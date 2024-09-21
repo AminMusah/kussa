@@ -42,6 +42,7 @@ export default function Home() {
             link="/products/1"
             _id="1"
             price={100}
+            key={index}
           />
         ))}
       </div>
