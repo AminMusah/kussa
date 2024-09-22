@@ -196,12 +196,6 @@ export default function Page() {
                     <label htmlFor="password" className="text-sm text-gray-600">
                       Password
                     </label>
-                    <a
-                      href="#!"
-                      className="text-sm text-gray-400 hover:text-indigo-500 focus:text-indigo-500 focus:outline-none"
-                    >
-                      Forgot password?
-                    </a>
                   </div>
                   <input
                     id="password"
