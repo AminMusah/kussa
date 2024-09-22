@@ -1,117 +1,247 @@
+import Link from "next/link";
+import {
+  Bell,
+  CircleUser,
+  Home,
+  LineChart,
+  Menu,
+  Package,
+  Package2,
+  Search,
+  ShoppingCart,
+  Users,
+} from "lucide-react";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { ModeToggle } from "@/components/mode-toggle";
+import ProductsTable from "@/components/products-table";
+
+export const description =
+  "A products dashboard with a sidebar navigation and a main content area. The dashboard has a header with a search input and a user menu. The sidebar has a logo, navigation links, and a card with a call to action. The main content area shows an empty state with a call to action.";
+
 export default function Dashboard() {
   return (
-    <div className="h-dvh">
-      <h1>Dashboard</h1>
-
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore odio
-        vero aliquid vitae amet voluptate totam quos commodi quasi et beatae
-        eos, at quibusdam! Voluptate eaque, ipsum totam esse officiis laudantium
-        sunt sit quia ullam enim voluptas, accusantium labore saepe, cum fugit
-        et facilis placeat beatae nostrum unde molestias provident excepturi
-        nihil! Molestias a exercitationem explicabo quod accusamus adipisci
-        eveniet! At magni possimus quod consequuntur nihil debitis molestiae
-        atque, praesentium consectetur porro corrupti provident soluta labore?
-        Vel modi, aperiam debitis molestias minima cumque dolore assumenda culpa
-        fuga accusamus laudantium, corrupti ullam magni aliquam obcaecati
-        facilis. Hic officia impedit optio itaque tempore at! Earum officia
-        laudantium ipsa culpa dolor architecto sit sint esse consequuntur,
-        commodi ex dolore voluptatibus reprehenderit corporis facere est
-        cupiditate. Quisquam laboriosam quam, harum quaerat amet corrupti omnis
-        laborum veritatis beatae id hic minima ea dignissimos dolorum nihil sunt
-        nobis nemo tempore labore, velit ipsa! Similique fuga inventore impedit
-        mollitia laborum vitae in? Ipsam, asperiores eius. Recusandae,
-        architecto vero! Fuga voluptates nemo ab veritatis odio natus neque
-        maiores, aliquam architecto itaque quisquam quia nobis labore eius
-        voluptatem ut aperiam quis, doloribus atque ratione quod officiis! Eius
-        blanditiis fuga totam doloremque laboriosam incidunt officia magnam? Sit
-        laborum ratione provident recusandae quisquam magnam iusto accusamus
-        odio unde modi, earum nostrum ipsum ea, rem consectetur nesciunt, quas
-        rerum aspernatur. Culpa delectus molestiae, reiciendis cumque, error
-        aspernatur eaque labore enim necessitatibus architecto a sit molestias
-        cum consequuntur excepturi ipsam voluptates in repellat aperiam, facere
-        voluptatum magni deserunt eum. Aspernatur quaerat eos dolore ducimus.
-        Fuga vitae facere a alias sapiente provident quibusdam fugiat, veniam
-        temporibus non quas ex deserunt quisquam omnis culpa! Est facere fugit
-        necessitatibus adipisci laboriosam quae non eveniet blanditiis pariatur,
-        ratione culpa perspiciatis eaque laborum illum nemo doloribus neque?
-        Cumque maxime quis tenetur rem deleniti aperiam quod ex architecto quam
-        blanditiis, aut dolorem nisi accusamus pariatur nihil officiis provident
-        culpa vitae praesentium harum hic? Quas obcaecati hic aut perferendis
-        eveniet velit exercitationem, cupiditate corrupti? Aperiam, repellendus
-        earum? Autem temporibus beatae dolores iure in quam, sit tempora
-        necessitatibus odit officiis eligendi aperiam. Commodi repudiandae optio
-        doloribus ut explicabo soluta dolore ullam pariatur, dolor et expedita
-        est voluptate hic impedit adipisci, esse minima delectus quidem saepe ab
-        molestias libero perspiciatis. Voluptatum optio tempore quasi numquam
-        nobis doloribus dolores, quisquam, natus expedita velit eum recusandae
-        accusamus sequi. Id accusamus voluptatum exercitationem cumque ipsa
-        harum non, molestias provident, veritatis aperiam facere? Libero
-        deleniti non sapiente asperiores, dicta, quam dolor corporis impedit
-        repellat suscipit quidem, delectus id sit soluta praesentium sed tempore
-        nam illum neque aut. Rerum reprehenderit rem distinctio natus sed
-        explicabo fuga dolores animi provident, sunt nesciunt, esse doloremque
-        minus, culpa iure perspiciatis sequi aperiam nulla saepe id amet quos
-        modi! Quia, numquam esse eos quos aut soluta nobis sed dignissimos
-        suscipit laudantium nam, fugiat, facilis at unde ea dolore illum. Natus
-        reprehenderit magni laboriosam, quod nulla repudiandae minima distinctio
-        asperiores, temporibus soluta sequi? Itaque debitis cupiditate magni
-        fugit iste minima reprehenderit explicabo necessitatibus, ab cum magnam
-        mollitia libero quae corporis provident inventore quibusdam molestias
-        eligendi sequi quia similique iure? Libero inventore recusandae atque?
-        Distinctio quam exercitationem id excepturi iste architecto accusamus
-        voluptatibus voluptates alias tenetur impedit qui modi porro, ipsa neque
-        incidunt harum animi rerum quibusdam nesciunt sit nihil voluptate. Cum
-        cupiditate ab explicabo amet doloremque, corporis quis? Nihil, suscipit
-        labore. Optio, impedit nesciunt. Quas, ducimus. Ratione porro illo,
-        nihil aut laborum fuga nobis temporibus aspernatur inventore hic saepe
-        error, reiciendis repudiandae dignissimos molestiae tenetur velit ipsa
-        eligendi et. Corrupti consectetur quo praesentium veniam nisi natus hic
-        quibusdam molestiae possimus? Hic tempora, qui temporibus distinctio
-        sapiente modi odio consectetur laboriosam velit libero nam recusandae
-        cupiditate. Officia, quaerat dolores? Voluptatem id aspernatur delectus
-        totam! Dolores, fugiat. Consectetur quaerat aliquam quisquam accusantium
-        nihil, deleniti accusamus dolore maiores cum sapiente, commodi officia
-        odio rerum voluptatum, repudiandae id enim repellendus et suscipit modi
-        aspernatur ea necessitatibus a? Quae sed magnam necessitatibus quos
-        doloribus quidem, nam modi repellat eius et sit iusto unde accusamus
-        commodi ea, fugit natus fugiat praesentium est explicabo ex, qui quam!
-        Ea nam aliquid quasi molestiae! Reiciendis recusandae expedita, atque
-        eos laudantium nesciunt itaque, ipsam velit aut illum nobis? Voluptas at
-        aliquam culpa delectus voluptatum molestias, quia harum, quis, modi
-        ipsum beatae distinctio. Cumque voluptatem ea facere nemo labore animi
-        recusandae distinctio laborum alias provident, enim consectetur
-        reiciendis. Magnam, adipisci. Aperiam rem nobis deserunt similique
-        minus. Commodi earum adipisci corrupti illum, fugiat accusantium
-        cupiditate incidunt ad architecto officia alias corporis nihil enim
-        illo? Iusto incidunt fugit consequuntur, consequatur eaque delectus in,
-        error necessitatibus natus quasi quis, voluptatum quam magnam a eum nisi
-        provident odio? Rerum saepe incidunt veritatis temporibus ipsa voluptate
-        autem? Harum reprehenderit perferendis culpa repellat similique
-        explicabo laboriosam odio doloribus alias totam dicta, quas rem neque
-        excepturi aspernatur facilis! Itaque nisi iusto facilis fugit odio
-        doloremque, vel deleniti aliquid molestias? Quo, aperiam hic eaque
-        molestias dolorem assumenda porro officia necessitatibus atque iure.
-        Esse cupiditate fuga facere natus ipsum hic non odio, neque quod animi
-        nobis blanditiis est officiis aspernatur dolore quasi ipsam vitae
-        provident rerum aut accusantium voluptatum eveniet reiciendis. Totam
-        odio magnam aliquid est veniam necessitatibus dolor quo fugiat deleniti
-        illum possimus explicabo, cum iure voluptates sapiente enim porro! Odit
-        aliquid beatae magni, suscipit eaque, quas tempore temporibus nihil a
-        doloremque accusantium? Neque officia aliquam a, quia dolor modi
-        laboriosam nam eos quibusdam reprehenderit ab esse error facere aliquid
-        culpa alias animi distinctio voluptatem accusamus sed architecto! Vero
-        voluptates ea quaerat quam. Distinctio eaque nam fuga maiores non, neque
-        sint necessitatibus alias at, ex nihil! Ipsam iste illum numquam,
-        deleniti, quisquam dignissimos tempore, sed quia nemo sit doloremque
-        exercitationem illo eveniet natus a? Laborum quis quo explicabo dolore,
-        dolores hic eaque velit beatae et recusandae iure modi debitis,
-        dignissimos ab non optio. In rem odit iure quos id nostrum, maxime fugit
-        doloremque assumenda fuga quis tempora hic nam omnis ipsum distinctio
-        natus ex animi beatae quae nisi corrupti sed. Quas commodi obcaecati,
-        ullam, quis culpa fuga doloremque necessitatibus nisi aliquid neque aut
-        ipsam ducimus architecto dolores ea nulla inventore! Temporibus?
-      </p>
+    <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+      <div className="hidden border-r bg-muted/40 md:block">
+        <div className="flex h-full max-h-screen flex-col gap-2">
+          <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
+            <Link href="/" className="flex items-center gap-2 font-semibold">
+              <Package2 className="h-6 w-6" />
+              <span className="">Kussa shea bliss</span>
+            </Link>
+            <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
+              <Bell className="h-4 w-4" />
+              <span className="sr-only">Toggle notifications</span>
+            </Button>
+          </div>
+          <div className="flex-1">
+            <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
+              <Link
+                href="#"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+              >
+                <Home className="h-4 w-4" />
+                Dashboard
+              </Link>
+              <Link
+                href="#"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+              >
+                <ShoppingCart className="h-4 w-4" />
+                Orders
+                <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                  6
+                </Badge>
+              </Link>
+              <Link
+                href="#"
+                className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
+              >
+                <Package className="h-4 w-4" />
+                Products{" "}
+              </Link>
+              <Link
+                href="#"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+              >
+                <Users className="h-4 w-4" />
+                Customers
+              </Link>
+              <Link
+                href="#"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+              >
+                <LineChart className="h-4 w-4" />
+                Analytics
+              </Link>
+            </nav>
+          </div>
+          <div className="mt-auto p-4">
+            <Card x-chunk="dashboard-02-chunk-0">
+              <CardHeader className="p-2 pt-0 md:p-4">
+                <CardTitle>Upgrade to Pro</CardTitle>
+                <CardDescription>
+                  Unlock all features and get unlimited access to our support
+                  team.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
+                <Button size="sm" className="w-full">
+                  Upgrade
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col">
+        <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                className="shrink-0 md:hidden"
+              >
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Toggle navigation menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="flex flex-col">
+              <nav className="grid gap-2 text-lg font-medium">
+                <Link
+                  href="#"
+                  className="flex items-center gap-2 text-lg font-semibold"
+                >
+                  <Package2 className="h-6 w-6" />
+                  <span className="sr-only">Acme Inc</span>
+                </Link>
+                <Link
+                  href="#"
+                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                >
+                  <Home className="h-5 w-5" />
+                  Dashboard
+                </Link>
+                <Link
+                  href="#"
+                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
+                >
+                  <ShoppingCart className="h-5 w-5" />
+                  Orders
+                  <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                    6
+                  </Badge>
+                </Link>
+                <Link
+                  href="#"
+                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                >
+                  <Package className="h-5 w-5" />
+                  Products
+                </Link>
+                <Link
+                  href="#"
+                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                >
+                  <Users className="h-5 w-5" />
+                  Customers
+                </Link>
+                <Link
+                  href="#"
+                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                >
+                  <LineChart className="h-5 w-5" />
+                  Analytics
+                </Link>
+              </nav>
+              <div className="mt-auto">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Upgrade to Pro</CardTitle>
+                    <CardDescription>
+                      Unlock all features and get unlimited access to our
+                      support team.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Button size="sm" className="w-full">
+                      Upgrade
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+            </SheetContent>
+          </Sheet>
+          <div className="w-full flex-1">
+            <form>
+              <div className="relative">
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Input
+                  type="search"
+                  placeholder="Search products..."
+                  className="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3"
+                />
+              </div>
+            </form>
+          </div>
+          <ModeToggle />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="secondary" size="icon" className="rounded-full">
+                <CircleUser className="h-5 w-5" />
+                <span className="sr-only">Toggle user menu</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Settings</DropdownMenuItem>
+              <DropdownMenuItem>Support</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Logout</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </header>
+        <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+          <ProductsTable />
+          {/* <div className="flex items-center">
+            <h1 className="text-lg font-semibold md:text-2xl">Inventory</h1>
+          </div>
+          <div
+            className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
+            x-chunk="dashboard-02-chunk-1"
+          >
+            <div className="flex flex-col items-center gap-1 text-center">
+              <h3 className="text-2xl font-bold tracking-tight">
+                You have no products
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                You can start selling as soon as you add a product.
+              </p>
+              <Button className="mt-4">Add Product</Button>
+            </div>
+          </div> */}
+        </main>
+      </div>
     </div>
   );
 }

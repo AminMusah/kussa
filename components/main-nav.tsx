@@ -83,7 +83,7 @@ export function MainNav({
         isScrolled || pathname !== `/`
           ? "bg-white  opacity-80"
           : "bg-transparent"
-      }`}
+      } ${pathname === `/auth/dashboard` ? "hidden" : ""}`}
     >
       <div className="flex h-16 items-center  overflow-hidden w-full justify-between">
         <Image
