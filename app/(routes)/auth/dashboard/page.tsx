@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   Bell,
@@ -34,7 +36,10 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ModeToggle } from "@/components/mode-toggle";
 import ProductsTable from "@/components/products-table";
 
+import { useClerk } from "@clerk/nextjs";
+
 export default function Dashboard() {
+  const { signOut } = useClerk();
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
@@ -214,7 +219,9 @@ export default function Dashboard() {
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => signOut({ redirectUrl: "/" })}>
+                Logout
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
