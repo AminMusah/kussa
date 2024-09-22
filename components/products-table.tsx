@@ -64,7 +64,7 @@ export default function ProductsTable() {
                   alt="Product image"
                   className="aspect-square rounded-md object-cover"
                   height="64"
-                  src="/placeholder.svg"
+                  src="/images/IMG_9363.jpg"
                   width="64"
                 />
               </TableCell>
@@ -101,7 +101,7 @@ export default function ProductsTable() {
                   alt="Product image"
                   className="aspect-square rounded-md object-cover"
                   height="64"
-                  src="/placeholder.svg"
+                  src="/images/IMG_9363.jpg"
                   width="64"
                 />
               </TableCell>
@@ -138,7 +138,7 @@ export default function ProductsTable() {
                   alt="Product image"
                   className="aspect-square rounded-md object-cover"
                   height="64"
-                  src="/placeholder.svg"
+                  src="/images/IMG_9363.jpg"
                   width="64"
                 />
               </TableCell>
@@ -173,7 +173,7 @@ export default function ProductsTable() {
                   alt="Product image"
                   className="aspect-square rounded-md object-cover"
                   height="64"
-                  src="/placeholder.svg"
+                  src="/images/IMG_9363.jpg"
                   width="64"
                 />
               </TableCell>
@@ -210,7 +210,7 @@ export default function ProductsTable() {
                   alt="Product image"
                   className="aspect-square rounded-md object-cover"
                   height="64"
-                  src="/placeholder.svg"
+                  src="/images/IMG_9363.jpg"
                   width="64"
                 />
               </TableCell>
@@ -247,7 +247,7 @@ export default function ProductsTable() {
                   alt="Product image"
                   className="aspect-square rounded-md object-cover"
                   height="64"
-                  src="/placeholder.svg"
+                  src="/images/IMG_9363.jpg"
                   width="64"
                 />
               </TableCell>
