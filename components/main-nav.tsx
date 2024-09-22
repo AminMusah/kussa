@@ -89,7 +89,7 @@ export function MainNav({
         <Image
           className="aspect-square object-cover cursor-pointer transition-transform duration-300 hover:scale-105"
           alt="Image"
-          src={`/images/IMG-20240910-WA0004-removebg-preview (2).png`}
+          src={`/images/IMG-logo-removebg-.png`}
           width={100}
           height={100}
           sizes="(max-width: 4px) 100vw, (max-width: 4px) 80vw, 1200px"
