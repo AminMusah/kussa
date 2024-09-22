@@ -56,14 +56,7 @@ export default function Home() {
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-2 h-[500px] md:h-[700px]">
-        <div
-          className="relative rounded-xl overflow-hidden group h-full "
-          style={{
-            backgroundImage: "url('/images/IMG_9458.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
+        <div className="relative rounded-xl overflow-hidden group h-full bg-[url('/images/IMG_9458.jpg')] bg-cover bg-center">
           {/* Content */}
           <div className="absolute bottom-0 left-0 right-0 z-10 flex flex-col items-center text-center md:gap-y-6 p-8">
             <h2 className="max-w-xl text-white md:text-3xl font-bold transition-transform duration-300 group-hover:scale-105">

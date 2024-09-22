@@ -10,6 +10,7 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
+import { Toaster } from "@/components/ui/toaster";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -32,6 +33,7 @@ export default function RootLayout({
             {children}
             <Footer />
           </div>
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>
