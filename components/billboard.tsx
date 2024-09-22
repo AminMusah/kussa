@@ -37,7 +37,6 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
       buttonText: "Shop for lemon infused shea butter",
     },
     {
-      // url: "/images/1000007077.jpg",
       url: "/images/IMG_9363.jpg",
       title: "About us",
       description:
@@ -46,7 +45,6 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
     },
 
     {
-      // url: "/images/1000007079.jpg",
       url: "/images/IMG_9425.jpg",
       title: "Contact us",
       description:

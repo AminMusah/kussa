@@ -87,7 +87,7 @@ export function MainNav({
     >
       <div className="flex h-16 items-center  overflow-hidden w-full justify-between">
         <Image
-          className="object-cover cursor-pointer transition-transform duration-300 hover:scale-105"
+          className="aspect-square object-cover cursor-pointer transition-transform duration-300 hover:scale-105"
           alt="Image"
           src={`/images/IMG-20240910-WA0004-removebg-preview (2).png`}
           width={100}

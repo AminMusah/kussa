@@ -32,9 +32,10 @@ const ProductCard = ({
           className="flex flex-col gap-2 w-full"
           onClick={() => router.push(`/products/${_id}`)}
         >
-          <div className="aspect-square w-full relative overflow-hidden rounded-xl">
+          <div className="aspect-square  relative overflow-hidden rounded-xl">
             <Image
               fill
+              sizes="(max-width: 4px) 100vw, (max-width: 4px) 80vw, 1200px"
               className="object-cover h-full w-full group-hover:scale-110 transition"
               src={imageUrl}
               alt="Listing"

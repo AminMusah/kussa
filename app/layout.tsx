@@ -27,12 +27,6 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={nunito.className}>
-          <SignedOut>
-            <SignInButton />
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
           <div className="min-h-dvh grid grid-rows-[auto,1fr,auto] grid-cols-[minmax(0,1fr)]">
             <MainNav className="mx-6" />
             {children}
