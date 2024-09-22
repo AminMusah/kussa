@@ -9,6 +9,7 @@ import {
   SignedIn,
   SignedOut,
   UserButton,
+  UserProfile,
 } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/toaster";
 
