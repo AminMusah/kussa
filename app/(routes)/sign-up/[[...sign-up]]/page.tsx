@@ -68,7 +68,7 @@ export default function Page() {
       // and redirect the user
       if (completeSignUp.status === "complete") {
         await setActive({ session: completeSignUp.createdSessionId });
-        router.push("/sign-in");
+        router.push("/");
       } else {
         // If the status is not complete, check why. User may need to
         // complete further steps.
@@ -221,7 +221,7 @@ export default function Page() {
                     ) : (
                       ""
                     )}
-                    Sign in
+                    Sign up
                   </Button>
                 </div>
                 {/* <p className="text-center text-sm text-gray-500">
