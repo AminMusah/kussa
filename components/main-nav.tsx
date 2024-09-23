@@ -44,38 +44,13 @@ export function MainNav({
       label: "Explore",
       active: pathname === `/explore`,
     },
-    {
-      href: `/faqs`,
-      label: "FAQs",
-      active: pathname === `/faqs`,
-    },
+
     {
       href: `/contact`,
       label: "Contact Us",
       active: pathname === `/contact`,
     },
-    {
-      href: `/auth/admin/billboards`,
-      label: "Manage Billboards",
-      active: pathname === `/auth/admin/billboards`,
-    },
-    {
-      href: `/auth/admin/`,
-      label: "Manage Products",
-      active: pathname === `/auth/admin/`,
-    },
-    {
-      href: `/auth/admin/categories`,
-      label: "Manage Categories",
-      active: pathname === `/auth/admin/categories`,
-    },
   ];
-
-  const status = Cookies.get("isAuth");
-
-  const filteredRoutes = status
-    ? routes // If authenticated, include all routes
-    : routes.filter((route) => !route.href.startsWith("/auth/admin"));
 
   return (
     <div
@@ -102,7 +77,7 @@ export function MainNav({
           )}
           {...props}
         >
-          {filteredRoutes.map((route) => (
+          {routes.map((route) => (
             <Link
               key={route.href}
               href={route.href}

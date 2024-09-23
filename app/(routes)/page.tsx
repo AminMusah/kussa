@@ -19,7 +19,7 @@ export default function Home() {
       <Billboard data={[]} />
       <div className="group/wrap relative">
         <div className="relative scroll-smooth">
-          <div className="group flex h-[300px] md:h-screen w-full items-center justify-center">
+          <div className="group flex h-[300px] md:h-[500px] w-full items-center justify-center">
             <div>
               <div className="overflow-hidden font-clash text-7xl font-medium">
                 <h2 className="group-hover/wrap:translate-y-full group-hover:animate-reveal text-xs md:text-xl font-thin text-center">
@@ -65,16 +65,16 @@ export default function Home() {
       </div>
       <div className="group/wrap relative">
         <div className="relative scroll-smooth">
-          <div className="group flex h-[300px] md:h-screen w-full items-center justify-center">
+          <div className="group flex h-[300px] md:h-[600px] w-full items-center justify-center">
             <div>
               <div className="overflow-hidden font-clash text-7xl font-medium">
-                <p className="group-hover/wrap:translate-y-full group-hover:animate-reveal  text-xl md:text-5xl text-center max-w-xl">
-                  Discover an effortless
+                <p className="group-hover/wrap:translate-y-full group-hover:animate-reveal  text-xl md:text-5xl text-center max-w-2xl">
+                  Explore our products,
                 </p>
               </div>
               <div className="overflow-hidden font-clash text-7xl font-medium">
-                <p className="group-hover/wrap:translate-y-full group-hover:animate-reveal group-hover:animation-delay-300 text-xl md:text-5xl text-center max-w-xl">
-                  journey to a healthy skin.
+                <p className="group-hover/wrap:translate-y-full group-hover:animate-reveal group-hover:animation-delay-300 text-xl md:text-5xl text-center max-w-2xl">
+                  featuring various types with unique uses and benefits
                 </p>
               </div>
             </div>
@@ -250,24 +250,14 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="group/wrap relative">
-        <div className="relative scroll-smooth">
-          <div className="group flex h-[300px] md:h-screen w-full items-center justify-center">
-            <div>
-              <div className="overflow-hidden font-clash text-7xl font-medium">
-                <p className="group-hover/wrap:translate-y-full group-hover:animate-reveal  text-3xl md:text-5xl text-center max-w-xl">
-                  Our story
-                </p>
-              </div>
-              <div className="overflow-hidden font-clash text-7xl font-medium">
-                {/* <p className="group-hover/wrap:translate-y-full group-hover:animate-reveal group-hover:animation-delay-300 text-xl md:text-5xl text-center max-w-xl">
-                  journey to a healthy skin.
-                </p> */}
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="overflow-hidden font-clash text-7xl font-medium px-2 pt-32">
+        <p className="  text-3xl md:text-5xl  ">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum neque
+          ipsum veritatis quas id consequatur nobis sed, repellat fuga sit
+          necessitatibus saepe deserunt iusto quod culpa earum cum fugit eius?
+        </p>
       </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-3 md:gap-2 p-2 h-[700px]">
         <div
           className="bg-[#f1e6e9] rounded-xl overflow-hidden group h-full col-span-2"
@@ -335,7 +325,10 @@ export default function Home() {
               Our founder
             </h2>
 
-            <Button className="font-thin text-sm max-w-xl text-white md:py-5 md:px-8 rounded-full transition-all duration-300 bg-[#772432] hover:bg-[#923847] ">
+            <Button
+              className="font-thin text-sm max-w-xl text-white md:py-5 md:px-8 rounded-full transition-all duration-300 bg-[#772432] hover:bg-[#923847] "
+              onClick={() => router.push("/founder")}
+            >
               Read more
             </Button>
           </div>

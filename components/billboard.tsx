@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, Dot } from "lucide-react";
 import { Button } from "./ui/button";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface BillboardProps {
   data: any;
@@ -12,7 +13,7 @@ interface BillboardProps {
 const Billboard: React.FC<BillboardProps> = ({ data }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-
+  const router = useRouter();
   const slides = [
     {
       url: "/images/1000007081.jpg",
@@ -20,14 +21,15 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
       title: "KUSSA SHEA BLISS",
       description: "Effortless journey to a healthy skin.",
       buttonText: "Go shopping",
+      link: "/shop",
     },
     {
       url: "/images/IMG_9416.jpg",
-
       title: "Skin care",
       description:
         "KUSSA SHEA BLISS specializes in producing high-quality skincare and personal care products infused with shea butter, a natural ingredient known for its nourishing and moisturizing properties.",
       buttonText: "Explore types of products and benefits",
+      link: "/explore",
     },
     {
       url: "/images/IMG-20240818-WA0054.jpg",
@@ -35,6 +37,7 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
       description:
         "Our lemon infused shea butter product is solely natural shea butter infused with lemon essential oil. The composition of the product is 90% shea butter and 10% lemon essential oil. The outcome of the product is solid.",
       buttonText: "Shop for lemon infused shea butter",
+      link: "/shop",
     },
     {
       url: "/images/IMG_9363.jpg",
@@ -42,6 +45,7 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
       description:
         "Kussa Shea Bliss (KSB) is a well-established company in the skincare and personal care industry with three years of successful operations.",
       buttonText: "Read more",
+      link: "/shop",
     },
 
     {
@@ -50,6 +54,7 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
       description:
         "For quick and easy assistance, feel free to contact us anytime. Our team is here to help you with any questions or concerns you may have.",
       buttonText: "Contact us",
+      link: "/shop",
     },
   ];
 
@@ -115,7 +120,10 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
           <div className=" max-w-xl text-sm md:text-base text-white  animate-reveal animation-delay-400">
             {slides[currentIndex]?.description}
           </div>
-          <Button className="font-thin text-sm max-w-xl rounded-full text-white bg-[#772432] hover:bg-[#923847] py-6 px-16  animate-reveal animation-delay-400">
+          <Button
+            className="font-thin text-sm max-w-xl rounded-full text-white bg-[#772432] hover:bg-[#923847] py-6 px-16  animate-reveal animation-delay-400"
+            onClick={() => router.push(slides[currentIndex]?.link)}
+          >
             {slides[currentIndex]?.buttonText}
           </Button>
         </div>
