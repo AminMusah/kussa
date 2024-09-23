@@ -5,6 +5,12 @@ import ProductCard from "@/components/product-card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Dot, Globe, Leaf } from "lucide-react";
 import { useRouter } from "next/navigation";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export default function Home() {
   const router = useRouter();
@@ -333,6 +339,80 @@ export default function Home() {
               Read more
             </Button>
           </div>
+        </div>
+      </div>
+      <div className="md:py-44 flex flex-wrap md:flex-nowrap mx-2 mt-10">
+        <div className="h-full w-[40%]">
+          <h2 className="text-7xl leading-[1.2] font-semibold">FAQs</h2>
+        </div>
+        <div className="h-full w-full overflow-hidden p-2 ">
+          <Accordion type="single" collapsible>
+            <AccordionItem value="item-1">
+              <AccordionTrigger className="text-start no-underline hover:no-underline font-bold md:text-2xl">
+                Why do our clients choose us?
+              </AccordionTrigger>
+              <AccordionContent>
+                We're committed to providing high-quality, natural products that
+                promote healthy skin. We're passionate about empowering
+                individuals to take control of their skin care journey, and our
+                community-driven approach ensures that every customer feels
+                supported and valued. By choosing Kussa, our clients become part
+                of a movement that celebrates effortless, healthy beauty.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+              <AccordionTrigger className="text-start no-underline hover:no-underline font-bold md:text-2xl">
+                How do we deliver?
+              </AccordionTrigger>
+              <AccordionContent>
+                We deliver through a network of trusted partners and carriers,
+                ensuring timely and secure transportation of our products to
+                your doorstep.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-3">
+              <AccordionTrigger className="text-start no-underline hover:no-underline font-bold md:text-2xl">
+                Can I cancel or modify my order?
+              </AccordionTrigger>
+              <AccordionContent>
+                Please contact our customer service team as soon as possible if
+                you need to cancel or modify your order. We will do our best to
+                accommodate your request, but please note that we may not be
+                able to make changes once an order has shipped.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-4">
+              <AccordionTrigger className="text-start no-underline hover:no-underline font-bold md:text-2xl">
+                What is your return policy?
+              </AccordionTrigger>
+              <AccordionContent>
+                We accept returns within 30 days of delivery. Please see our
+                full return policy for details on how to initiate a return and
+                what items are eligible.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-5">
+              <AccordionTrigger className="text-start no-underline hover:no-underline font-bold md:text-2xl">
+                Do you offer any discounts or promotions?
+              </AccordionTrigger>
+              <AccordionContent>
+                Yes, we regularly offer discounts and promotions. Follow us on
+                social media or sign up for our email newsletter to stay
+                up-to-date on our latest deals.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-6">
+              <AccordionTrigger className="text-start no-underline hover:no-underline font-bold md:text-2xl">
+                How do I get assistance?
+              </AccordionTrigger>
+              <AccordionContent>
+                For assistance, please don't hesitate to contact us directly by
+                email
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </div>
     </div>
