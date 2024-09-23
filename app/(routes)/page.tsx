@@ -11,14 +11,25 @@ export default function Home() {
   return (
     <div>
       <Billboard data={[]} />
-      <div className="bg-[#772432]  p-4 md:p-24 flex justify-center items-center flex-col gap-y-6">
-        <p className="text-white text-xs md:text-xl font-thin text-center">
-          Welcome to Kussa shea bliss
-        </p>
-        <p className="text-white font-thin md:text-5xl text-center max-w-xl">
-          Effortless journey to a healthy skin.
-        </p>
+      <div className="group/wrap relative">
+        <div className="relative scroll-smooth">
+          <div className="group flex h-[300px] md:h-screen w-full items-center justify-center">
+            <div>
+              <div className="overflow-hidden font-clash text-7xl font-medium">
+                <h2 className="group-hover/wrap:translate-y-full group-hover:animate-reveal text-xs md:text-xl font-thin text-center">
+                  Welcome to Kussa shea bliss
+                </h2>
+              </div>
+              <div className="overflow-hidden font-clash text-7xl font-medium">
+                <p className="group-hover/wrap:translate-y-full group-hover:animate-reveal group-hover:animation-delay-300 text-xl md:text-5xl text-center max-w-xl">
+                  Effortless journey to a healthy skin.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
       <div className="my-8 mx-2">
         <Button
           className="cursor-pointer border border-black border-opacity-50 flex justify-between rounded-full bg-white text-black hover:text-white py-6 hover:border-white  min-w-[250px] group hover:bg-[#772432]"
@@ -34,7 +45,7 @@ export default function Home() {
       </div>
 
       <div className="  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-4 gap-8">
-        {Array.from({ length: 8 }).map((_, index) => (
+        {Array.from({ length: 4 }).map((_, index) => (
           <ProductCard
             name="Shea Butter"
             desc="Shea Butter is a natural moisturizer that is good for the skin."
@@ -46,15 +57,25 @@ export default function Home() {
           />
         ))}
       </div>
-
-      <div className="p-4 md:p-24 flex justify-center items-center flex-col gap-y-6">
-        {/* <p className=" text-xs md:text-xl font-thin text-center">
-          Kussa shea bliss
-        </p> */}
-        <p className=" font-thin md:text-5xl text-center max-w-xl">
-          Discover an effortless journey to a healthy skin.
-        </p>
+      <div className="group/wrap relative">
+        <div className="relative scroll-smooth">
+          <div className="group flex h-[300px] md:h-screen w-full items-center justify-center">
+            <div>
+              <div className="overflow-hidden font-clash text-7xl font-medium">
+                <p className="group-hover/wrap:translate-y-full group-hover:animate-reveal  text-xl md:text-5xl text-center max-w-xl">
+                  Discover an effortless
+                </p>
+              </div>
+              <div className="overflow-hidden font-clash text-7xl font-medium">
+                <p className="group-hover/wrap:translate-y-full group-hover:animate-reveal group-hover:animation-delay-300 text-xl md:text-5xl text-center max-w-xl">
+                  journey to a healthy skin.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-2 h-[500px] md:h-[700px]">
         <div className="relative rounded-xl overflow-hidden group h-full bg-[url('/images/IMG_9458.jpg')] bg-cover bg-center">
           {/* Content */}
@@ -149,20 +170,23 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="p-2 md:py-24 flex justify-center items-center flex-col gap-y-6">
-        <p className="font-thin md:text-2xl w-full  ">
-          Kussa Shea Bliss (KSB) is a well-established company in the skincare
-          and personal care industry with three years of successful operations.
-        </p>
-        <p className="font-thin md:text-2xl w-full  ">
-          KSB specializes in producing high-quality skincare and personal care
-          products infused with shea butter, a natural ingredient known for its
-          nourishing and moisturizing properties. The company has gained a solid
-          reputation for its commitment to using ethically sourced and
-          sustainable ingredients, as well as its dedication to providing
-          exceptional customer experiences. Our products can be purchased
-          worldwide from our website and within some shops across Africa.
-        </p>
+      <div className="group/wrap relative">
+        <div className="relative scroll-smooth">
+          <div className="group flex h-[300px] md:h-screen w-full items-center justify-center">
+            <div>
+              <div className="overflow-hidden font-clash text-7xl font-medium">
+                <p className="group-hover/wrap:translate-y-full group-hover:animate-reveal  text-3xl md:text-5xl text-center max-w-xl">
+                  Our story
+                </p>
+              </div>
+              <div className="overflow-hidden font-clash text-7xl font-medium">
+                {/* <p className="group-hover/wrap:translate-y-full group-hover:animate-reveal group-hover:animation-delay-300 text-xl md:text-5xl text-center max-w-xl">
+                  journey to a healthy skin.
+                </p> */}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 md:gap-2 p-2 h-[500px] md:h-[700px]">
@@ -219,20 +243,24 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="p-2 md:py-24 flex justify-center items-center flex-col gap-y-6">
-        <p className="font-thin md:text-2xl w-full  ">
-          Kussa Shea Bliss (KSB) is a well-established company in the skincare
-          and personal care industry with three years of successful operations.
-        </p>
-        <p className="font-thin md:text-2xl w-full  ">
-          KSB specializes in producing high-quality skincare and personal care
-          products infused with shea butter, a natural ingredient known for its
-          nourishing and moisturizing properties. The company has gained a solid
-          reputation for its commitment to using ethically sourced and
-          sustainable ingredients, as well as its dedication to providing
-          exceptional customer experiences. Our products can be purchased
-          worldwide from our website and within some shops across Africa.
-        </p>
+
+      <div className="group/wrap relative">
+        <div className="relative scroll-smooth">
+          <div className="group flex h-[300px] md:h-screen w-full items-center justify-center">
+            <div>
+              <div className="overflow-hidden font-clash text-7xl font-medium">
+                <p className="group-hover/wrap:translate-y-full group-hover:animate-reveal  text-3xl md:text-5xl text-center max-w-xl">
+                  Our story
+                </p>
+              </div>
+              <div className="overflow-hidden font-clash text-7xl font-medium">
+                {/* <p className="group-hover/wrap:translate-y-full group-hover:animate-reveal group-hover:animation-delay-300 text-xl md:text-5xl text-center max-w-xl">
+                  journey to a healthy skin.
+                </p> */}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-3 md:gap-2 p-2 h-[700px]">
         <div

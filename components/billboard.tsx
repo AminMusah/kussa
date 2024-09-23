@@ -109,13 +109,13 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
 
         {/* Content */}
         <div className="relative z-10 h-full flex flex-col justify-center items-center text-center gap-y-6">
-          <h2 className="max-w-xl text-white text-3xl md:text-[60px] font-thin">
+          <h2 className="max-w-xl text-white text-3xl md:text-[60px] font-thin  animate-reveal">
             {slides[currentIndex]?.title}
           </h2>
-          <div className=" max-w-xl text-sm md:text-base text-white">
+          <div className=" max-w-xl text-sm md:text-base text-white  animate-reveal animation-delay-400">
             {slides[currentIndex]?.description}
           </div>
-          <Button className="font-thin text-sm max-w-xl rounded-full text-white  bg-[#772432] hover:bg-[#923847] py-6 px-16">
+          <Button className="font-thin text-sm max-w-xl rounded-full text-white bg-[#772432] hover:bg-[#923847] py-6 px-16  animate-reveal animation-delay-400">
             {slides[currentIndex]?.buttonText}
           </Button>
         </div>

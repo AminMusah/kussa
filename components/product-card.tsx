@@ -28,11 +28,11 @@ const ProductCard = ({
   return (
     <div className="m-2 ">
       <div className="col-span-1 cursor-pointer group">
-        <div
-          className="flex flex-col gap-2 w-full"
-          onClick={() => router.push(`/products/${_id}`)}
-        >
-          <div className="aspect-square  relative overflow-hidden rounded-xl">
+        <div className="flex flex-col gap-2 w-full">
+          <div
+            className="aspect-square  relative overflow-hidden rounded-xl"
+            onClick={() => router.push(`/products/${_id}`)}
+          >
             <Image
               fill
               sizes="(max-width: 4px) 100vw, (max-width: 4px) 80vw, 1200px"
@@ -47,17 +47,20 @@ const ProductCard = ({
             </div>
           </div>
           <div className="flex flex-row justify-between">
-            <div className="font-semibold text-lg overflow-hidden truncate w-36">
+            <div
+              className="font-semibold text-lg overflow-hidden truncate w-36"
+              onClick={() => router.push(`/products/${_id}`)}
+            >
               {name}
             </div>
             <div className="flex flex-col gap-2">
-              <Button
-                onClick={() => router.push(`${link}`)}
-                className="bg-[#772432] hover:bg-[#923847] rounded-full"
+              <span
+                // onClick={() => router.push(`${link}`)}
+                className="underline flex items-center "
               >
-                <span className="mr-4">Add to cart</span>
+                <span className="mr-2">Add to cart</span>
                 <ShoppingBasket size={16} />
-              </Button>
+              </span>
             </div>
           </div>
 
