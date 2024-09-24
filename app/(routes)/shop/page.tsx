@@ -1,5 +1,6 @@
 import ProductCard from "@/components/product-card";
 import { Button } from "@/components/ui/button";
+import { Search, SlidersHorizontal } from "lucide-react";
 
 export default function Shop() {
   return (
@@ -18,7 +19,37 @@ export default function Shop() {
           journey to healthier, more radiant skin.
         </p>
       </div>
-      <div className="py-24">
+      <div className="flex justify-center items-center flex-col w-full">
+        <div className="flex flex-wrap mt-4 ">
+          <input
+            type="text"
+            placeholder="Search products"
+            className="rounded-full mr-4 p-2 px-4 md:min-w-[600px] outline-none border mt-4"
+          />
+          <div className="flex mt-4">
+            {/* <div
+              className="w-[50px] h-[50px] mr-4 cursor-pointer hover:bg-white border border-black border-opacity-50 rounded-full flex justify-center items-center py-6 group"
+              // onClick={() => router.push(`/shop`)}
+            >
+              <SlidersHorizontal
+                size={28}
+                className="group-hover:border-white group-hover:text-[#772432]  transition-all duration-300"
+              />
+            </div> */}
+            <div
+              className="w-[50px] h-[50px] mr-4 cursor-pointer hover:bg-white border border-black hover:border-[#772432]  border-opacity-50 rounded-full flex justify-center items-center bg-black text-white py-6 group"
+              // onClick={() => router.push(`/shop`)}
+            >
+              <Search
+                size={28}
+                strokeWidth={1}
+                className="group-hover:border-white group-hover:text-[#772432]  transition-all duration-300"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="py-14">
         <div className="pb-24  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-4 gap-8">
           {Array.from({ length: 24 }).map((_, index) => (
             <ProductCard
