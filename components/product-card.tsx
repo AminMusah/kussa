@@ -31,7 +31,7 @@ const ProductCard = ({
         <div className="flex flex-col gap-2 w-full">
           <div
             className="aspect-square  relative overflow-hidden rounded-xl"
-            onClick={() => router.push(`/products/${_id}`)}
+            onClick={() => router.push(`/shop/${_id}`)}
           >
             <Image
               fill
@@ -49,7 +49,7 @@ const ProductCard = ({
           <div className="flex flex-row justify-between">
             <div
               className="font-semibold text-lg overflow-hidden truncate w-36"
-              onClick={() => router.push(`/products/${_id}`)}
+              onClick={() => router.push(`/shop/${_id}`)}
             >
               {name}
             </div>

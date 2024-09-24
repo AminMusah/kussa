@@ -57,7 +57,7 @@ export default function Shop() {
               desc="Shea Butter is a natural moisturizer that is good for the skin."
               imageUrl="/images/IMG_9330.jpg"
               link="/products/1"
-              _id="1"
+              _id={`${index}`}
               price={100}
               key={index}
             />

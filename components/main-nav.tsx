@@ -7,7 +7,7 @@ import Cookies from "js-cookie";
 
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { CarTaxiFront, Search, ShoppingCart } from "lucide-react";
+import { CarTaxiFront, Heart, Search, ShoppingCart } from "lucide-react";
 
 export function MainNav({
   className,
@@ -109,7 +109,7 @@ export function MainNav({
           ))}
         </nav>
         <div className="flex items-center space-x-4 px-2">
-          <Search
+          <Heart
             className={`cursor-pointer transition-transform duration-300 hover:scale-110   ${
               isScrolled || pathname !== `/` ? "text-black" : "text-white"
             } `}

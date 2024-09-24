@@ -268,7 +268,7 @@ export default function Home() {
           // }}
         >
           <div className="flex flex-col w-full justify-between h-full">
-            <h2 className=" md:text-3xl font-bold transition-transform duration-300 w-full p-2 md:p-8 ">
+            <h2 className="md:text-3xl font-bold transition-transform duration-300 w-full p-2 md:p-8 ">
               Kussa Shea Bliss was founded 5 years ago by Ms Irene Atubiga, a
               passionate entrepreneur with extensive experience in the skincare
               industry. Irene's vision was to develop a skincare brand that
