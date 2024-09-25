@@ -17,7 +17,7 @@ export default function Cart() {
         <p className="text-sm text-[#384853]">Manage your cart</p>
       </div>
       <div className="grid grid-cols-3 pt-4 px-2">
-        <div className="col-span-4 md:col-span-2 border rounded-3xl px-5 py-2 w-full">
+        <div className="col-span-4 xl:col-span-2 border rounded-3xl px-5 py-2 w-full">
           <div className="grid grid-cols-4 items-end w-full border-b">
             <span className="text-2xl py-2 col-span-1 ">Product</span>
             <span className="text-2xl py-2 col-span-1 text-end">Quantity</span>
@@ -25,7 +25,7 @@ export default function Cart() {
             <span className="text-2xl py-2 col-span-1 text-end">Action</span>
           </div>
           {Array.from({ length: 4 }).map((_, index) => (
-            <div className="grid  grid-cols-4 py-5">
+            <div className="grid  grid-cols-4 py-5" key={index}>
               <div className="flex items-center col-span-1 ">
                 <div className="relative w-[100px] h-[100px] overflow-hidden rounded-xl mr-2">
                   <Image
