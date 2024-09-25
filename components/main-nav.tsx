@@ -115,6 +115,7 @@ export function MainNav({
             } `}
           />
           <ShoppingCart
+            onClick={() => router.push("/cart")}
             className={`cursor-pointer transition-transform   ${
               isScrolled || pathname !== `/` ? "text-black" : "text-white"
             }  duration-300 hover:scale-110`}
