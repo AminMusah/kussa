@@ -1,8 +1,12 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Heart, Minus, Plus, Trash, Trash2 } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Cart() {
+  const router = useRouter();
   return (
     <div className="pt-28 pb-10">
       {" "}
@@ -88,6 +92,7 @@ export default function Cart() {
               <Button
                 type="submit"
                 className="w-full h-[50px] rounded-full px-3 py-2  hover:bg-white border border-black hover:border-[#772432] group-hover:border-white hover:text-[#772432]  transition-all duration-300  border-opacity-50 focus:outline-none group-invalid:pointer-events-none group-invalid:opacity-70"
+                onClick={() => router.push("/checkout")}
               >
                 Checkout
               </Button>
