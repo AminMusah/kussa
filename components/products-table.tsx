@@ -28,16 +28,30 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useRouter } from "next/navigation";
 
 export default function ProductsTable() {
+  const router = useRouter();
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Products</CardTitle>
-        <CardDescription>
-          Manage your products and view their sales performance.
-        </CardDescription>
+      <CardHeader className="flex w-full justify-between flex-row">
+        <div>
+          <CardTitle>Products</CardTitle>
+          <CardDescription>
+            Manage your products and view their sales performance.
+          </CardDescription>
+        </div>
+        <div>
+          <Button
+            onClick={() =>
+              router.push("/auth/dashboard/products/create-product")
+            }
+          >
+            Add product
+          </Button>
+        </div>
       </CardHeader>
+
       <CardContent>
         <Table>
           <TableHeader>
