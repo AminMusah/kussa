@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { CarTaxiFront, Heart, Search, ShoppingCart } from "lucide-react";
+import { useModal } from "@/hooks/use-modal-store";
 
 export function MainNav({
   className,
@@ -16,6 +17,7 @@ export function MainNav({
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+  const { onOpen, isOpen } = useModal();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -115,7 +117,7 @@ export function MainNav({
             } `}
           />
           <ShoppingCart
-            onClick={() => router.push("/cart")}
+            onClick={() => onOpen("toggleCart")}
             className={`cursor-pointer transition-transform   ${
               isScrolled || pathname !== `/` ? "text-black" : "text-white"
             }  duration-300 hover:scale-110`}

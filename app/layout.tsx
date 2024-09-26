@@ -12,6 +12,7 @@ import {
   UserProfile,
 } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/toaster";
+import { ModalProvider } from "@/components/providers/modal-provider";
 
 const nunito = Nunito({ subsets: ["latin"] });
 export const metadata: Metadata = {
@@ -35,6 +36,7 @@ export default function RootLayout({
             <Footer />
           </div>
           <Toaster />
+          <ModalProvider />
         </body>
       </html>
     </ClerkProvider>

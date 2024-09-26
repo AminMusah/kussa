@@ -8,7 +8,6 @@ const isPublicRoute = createRouteMatcher([
   "/explore",
   "/api/auth/login",
   "/founder",
-  "/cart",
   "/checkout",
   "/shop/:path*",
   "/api/webhooks/clerk",

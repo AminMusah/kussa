@@ -18,6 +18,8 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
 
 export default function CheckOut() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -51,7 +53,7 @@ export default function CheckOut() {
         console.log(`Validation field is empty: ${field}`);
         toast({
           title: "Error",
-          description: `Please fill in the ${field} field`,
+          description: `Please ${field} field is required`,
           variant: "destructive",
         });
         return;
@@ -96,8 +98,103 @@ export default function CheckOut() {
   };
 
   return (
-    <div className="grid items-center grid-cols-3 py-28 px-2">
-      <Card className=" col-span-2">
+    <div className="grid items-start grid-cols-4 py-28 px-2 ">
+      <div className="col-span-4 md:col-span-2  flex flex-col ">
+        <div className="md:pr-6 ">
+          <h1 className="text-4xl font-bold mb-4">Order Summary</h1>
+          <p className="text-gray-600 mb-6">
+            Review your order carefully. Once you're ready, click 'Proceed to
+            Payment' to complete your purchase.
+          </p>
+
+          {/* <div className="mb-6">
+            <h2 className="text-sm font-semibold text-gray-600 mb-2">
+              Tracking number
+            </h2>
+            <p className="text-blue-600">515478787555458481512</p>
+          </div> */}
+
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle>Order Summary</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center space-x-4">
+                <Image
+                  src="/placeholder.svg?height=80&width=80"
+                  alt="Basic Tee"
+                  width={80}
+                  height={80}
+                  className="rounded-md"
+                />
+                <div className="flex-1">
+                  <h3 className="font-semibold">Basic Tee</h3>
+                  <p className="text-sm text-gray-600">Charcoal</p>
+                  <p className="text-sm text-gray-600">L</p>
+                </div>
+                <p className="font-semibold">GHC 36.00</p>
+              </div>
+              <div className="flex items-center space-x-4">
+                <Image
+                  src="/placeholder.svg?height=80&width=80"
+                  alt="Artwork Tee"
+                  width={80}
+                  height={80}
+                  className="rounded-md"
+                />
+                <div className="flex-1">
+                  <h3 className="font-semibold">Artwork Tee — Iso Dots</h3>
+                  <p className="text-sm text-gray-600">Peach</p>
+                  <p className="text-sm text-gray-600">S</p>
+                </div>
+                <p className="font-semibold">GHC 36.00</p>
+              </div>
+              <div className="border-t pt-4">
+                <div className="flex justify-between">
+                  <p>Subtotal</p>
+                  <p className="font-semibold">GHC 72.00</p>
+                </div>
+                <div className="flex justify-between">
+                  <p>Shipping</p>
+                  <p className="font-semibold">GHC 8.00</p>
+                </div>
+                <div className="flex justify-between">
+                  <p>Taxes</p>
+                  <p className="font-semibold">GHC 6.40</p>
+                </div>
+              </div>
+              <div className="border-t pt-4">
+                <div className="flex justify-between">
+                  <p className="font-semibold">Total</p>
+                  <p className="font-semibold">GHC 86.40</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h2 className="text-lg font-semibold mb-2">Shipping Address</h2>
+              <p>Kristin Watson</p>
+              <p>7363 Cynthia Pass</p>
+              <p>Toronto, ON N3Y 4H8</p>
+            </div>
+            <div>
+              <h2 className="text-lg font-semibold mb-2">
+                Payment Information
+              </h2>
+              <div className="flex items-center space-x-2">
+                <div className="bg-blue-600 text-white px-2 py-1 text-xs font-semibold rounded">
+                  VISA
+                </div>
+                <p>Ending with 4242</p>
+              </div>
+              <p>Expires 12 / 21</p>
+            </div>
+          </div> */}
+        </div>
+      </div>
+      <Card className="col-span-4 md:col-span-2">
         <CardHeader>
           <CardTitle className="text-2xl">Checkout</CardTitle>
           <CardDescription>
@@ -224,22 +321,6 @@ export default function CheckOut() {
           </Button>
         </CardFooter>
       </Card>
-      <div className="px-2 col-span-3 md:col-span-1  sm:mt-10 xl:mt-0 flex flex-col ">
-        <p className="md:px-10 my-5 md:my-0 text-start text-3xl">Payment</p>
-        <div className="flex justify-between md:px-10 flex-col  items-start">
-          <div className="flex w-full flex-col  my-5 ">
-            {/* <div className="flex justify-between w-full ">
-              <span className="text-xl">Sub total</span>
-              <span className="text-3xl">GHC 100</span>
-            </div> */}
-            <div className="h-[1px] bg-black w-full my-5"></div>
-            <div className="flex justify-between w-full">
-              <span className="text-xl font-bold">Total</span>
-              <span className="text-3xl">GHC 100</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
