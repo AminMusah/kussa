@@ -24,31 +24,47 @@ export default function CreateProduct() {
   const { toast } = useToast();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [stockQuantity, setStockQuantity] = useState("");
-  const [images, setImages] = useState([]); // Specify type as string[]
+  const [price, setPrice] = useState(0);
+  const [stockQuantity, setStockQuantity] = useState(0);
+  const [images, setImages] = useState<string[]>([]); // Specify type as string[]
   const [category, setCategory] = useState("");
+  const [progress, setProgress] = useState("");
+  const [imageFiles, setImageFiles] = useState<
+    { file: File; preview: string }[]
+  >([]);
+
+  const handCategoryInputChange = (value: any) => {
+    setCategory(value);
+  };
 
   const submit = async () => {
     try {
       setLoading(true);
-      console.log(images);
-      const response = await axios.post(
-        "/api/product/",
-        {
-          name,
-          description,
-          price,
-          stockQuantity,
-          images,
-          category,
+
+      const imgUrls = images.map((item) => {
+        return {
+          url: item,
+        };
+      });
+
+      console.log(imgUrls, "urls");
+
+      const payload = {
+        name,
+        description,
+        price: +price,
+        stockQuantity: +stockQuantity,
+        images: imgUrls,
+        category,
+      };
+
+      console.log(payload);
+
+      const response = await axios.post("/api/product/", payload, {
+        headers: {
+          "Content-Type": "application/json",
         },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      });
 
       toast({
         title: "Success",
@@ -58,10 +74,11 @@ export default function CreateProduct() {
 
       setName("");
       setDescription("");
-      setPrice("");
-      setStockQuantity("");
+      setPrice(0);
+      setStockQuantity(0);
       setImages([]);
       setCategory("");
+      setImageFiles([]);
     } catch (error: any) {
       console.error(error.response.data);
       toast({
@@ -87,26 +104,42 @@ export default function CreateProduct() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <Label htmlFor="name">Product Name</Label>
-                <Input id="name" placeholder="Enter product name" />
+                <Input
+                  id="name"
+                  placeholder="Enter product name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="price">Price</Label>
-                <Input id="price" type="number" placeholder="Enter price" />
+                <Input
+                  id="price"
+                  placeholder="Enter price"
+                  value={price}
+                  onChange={(e) => setPrice(+e.target.value)}
+                />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="stockQuantity">Stock Quantity</Label>
                 <Input
                   id="stockQuantity"
-                  type="number"
+                  value={stockQuantity}
                   placeholder="Enter stock quantity"
+                  onChange={(e) => setStockQuantity(+e.target.value)}
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="category">Category</Label>
-                <Select>
+                <Select
+                  onValueChange={(value) => {
+                    handCategoryInputChange(value);
+                  }}
+                  defaultValue={category}
+                >
                   <SelectTrigger id="category">
                     <SelectValue placeholder="Select a category" />
                   </SelectTrigger>
@@ -116,6 +149,7 @@ export default function CreateProduct() {
                     <SelectItem value="citronella">Citronella</SelectItem>
                     <SelectItem value="perfume">Perfume</SelectItem>
                     <SelectItem value="lavender">Lavender</SelectItem>
+                    <SelectItem value="natural">Natural</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -125,10 +159,20 @@ export default function CreateProduct() {
                 <Textarea
                   id="description"
                   placeholder="Enter product description"
+                  rows={10}
+                  onChange={(e) => setDescription(e.target.value)}
+                  value={description}
                 />
               </div>
             </div>
-            <MultipleImageUpload getImages={setImages} />
+            <p className="text-black text-xs mb-4">{progress}</p>
+            <MultipleImageUpload
+              getImages={setImages}
+              getProgress={setProgress}
+              setImageFiles={setImageFiles}
+              imageFiles={imageFiles}
+            />
+
             <Button
               type="submit"
               // className="w-full"

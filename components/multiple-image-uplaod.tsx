@@ -4,33 +4,93 @@ import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { X, Upload } from "lucide-react";
+import firebase from "@/firebase/firebase";
+import "firebase/compat/storage";
 
 interface MultipleImageUploadProps {
   getImages: any;
+  getProgress: any;
+  setImageFiles: any;
+  imageFiles: any;
 }
+
+// Initialize Firebase Storage
 
 export default function MultipleImageUpload({
   getImages,
+  getProgress,
+  setImageFiles,
+  imageFiles,
 }: MultipleImageUploadProps) {
-  const [images, setImages] = useState<{ file: File; preview: string }[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const files = event.target.files;
+
+    // Create a reference to the storage bucket
+
+    // Loop through each file
+    for (const file of files as any) {
+      // Create a reference to the file in the storage bucket
+      const storageRef = firebase.storage().ref("/products/" + file.name);
+
+      try {
+        // Upload the file
+        const uploadTask = storageRef.put(file);
+        // Handle upload progress
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log("Upload is " + progress + "% done");
+            getProgress(`Upload is ${progress.toString()} done`);
+            switch (snapshot.state) {
+              case "paused":
+                console.log("Upload is paused");
+                getProgress("Upload is paused");
+                break;
+              case "running":
+                console.log("Upload is running");
+                getProgress("Upload is running");
+                break;
+            }
+          },
+          (error) => {
+            // Handle unsuccessful uploads
+            console.error("Upload failed:", error);
+          },
+          () => {
+            // Handle successful uploads
+            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+              getProgress("");
+              console.log("File available at", downloadURL);
+              // Do something with the download URL (e.g., store it in a database)
+              getImages((prevImages: any) => [...prevImages, downloadURL]);
+            });
+          }
+        );
+      } catch (error) {
+        console.error("Error uploading file:", error);
+      }
+    }
+
     if (files) {
       const newImages = Array.from(files).map((file) => ({
         file,
         preview: URL.createObjectURL(file),
       }));
-      setImages((prevImages) => [...prevImages, ...newImages]);
-      getImages((prevImages: any) => [...prevImages, ...newImages]);
+      setImageFiles((prevImages: any) => [...prevImages, ...newImages]);
     }
   };
 
   // console.log(images);
 
   const removeImage = (index: number) => {
-    setImages((prevImages) => {
+    setImageFiles((prevImages: any) => {
       const updatedImages = [...prevImages];
       URL.revokeObjectURL(updatedImages[index].preview);
       updatedImages.splice(index, 1);
@@ -76,9 +136,9 @@ export default function MultipleImageUpload({
         </CardContent>
       </Card>
 
-      {images.length > 0 && (
+      {imageFiles.length > 0 && (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {images.map((image, index) => (
+          {imageFiles.map((image: any, index: any) => (
             <Card key={index} className="relative group overflow-hidden">
               <img
                 src={image.preview}

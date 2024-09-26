@@ -40,18 +40,18 @@ export const POST = async (req: Request, res: Response) => {
     });
   }
 
-  if (images.length <= 0) {
-    return new NextResponse("Please stock quantity is required", {
-      status: 400,
-    });
-  }
+  // if (images.length <= 0) {
+  //   return new NextResponse("Please at least one image is required", {
+  //     status: 400,
+  //   });
+  // }
 
   const newProduct = new Product({
     name,
     description,
-    price,
-    stockQuantity,
-    images,
+    price: parseFloat(price),
+    stockQuantity: parseInt(stockQuantity),
+    images: images, // This should already be an array of image objects
     category,
   });
 

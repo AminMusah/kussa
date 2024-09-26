@@ -1,14 +1,6 @@
 const mongoose = require("mongoose");
 const { v4: uuidv4 } = require("uuid");
 
-const imageSchema = new mongoose.Schema({
-  _id: { type: String, default: uuidv4 }, // Unique ID for each image, generated using uuid
-  url: { type: String, required: true },
-  alt: { type: String },
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
-});
-
 const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
@@ -16,7 +8,14 @@ const productSchema = new mongoose.Schema(
     price: { type: Number, required: true },
     stockQuantity: { type: Number, required: true },
     category: { type: String, required: true },
-    images: [imageSchema],
+    images: [
+      {
+        // Change this line to define images as an array of objects
+        _id: { type: String, default: uuidv4 },
+        url: { type: String },
+        alt: { type: String, default: "kussa product" }, // Add alt text if needed
+      },
+    ],
   },
   { timestamps: true }
 );
