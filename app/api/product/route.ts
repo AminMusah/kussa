@@ -40,11 +40,11 @@ export const POST = async (req: Request, res: Response) => {
     });
   }
 
-  // if (images.length <= 0) {
-  //   return new NextResponse("Please at least one image is required", {
-  //     status: 400,
-  //   });
-  // }
+  if (images.length <= 0) {
+    return new NextResponse("Please at least one image is required", {
+      status: 400,
+    });
+  }
 
   const newProduct = new Product({
     name,
