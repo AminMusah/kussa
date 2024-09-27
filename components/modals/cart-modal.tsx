@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { Trash2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function CartModal() {
   const router = useRouter();
@@ -15,12 +16,14 @@ export default function CartModal() {
   };
 
   return (
-    <>
+    <AnimatePresence>
       {isModalOpen && (
-        <div
-          className={`relative z-20 transition-opacity duration-300 ${
-            isModalOpen ? "opacity-100" : "opacity-0"
-          }`} // {{ edit_1 }}
+        <motion.div
+          initial={{ x: "100%" }}
+          animate={{ x: 0 }}
+          exit={{ x: "100%" }}
+          transition={{ type: "spring", damping: 20, stiffness: 100 }}
+          className="fixed inset-y-0 right-0 w-full   z-50 "
           aria-labelledby="slide-over-title"
           role="dialog"
           aria-modal="true"
@@ -186,8 +189,8 @@ export default function CartModal() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
-    </>
+    </AnimatePresence>
   );
 }

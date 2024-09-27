@@ -142,8 +142,6 @@ export default function MultipleImageUpload({
     fileInputRef.current?.click();
   };
 
-  console.log(uploading, "uploading");
-
   return (
     <div className="space-y-4">
       <Card>

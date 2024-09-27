@@ -12,6 +12,10 @@ const isPublicRoute = createRouteMatcher([
   "/shop/:path*",
   "/api/webhooks/clerk",
   "/api/payment/initiate",
+  "/api/product",
+  "/api/product/:path*",
+  "/api/cart/",
+  "/api/cart/:path*",
 ]);
 
 export default clerkMiddleware((auth, request) => {

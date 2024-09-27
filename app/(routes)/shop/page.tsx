@@ -63,7 +63,9 @@ export default function Shop() {
       <div className="py-14">
         <div className="pb-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-4 gap-8">
           {loading
-            ? Array.from({ length: 8 }, (_, index) => <SkeletonCard />)
+            ? Array.from({ length: 8 }, (_, index) => (
+                <SkeletonCard key={index} />
+              ))
             : products.map(
                 (
                   product: {

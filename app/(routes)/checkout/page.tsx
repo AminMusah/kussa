@@ -50,7 +50,6 @@ export default function CheckOut() {
   const initiatePayment = async () => {
     for (let field in validation) {
       if (!validation[field]) {
-        console.log(`Validation field is empty: ${field}`);
         toast({
           title: "Error",
           description: `Please ${field} field is required`,

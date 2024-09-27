@@ -13,7 +13,7 @@ export default function Product({ params }: { params: { id: string } }) {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
-
+  const [submitting, setSubmitting] = useState(false);
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState<any>({});
 
@@ -37,6 +37,46 @@ export default function Product({ params }: { params: { id: string } }) {
   useEffect(() => {
     getProduct(params.id);
   }, [params.id]);
+
+  const submit = async () => {
+    try {
+      setSubmitting(true);
+
+      const payload = {
+        // name,
+        // description,
+        // price: +price,
+        // stockQuantity: +stockQuantity,
+        // images: imgUrls,
+        // category,
+      };
+
+      console.log(payload);
+
+      const response = await axios.post("/api/cart/", payload, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      console.log(response, "res");
+
+      toast({
+        title: "Success",
+        description: "Added to cart!!",
+        variant: "success",
+      });
+    } catch (error: any) {
+      console.error(error.response.data);
+      toast({
+        title: "Error",
+        description: error.response.data,
+        variant: "destructive",
+      });
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   // console.log(product);
 
@@ -184,6 +224,7 @@ export default function Product({ params }: { params: { id: string } }) {
               </div>
 
               <Button
+                onClick={() => submit()}
                 type="submit"
                 className="w-9/12 h-[50px] rounded-full px-3 py-2  hover:bg-white border border-black hover:border-[#772432] group-hover:border-white hover:text-[#772432]  transition-all duration-300  border-opacity-50 focus:outline-none group-invalid:pointer-events-none group-invalid:opacity-70"
               >
