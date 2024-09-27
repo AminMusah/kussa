@@ -175,6 +175,7 @@ export default function CreateProduct() {
               productId=""
               setRendering=""
               rendring=""
+              progress=""
             />
 
             <Button

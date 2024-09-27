@@ -94,7 +94,7 @@ export default function CreateProduct({ params }: { params: { id: string } }) {
 
       toast({
         title: "Success",
-        description: "Product created successfully!!",
+        description: "Product updated successfully!!",
         variant: "success",
       });
       setRender(!render);
@@ -114,10 +114,9 @@ export default function CreateProduct({ params }: { params: { id: string } }) {
     <div className="container mx-auto p-6">
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl font-bold">
-            Create New Product
-          </CardTitle>
+          <CardTitle className="text-2xl font-bold">Update product</CardTitle>
         </CardHeader>
+
         <CardContent>
           <form className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -185,7 +184,6 @@ export default function CreateProduct({ params }: { params: { id: string } }) {
                 />
               </div>
             </div>
-            <p className="text-black text-xs mb-4">{progress}</p>
             <MultipleImageUpload
               getImages={setImages}
               getProgress={setProgress}
@@ -195,6 +193,7 @@ export default function CreateProduct({ params }: { params: { id: string } }) {
               productId={params.id}
               rendring={render}
               setRendering={setRender}
+              progress={progress}
             />
 
             <Button

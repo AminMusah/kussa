@@ -7,6 +7,10 @@ const cartSchema = new mongoose.Schema(
       ref: "User",
       required: false,
     },
+    sessionId: {
+      type: String,
+      required: false,
+    },
     items: [
       {
         productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
@@ -15,7 +19,6 @@ const cartSchema = new mongoose.Schema(
         price: { type: Number, required: true },
       },
     ],
-    shippingAddress: { type: String, required: true },
   },
   { timestamps: true }
 );

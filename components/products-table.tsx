@@ -29,18 +29,55 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useAllProducts from "@/hooks/use-all-products";
+import axios from "axios";
+import { useToast } from "@/hooks/use-toast";
+import OverlayLoader from "./overlay-loader";
 
 export default function ProductsTable() {
   const router = useRouter();
   const { products, loading, getProducts } = useAllProducts();
+  const [rendring, setRendering] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [rendring]);
+
   const FORMAT = "dddd, MMMM D, YYYY h:mm A";
+
   console.log(products);
+
+  const deleteProduct = async (id: string) => {
+    try {
+      setIsLoading(true);
+
+      const response = await axios.delete(`/api/product/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      toast({
+        title: "Success",
+        description: "Product deleted successfully!!",
+        variant: "success",
+      });
+      setRendering(!rendring);
+    } catch (error: any) {
+      console.error(error.response.data);
+      toast({
+        title: "Error",
+        description: error.response.data,
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <Card>
       <CardHeader className="flex w-full justify-between flex-row">
@@ -71,15 +108,18 @@ export default function ProductsTable() {
               <TableHead>Name</TableHead>
               {/* <TableHead>Status</TableHead> */}
               <TableHead>Price</TableHead>
-              <TableHead className="hidden md:table-cell">
-                Total Sales
-              </TableHead>
+              <TableHead className="hidden md:table-cell">Quantity</TableHead>
               <TableHead className="hidden md:table-cell">Created at</TableHead>
               <TableHead>
                 <span className="sr-only">Actions</span>
               </TableHead>
             </TableRow>
           </TableHeader>
+
+          <OverlayLoader
+            isLoading={isLoading}
+            text="Processing your request..."
+          />
 
           <TableBody>
             {products.map(
@@ -91,6 +131,7 @@ export default function ProductsTable() {
                 link: string;
                 price: number;
                 createdAt: any;
+                stockQuantity: any;
               }) => (
                 <TableRow key={product?._id}>
                   <TableCell className="hidden sm:table-cell">
@@ -107,7 +148,9 @@ export default function ProductsTable() {
                     <Badge variant="outline">Draft</Badge>
                   </TableCell> */}
                   <TableCell>GHC {product?.price}</TableCell>
-                  <TableCell className="hidden md:table-cell">25</TableCell>
+                  <TableCell className="hidden md:table-cell">
+                    {product.stockQuantity} pcs
+                  </TableCell>
                   <TableCell className="hidden md:table-cell">
                     {dayjs(product.createdAt).format(FORMAT)}
                   </TableCell>
@@ -134,7 +177,13 @@ export default function ProductsTable() {
                         >
                           Edit
                         </DropdownMenuItem>
-                        <DropdownMenuItem>Delete</DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={() => {
+                            deleteProduct(product?._id);
+                          }}
+                        >
+                          Delete
+                        </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>

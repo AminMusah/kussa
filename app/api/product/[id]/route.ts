@@ -107,7 +107,7 @@ export async function DELETE(
     return new NextResponse("product has been deleted", { status: 200 });
   }
   try {
-    return NextResponse.json(product);
+    return NextResponse.json({ message: "prduct deleted" });
   } catch (error) {
     console.log("[PRODUCT_DELETE]", error);
     return new NextResponse("Internal error", { status: 500 });

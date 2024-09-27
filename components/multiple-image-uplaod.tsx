@@ -8,6 +8,7 @@ import firebase from "@/firebase/firebase";
 import "firebase/compat/storage";
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
+import OverlayLoader from "./overlay-loader";
 
 interface MultipleImageUploadProps {
   getImages: any;
@@ -18,6 +19,7 @@ interface MultipleImageUploadProps {
   productId: any;
   rendring: any;
   setRendering: any;
+  progress: any;
 }
 
 // Initialize Firebase Storage
@@ -25,15 +27,16 @@ interface MultipleImageUploadProps {
 export default function MultipleImageUpload({
   getImages,
   getProgress,
-  setImageFiles,
-  imageFiles,
   useImages,
   productId,
   rendring,
   setRendering,
+  progress,
 }: MultipleImageUploadProps) {
   const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [deleting, setDeleting] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -54,6 +57,7 @@ export default function MultipleImageUpload({
         uploadTask.on(
           "state_changed",
           (snapshot) => {
+            setUploading(true);
             // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
             const progress =
               (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -78,7 +82,7 @@ export default function MultipleImageUpload({
             // Handle successful uploads
             uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
               getProgress("");
-              console.log("File available at", downloadURL);
+              setUploading(false);
               // Do something with the download URL (e.g., store it in a database)
 
               getImages((prevImages: any) => [...prevImages, downloadURL]);
@@ -87,26 +91,14 @@ export default function MultipleImageUpload({
         );
       } catch (error) {
         console.error("Error uploading file:", error);
+      } finally {
       }
     }
-
-    // if (files) {
-    //   const newImages = Array.from(files).map((file) => ({
-    //     file,
-    //     preview: URL.createObjectURL(file),
-    //   }));
-
-    //   getImages((prevImages: any) => [
-    //     ...prevImages,
-    //     ...newImages
-
-    //   ]);
-    // }
   };
 
   const removeImage = async (index: number, id: string, imageId: string) => {
     try {
-      // setLoading(true);
+      setDeleting(true);
 
       const payload = { imageId: imageId };
 
@@ -131,24 +123,26 @@ export default function MultipleImageUpload({
         variant: "destructive",
       });
     } finally {
-      // setLoading(false);
+      setDeleting(false);
     }
   };
 
   const deleteImage = (index: number) => {
+    setDeleting(true);
     getImages((prevImages: any) => {
       const updatedImages = [...prevImages];
       updatedImages.splice(index, 1);
       console.log(updatedImages, "updated");
       return updatedImages;
     });
+    setDeleting(false);
   };
 
   const triggerFileInput = () => {
     fileInputRef.current?.click();
   };
 
-  console.log(useImages, "existing image");
+  console.log(uploading, "uploading");
 
   return (
     <div className="space-y-4">
@@ -184,31 +178,10 @@ export default function MultipleImageUpload({
         </CardContent>
       </Card>
 
-      {/* {imageFiles?.length > 0 && (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {imageFiles.map((image: any, index: any) => (
-            <Card key={index} className="relative group overflow-hidden">
-              <img
-                src={image.preview}
-                alt={`Uploaded image ${index + 1}`}
-                className="w-full h-40 object-cover transition-transform group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <Button
-                  type="button"
-                  variant="destructive"
-                  size="icon"
-                  className="rounded-full"
-                  onClick={() => removeImage(index)}
-                >
-                  <X className="h-4 w-4" />
-                  <span className="sr-only">Remove image</span>
-                </Button>
-              </div>
-            </Card>
-          ))}
-        </div>
-      )} */}
+      <OverlayLoader
+        isLoading={deleting || uploading}
+        text={uploading ? progress : deleting ? "deleting" : ""}
+      />
 
       {useImages?.length > 0 && (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
