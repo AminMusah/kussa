@@ -60,7 +60,7 @@ export async function PATCH(
   }
 
   if (images.length <= 0) {
-    return new NextResponse("Please stock quantity is required", {
+    return new NextResponse("Please at least one image is required", {
       status: 400,
     });
   }
@@ -70,8 +70,8 @@ export async function PATCH(
     {
       name,
       description,
-      price,
-      stockQuantity,
+      price: parseFloat(price),
+      stockQuantity: parseInt(stockQuantity),
       images,
       category,
     },
@@ -79,8 +79,6 @@ export async function PATCH(
       new: true,
     }
   );
-
-  console.log(updateProduct);
 
   try {
     return NextResponse.json(updateProduct);

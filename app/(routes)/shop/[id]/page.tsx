@@ -14,8 +14,6 @@ export default function Product({ params }: { params: { id: string } }) {
   const router = useRouter();
   const { toast } = useToast();
 
-  console.log(params);
-
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState<any>({});
 

@@ -6,12 +6,18 @@ import { Card, CardContent } from "@/components/ui/card";
 import { X, Upload } from "lucide-react";
 import firebase from "@/firebase/firebase";
 import "firebase/compat/storage";
+import axios from "axios";
+import { useToast } from "@/hooks/use-toast";
 
 interface MultipleImageUploadProps {
   getImages: any;
   getProgress: any;
   setImageFiles: any;
   imageFiles: any;
+  useImages: any;
+  productId: any;
+  rendring: any;
+  setRendering: any;
 }
 
 // Initialize Firebase Storage
@@ -21,7 +27,12 @@ export default function MultipleImageUpload({
   getProgress,
   setImageFiles,
   imageFiles,
+  useImages,
+  productId,
+  rendring,
+  setRendering,
 }: MultipleImageUploadProps) {
+  const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageUpload = async (
@@ -69,6 +80,7 @@ export default function MultipleImageUpload({
               getProgress("");
               console.log("File available at", downloadURL);
               // Do something with the download URL (e.g., store it in a database)
+
               getImages((prevImages: any) => [...prevImages, downloadURL]);
             });
           }
@@ -78,22 +90,56 @@ export default function MultipleImageUpload({
       }
     }
 
-    if (files) {
-      const newImages = Array.from(files).map((file) => ({
-        file,
-        preview: URL.createObjectURL(file),
-      }));
-      setImageFiles((prevImages: any) => [...prevImages, ...newImages]);
+    // if (files) {
+    //   const newImages = Array.from(files).map((file) => ({
+    //     file,
+    //     preview: URL.createObjectURL(file),
+    //   }));
+
+    //   getImages((prevImages: any) => [
+    //     ...prevImages,
+    //     ...newImages
+
+    //   ]);
+    // }
+  };
+
+  const removeImage = async (index: number, id: string, imageId: string) => {
+    try {
+      // setLoading(true);
+
+      const payload = { imageId: imageId };
+
+      const response = await axios.delete(`/api/product/${id}/image`, {
+        data: payload, // Pass payload as data
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      toast({
+        title: "Success",
+        description: "Image deleted successfully!!",
+        variant: "success",
+      });
+      setRendering(!rendring);
+    } catch (error: any) {
+      console.error(error.response.data);
+      toast({
+        title: "Error",
+        description: error.response.data,
+        variant: "destructive",
+      });
+    } finally {
+      // setLoading(false);
     }
   };
 
-  // console.log(images);
-
-  const removeImage = (index: number) => {
-    setImageFiles((prevImages: any) => {
+  const deleteImage = (index: number) => {
+    getImages((prevImages: any) => {
       const updatedImages = [...prevImages];
-      URL.revokeObjectURL(updatedImages[index].preview);
       updatedImages.splice(index, 1);
+      console.log(updatedImages, "updated");
       return updatedImages;
     });
   };
@@ -101,6 +147,8 @@ export default function MultipleImageUpload({
   const triggerFileInput = () => {
     fileInputRef.current?.click();
   };
+
+  console.log(useImages, "existing image");
 
   return (
     <div className="space-y-4">
@@ -136,7 +184,7 @@ export default function MultipleImageUpload({
         </CardContent>
       </Card>
 
-      {imageFiles.length > 0 && (
+      {/* {imageFiles?.length > 0 && (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {imageFiles.map((image: any, index: any) => (
             <Card key={index} className="relative group overflow-hidden">
@@ -152,6 +200,41 @@ export default function MultipleImageUpload({
                   size="icon"
                   className="rounded-full"
                   onClick={() => removeImage(index)}
+                >
+                  <X className="h-4 w-4" />
+                  <span className="sr-only">Remove image</span>
+                </Button>
+              </div>
+            </Card>
+          ))}
+        </div>
+      )} */}
+
+      {useImages?.length > 0 && (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {useImages.map((image: any, index: any) => (
+            <Card
+              className="relative group overflow-hidden"
+              key={image?._id || index}
+            >
+              <img
+                src={image.url || image}
+                alt={image.alt}
+                className="w-full h-40 object-cover transition-transform group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <Button
+                  type="button"
+                  variant="destructive"
+                  size="icon"
+                  className="rounded-full"
+                  onClick={() => {
+                    if (typeof image === "string") {
+                      deleteImage(index);
+                    } else {
+                      removeImage(index, productId, image?._id);
+                    }
+                  }}
                 >
                   <X className="h-4 w-4" />
                   <span className="sr-only">Remove image</span>

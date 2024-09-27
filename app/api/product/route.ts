@@ -51,7 +51,7 @@ export const POST = async (req: Request, res: Response) => {
     description,
     price: parseFloat(price),
     stockQuantity: parseInt(stockQuantity),
-    images: images, // This should already be an array of image objects
+    images,
     category,
   });
 

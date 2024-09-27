@@ -12,19 +12,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import MultipleImageUpload from "@/components/multiple-image-uplaod";
 
-export default function CreateProduct() {
+export default function CreateProduct({ params }: { params: { id: string } }) {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
+  const [render, setRender] = useState(false);
   const [stockQuantity, setStockQuantity] = useState(0);
   const [images, setImages] = useState<string[]>([]); // Specify type as string[]
   const [category, setCategory] = useState("");
@@ -37,17 +38,44 @@ export default function CreateProduct() {
     setCategory(value);
   };
 
+  const [product, setProduct] = useState<any>({});
+
+  // get a product
+  const getProduct = async (id: any) => {
+    try {
+      // setLoading(true);
+      const response = await axios.get(`/api/product/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      setProduct(response.data);
+      setName(response.data.name);
+      setDescription(response.data.description);
+      setCategory(response.data.category);
+      setStockQuantity(response.data.stockQuantity);
+      setImages(response.data.images);
+      setPrice(response.data.price);
+    } catch (error: any) {
+      console.error(error.response.data);
+    } finally {
+      // setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getProduct(params.id);
+  }, [params.id, render]);
+
   const submit = async () => {
     try {
       setLoading(true);
 
-      const imgUrls = images.map((item) => {
-        return {
-          url: item,
-        };
-      });
-
-      console.log(imgUrls, "urls");
+      const imgUrls = [
+        ...images.map((item: any) =>
+          typeof item === "string" ? { url: item } : { ...item }
+        ),
+      ];
 
       const payload = {
         name,
@@ -58,9 +86,7 @@ export default function CreateProduct() {
         category,
       };
 
-      console.log(payload);
-
-      const response = await axios.post("/api/product/", payload, {
+      const response = await axios.patch(`/api/product/${params.id}`, payload, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -71,14 +97,7 @@ export default function CreateProduct() {
         description: "Product created successfully!!",
         variant: "success",
       });
-
-      setName("");
-      setDescription("");
-      setPrice(0);
-      setStockQuantity(0);
-      setImages([]);
-      setCategory("");
-      setImageFiles([]);
+      setRender(!render);
     } catch (error: any) {
       console.error(error.response.data);
       toast({
@@ -139,6 +158,7 @@ export default function CreateProduct() {
                     handCategoryInputChange(value);
                   }}
                   defaultValue={category}
+                  value={category}
                 >
                   <SelectTrigger id="category">
                     <SelectValue placeholder="Select a category" />
@@ -172,9 +192,9 @@ export default function CreateProduct() {
               setImageFiles={setImageFiles}
               imageFiles={imageFiles}
               useImages={images}
-              productId=""
-              setRendering=""
-              rendring=""
+              productId={params.id}
+              rendring={render}
+              setRendering={setRender}
             />
 
             <Button
@@ -186,7 +206,7 @@ export default function CreateProduct() {
               }}
             >
               {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : ""}
-              Create Product
+              Update product
             </Button>
           </form>
         </CardContent>
