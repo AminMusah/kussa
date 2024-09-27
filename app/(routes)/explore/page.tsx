@@ -1,4 +1,23 @@
 export default function Explore() {
+  const features = [
+    { name: "Origin", description: "Designed by Good Goods, Inc." },
+    {
+      name: "Material",
+      description:
+        "Solid walnut base with rare earth magnets and powder coated steel card cover",
+    },
+    { name: "Dimensions", description: '6.25" x 3.55" x 1.15"' },
+    {
+      name: "Finish",
+      description: "Hand sanded and finished with natural oil",
+    },
+    { name: "Includes", description: "Wood card tray and 3 refill packs" },
+    {
+      name: "Considerations",
+      description:
+        "Made from natural materials. Grain and color vary with each item.",
+    },
+  ];
   return (
     <div>
       <div className="pt-32 flex justify-center items-center flex-col gap-y-6">
@@ -12,69 +31,143 @@ export default function Explore() {
           TYPES OF PRODUCT AND USES/BENEFITS
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-2 p-2 h-[1200px] md:h-[700px]">
-        <div
-          className="relative rounded-xl overflow-hidden group mb-2 md:mb-0"
-          style={{
-            backgroundImage: "url('/images/IMG_9330.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        ></div>
-        <div
-          className=" rounded-xl overflow-hidden group h-full"
-          // style={{
-          //   backgroundImage: "url('/images/IMG_9458.jpg')",
-          //   backgroundSize: "cover",
-          //   backgroundPosition: "center",
-          // }}
-        >
-          <div className="flex flex-col w-full h-full">
-            <h2 className="md:text-3xl font-bold transition-transform duration-300 w-full px-2 md:px-8">
-              LEMON INFUSED SHEA BUTTER
-            </h2>
+      <div className="mx-auto grid max-w-2xl grid-cols-1 items-start gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            LEMON INFUSED SHEA BUTTER
+          </h2>
+          <p className="mt-4 text-gray-500">
+            Our lemon infused shea butter product is solely natural shea butter
+            infused with lemon essential oil.
+          </p>
+          <p className="mt-4 text-gray-500">
+            The composition of the product is 90% shea butter and 10% lemon
+            essential oil. The outcome of the product is solid. Below are some
+            uses and benefits of our lemon infused shea butter.
+          </p>
 
-            <div className="flex  flex-col w-full p-2 md:p-8 pt-12">
-              <div className="flex flex-col">
-                <p className="text-xs md:text-base">
-                  Our lemon infused shea butter product is solely natural shea
-                  butter infused with lemon essential oil.
-                </p>
-              </div>
-              <div className="flex flex-col py-8">
-                <p className=" text-xs sm:text-xl md:text-base">
-                  The composition of the product is 90% shea butter and 10%
-                  lemon essential oil. The outcome of the product is solid.
-                  Below are some uses and benefits of our lemon infused shea
-                  butter.
-                </p>
-              </div>
-              <div className="mt-4">
-                <ul>
-                  <li className="text-xs md:text-base">
-                    • Reduces anxiety and depression.
-                  </li>
-                  <li className="text-xs md:text-base">
-                    • Eases morning sickness.
-                  </li>
-                  <li className="text-xs md:text-base">
-                    • Improves skin health.
-                  </li>
-                  <li className="text-xs md:text-base">• Relieves pain.</li>
-                  <li className="text-xs md:text-base">
-                    • Improves cold symptoms.
-                  </li>
-                  <li className="text-xs md:text-base">
-                    • Used in the treatment of acne.
-                  </li>
-                  <li className="text-xs md:text-base">• Heals wounds.</li>
-                  <li className="text-xs md:text-base">• Heals wounds.</li>
-                </ul>
-              </div>
+          <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
+            <div className="border-t border-gray-200 pt-4">
+              {/* <dt className="font-medium text-gray-900">{feature.name}</dt> */}
+              <dd className="mt-2 text-sm text-gray-500">
+                <div className="mt-4">
+                  <ul>
+                    <li className="text-xs md:text-base">
+                      • Reduces anxiety and depression.
+                    </li>
+                    <li className="text-xs md:text-base">
+                      • Eases morning sickness.
+                    </li>
+                    <li className="text-xs md:text-base">
+                      • Improves skin health.
+                    </li>
+                    <li className="text-xs md:text-base">• Relieves pain.</li>
+                    <li className="text-xs md:text-base">
+                      • Improves cold symptoms.
+                    </li>
+                    <li className="text-xs md:text-base">
+                      • Used in the treatment of acne.
+                    </li>
+                    <li className="text-xs md:text-base">• Heals wounds.</li>
+                    <li className="text-xs md:text-base">• Heals wounds.</li>
+                  </ul>
+                </div>
+              </dd>
             </div>
-          </div>
+          </dl>
+        </div>
+        <div className="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-6 lg:gap-8">
+          <img
+            alt="Walnut card tray with white powder coated steel divider and 3 punchout holes."
+            src="/images/IMG_9330.jpg"
+            className="rounded-lg bg-gray-100"
+          />
+          {/* <img
+            alt="Top down view of walnut card tray with embedded magnets and card groove."
+            src="https://tailwindui.com/img/ecommerce-images/product-feature-03-detail-02.jpg"
+            className="rounded-lg bg-gray-100"
+          />
+          <img
+            alt="Side of walnut card tray with card groove and recessed card area."
+            src="https://tailwindui.com/img/ecommerce-images/product-feature-03-detail-03.jpg"
+            className="rounded-lg bg-gray-100"
+          />
+          <img
+            alt="Walnut card tray filled with cards and card angled in dedicated groove."
+            src="https://tailwindui.com/img/ecommerce-images/product-feature-03-detail-04.jpg"
+            className="rounded-lg bg-gray-100"
+          /> */}
         </div>
       </div>
+      <div className="mx-auto grid max-w-2xl grid-cols-1 items-start gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            LEMON INFUSED SHEA BUTTER
+          </h2>
+          <p className="mt-4 text-gray-500">
+            Our lemon infused shea butter product is solely natural shea butter
+            infused with lemon essential oil.
+          </p>
+          <p className="mt-4 text-gray-500">
+            The composition of the product is 90% shea butter and 10% lemon
+            essential oil. The outcome of the product is solid. Below are some
+            uses and benefits of our lemon infused shea butter.
+          </p>
+
+          <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
+            <div className="border-t border-gray-200 pt-4">
+              {/* <dt className="font-medium text-gray-900">{feature.name}</dt> */}
+              <dd className="mt-2 text-sm text-gray-500">
+                <div className="mt-4">
+                  <ul>
+                    <li className="text-xs md:text-base">
+                      • Reduces anxiety and depression.
+                    </li>
+                    <li className="text-xs md:text-base">
+                      • Eases morning sickness.
+                    </li>
+                    <li className="text-xs md:text-base">
+                      • Improves skin health.
+                    </li>
+                    <li className="text-xs md:text-base">• Relieves pain.</li>
+                    <li className="text-xs md:text-base">
+                      • Improves cold symptoms.
+                    </li>
+                    <li className="text-xs md:text-base">
+                      • Used in the treatment of acne.
+                    </li>
+                    <li className="text-xs md:text-base">• Heals wounds.</li>
+                    <li className="text-xs md:text-base">• Heals wounds.</li>
+                  </ul>
+                </div>
+              </dd>
+            </div>
+          </dl>
+        </div>
+        <div className="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-6 lg:gap-8">
+          <img
+            alt="Walnut card tray with white powder coated steel divider and 3 punchout holes."
+            src="/images/IMG_9330.jpg"
+            className="rounded-lg bg-gray-100"
+          />
+          {/* <img
+            alt="Top down view of walnut card tray with embedded magnets and card groove."
+            src="https://tailwindui.com/img/ecommerce-images/product-feature-03-detail-02.jpg"
+            className="rounded-lg bg-gray-100"
+          />
+          <img
+            alt="Side of walnut card tray with card groove and recessed card area."
+            src="https://tailwindui.com/img/ecommerce-images/product-feature-03-detail-03.jpg"
+            className="rounded-lg bg-gray-100"
+          />
+          <img
+            alt="Walnut card tray filled with cards and card angled in dedicated groove."
+            src="https://tailwindui.com/img/ecommerce-images/product-feature-03-detail-04.jpg"
+            className="rounded-lg bg-gray-100"
+          /> */}
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-2 p-2 h-[1500px] md:h-[700px] md:mt-44">
         <div
           className=" rounded-xl overflow-hidden group h-full "

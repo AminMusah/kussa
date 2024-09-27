@@ -1,8 +1,19 @@
+"use client";
+
 import ProductCard from "@/components/product-card";
+import { SkeletonCard } from "@/components/product-skeleton-card";
 import { Button } from "@/components/ui/button";
+import useAllProducts from "@/hooks/use-all-products";
 import { Search, SlidersHorizontal } from "lucide-react";
+import { useEffect } from "react";
 
 export default function Shop() {
+  const { products, loading, getProducts } = useAllProducts();
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
   return (
     <div>
       <div className="pt-32 flex justify-center items-center flex-col gap-y-6">
@@ -50,18 +61,22 @@ export default function Shop() {
         </div>
       </div>
       <div className="py-14">
-        <div className="pb-24  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-4 gap-8">
-          {Array.from({ length: 24 }).map((_, index) => (
-            <ProductCard
-              name="Shea Butter"
-              desc="Shea Butter is a natural moisturizer that is good for the skin."
-              imageUrl="/images/IMG_9330.jpg"
-              link="/products/1"
-              _id={`${index}`}
-              price={100}
-              key={index}
-            />
-          ))}
+        <div className="pb-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-4 gap-8">
+          {loading
+            ? Array.from({ length: 8 }, (_, index) => <SkeletonCard />)
+            : products.map(
+                (
+                  product: {
+                    _id: string;
+                    name: string;
+                    description: string;
+                    images: [];
+                    link: string;
+                    price: number;
+                  },
+                  index
+                ) => <ProductCard {...product} key={product?._id} />
+              )}
         </div>
       </div>
     </div>

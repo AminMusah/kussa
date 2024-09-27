@@ -8,8 +8,8 @@ import { Heart, ShoppingBasket } from "lucide-react";
 
 type ProductProps = {
   name: any;
-  desc: string;
-  imageUrl: string;
+  description: string;
+  images: { url: string }[]; // Updated type to an array of objects with a url property
   link: string;
   _id: string;
   price: Number;
@@ -17,8 +17,8 @@ type ProductProps = {
 
 const ProductCard = ({
   name,
-  desc,
-  imageUrl,
+  description,
+  images,
   link,
   _id,
   price,
@@ -26,7 +26,7 @@ const ProductCard = ({
   const router = useRouter();
 
   return (
-    <div className="m-2 ">
+    <div className="m-2">
       <div className="col-span-1 cursor-pointer group">
         <div className="flex flex-col gap-2 w-full">
           <div className="aspect-square  relative overflow-hidden rounded-xl">
@@ -34,7 +34,7 @@ const ProductCard = ({
               fill
               sizes="(max-width: 4px) 100vw, (max-width: 4px) 80vw, 1200px"
               className="object-cover h-full w-full group-hover:scale-110 transition"
-              src={imageUrl}
+              src={images[0].url} // Accessing the first object's url
               alt={name}
               onClick={() => router.push(`/shop/${_id}`)}
             />
@@ -49,7 +49,7 @@ const ProductCard = ({
           </div>
           <div className="flex flex-row justify-between">
             <div
-              className="font-semibold text-lg overflow-hidden truncate w-36"
+              className="font-semibold text-lg overflow-hidden truncate w-4/6"
               onClick={() => router.push(`/shop/${_id}`)}
             >
               {name}
@@ -69,7 +69,7 @@ const ProductCard = ({
             GHC {price.toString()}
           </div>
           <div className="font-light text-neutral-500 overflow-hidden truncate">
-            {desc}
+            {description}
           </div>
         </div>
       </div>

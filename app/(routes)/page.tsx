@@ -11,9 +11,17 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import useAllProducts from "@/hooks/use-all-products";
+import { useEffect } from "react";
 
 export default function Home() {
   const router = useRouter();
+  const { products, loading, getProducts } = useAllProducts();
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
   return (
     <div>
       <Billboard data={[]} />
@@ -51,17 +59,21 @@ export default function Home() {
       </div>
 
       <div className="  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-4 gap-8">
-        {Array.from({ length: 4 }).map((_, index) => (
-          <ProductCard
-            name="Shea Butter"
-            desc="Shea Butter is a natural moisturizer that is good for the skin."
-            imageUrl="/images/IMG_9330.jpg"
-            link="/products/1"
-            _id="1"
-            price={100}
-            key={index}
-          />
-        ))}
+        {products.slice(0, 4).map(
+          (
+            product: {
+              _id: string;
+              name: string;
+              description: string;
+              images: [];
+              link: string;
+              price: number;
+            },
+            index
+          ) => (
+            <ProductCard {...product} key={product._id} />
+          )
+        )}
       </div>
       <div className="group/wrap relative">
         <div className="relative scroll-smooth">

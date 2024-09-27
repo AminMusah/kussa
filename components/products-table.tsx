@@ -29,9 +29,17 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import useAllProducts from "@/hooks/use-all-products";
 
 export default function ProductsTable() {
   const router = useRouter();
+  const { products, loading, getProducts } = useAllProducts();
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+  console.log(products);
   return (
     <Card>
       <CardHeader className="flex w-full justify-between flex-row">

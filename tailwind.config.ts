@@ -101,6 +101,11 @@ const config: Config = {
           opacity: "1",
         },
       },
+      shimmer: {
+        "100%": {
+          transform: "translateX(100%)",
+        },
+      },
     },
   },
   plugins: [

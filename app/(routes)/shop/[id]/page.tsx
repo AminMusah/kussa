@@ -1,70 +1,60 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
+import axios from "axios";
 import { ArrowLeft, ArrowRight, Dot, Heart, Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function Product() {
+export default function Product({ params }: { params: { id: string } }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const router = useRouter();
-  const slides = [
-    {
-      url: "/images/1000007081.jpg",
+  const { toast } = useToast();
 
-      title: "KUSSA SHEA BLISS",
-      description: "Effortless journey to a healthy skin.",
-      buttonText: "Go shopping",
-      link: "/shop",
-    },
-    {
-      url: "/images/IMG_9416.jpg",
-      title: "Skin care",
-      description:
-        "KUSSA SHEA BLISS specializes in producing high-quality skincare and personal care products infused with shea butter, a natural ingredient known for its nourishing and moisturizing properties.",
-      buttonText: "Explore types of products and benefits",
-      link: "/explore",
-    },
-    {
-      url: "/images/IMG-20240818-WA0054.jpg",
-      title: "Lemon infused shea butter.",
-      description:
-        "Our lemon infused shea butter product is solely natural shea butter infused with lemon essential oil. The composition of the product is 90% shea butter and 10% lemon essential oil. The outcome of the product is solid.",
-      buttonText: "Shop for lemon infused shea butter",
-      link: "/shop",
-    },
-    {
-      url: "/images/IMG_9363.jpg",
-      title: "About us",
-      description:
-        "Kussa Shea Bliss (KSB) is a well-established company in the skincare and personal care industry with three years of successful operations.",
-      buttonText: "Read more",
-      link: "/shop",
-    },
+  console.log(params);
 
-    {
-      url: "/images/IMG_9425.jpg",
-      title: "Contact us",
-      description:
-        "For quick and easy assistance, feel free to contact us anytime. Our team is here to help you with any questions or concerns you may have.",
-      buttonText: "Contact us",
-      link: "/shop",
-    },
-  ];
+  const [loading, setLoading] = useState(false);
+  const [product, setProduct] = useState<any>({});
+
+  // get a product
+  const getProduct = async (id: any) => {
+    try {
+      setLoading(true);
+      const response = await axios.get(`/api/product/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      setProduct(response.data);
+    } catch (error: any) {
+      console.error(error.response.data);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getProduct(params.id);
+  }, [params.id]);
+
+  // console.log(product);
 
   const data = [];
 
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? data.length - 1 : currentIndex - 1;
+    const newIndex = isFirstSlide
+      ? product?.images?.length - 1
+      : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
 
   const nextSlide = () => {
     setIsTransitioning(true);
-    const isLastSlide = currentIndex === slides.length - 1;
+    const isLastSlide = currentIndex === product?.images?.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setTimeout(() => {
       setCurrentIndex(newIndex);
@@ -89,20 +79,15 @@ export default function Product() {
       <div className="grid sm:grid-cols-1  md:grid-cols-3 pt-28 md:pt-44 mb-5 h-full md:h-screen p-10 ">
         <div className="flex justify-between flex-col col-span-3 md:col-span-3 xl:col-span-1">
           <div className="px-0 xl:px-10 mb-5">
-            <h1 className="text-5xl mb-10">Natural shea butter</h1>
-            <span className="text-5xl ">GHC 100</span>
+            <h1 className="text-5xl mb-10">{product.name}</h1>
+            <span className="text-5xl ">GHC {product.price}</span>
           </div>
           <div>
             <div className="px-0 xl:px-10">
               <h1 className="border-b mb-5">Details</h1>
-              <span>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptate voluptatem delectus laboriosam repudiandae minima et
-                atque in quam, natus est sunt tenetur aliquam eaque ab enim
-                tempore asperiores magni iste.
-              </span>
+              <span>{product.description}</span>
             </div>
-            <div className="px-0 xl:px-10 mt-5">
+            {/* <div className="px-0 xl:px-10 mt-5">
               <h1 className="border-b mb-5">Product info</h1>
               <span>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -110,7 +95,7 @@ export default function Product() {
                 atque in quam, natus est sunt tenetur aliquam eaque ab enim
                 tempore asperiores magni iste.
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -118,11 +103,11 @@ export default function Product() {
           {/* Background Image with Overlay */}
           <div className="absolute inset-0 ">
             <div className="relative w-full h-full">
-              {slides.map((slide, index) => (
+              {product?.images?.map((slide: any, index: any) => (
                 <Image
-                  key={slide.url}
+                  key={slide._id}
                   src={slide.url}
-                  alt={slide.title || "Billboard image"}
+                  alt={slide.alt || "kussa product"}
                   fill
                   style={{
                     objectFit: "cover",
