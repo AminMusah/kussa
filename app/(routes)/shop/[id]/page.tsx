@@ -3,7 +3,15 @@
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
-import { ArrowLeft, ArrowRight, Dot, Heart, Minus, Plus } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Dot,
+  Heart,
+  Loader2,
+  Minus,
+  Plus,
+} from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -16,6 +24,13 @@ export default function Product({ params }: { params: { id: string } }) {
   const [submitting, setSubmitting] = useState(false);
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState<any>({});
+  const [quantity, setQuantity] = useState<number>(0); // Change from Number to number
+
+  const updateQuantity = (change: number) => {
+    setQuantity((prevQuantity) =>
+      prevQuantity + change > 0 ? prevQuantity + change : 0
+    );
+  };
 
   // get a product
   const getProduct = async (id: any) => {
@@ -38,17 +53,13 @@ export default function Product({ params }: { params: { id: string } }) {
     getProduct(params.id);
   }, [params.id]);
 
-  const submit = async () => {
+  const submit = async (id: string) => {
     try {
       setSubmitting(true);
 
       const payload = {
-        // name,
-        // description,
-        // price: +price,
-        // stockQuantity: +stockQuantity,
-        // images: imgUrls,
-        // category,
+        productId: id,
+        quantity: +quantity,
       };
 
       console.log(payload);
@@ -112,6 +123,7 @@ export default function Product({ params }: { params: { id: string } }) {
   const goToSlide = (slideIndex: any) => {
     setCurrentIndex(slideIndex);
   };
+
   return (
     <div>
       <div className="grid sm:grid-cols-1  md:grid-cols-3 pt-28 md:pt-44 mb-5 h-full md:h-screen p-10 ">
@@ -187,13 +199,14 @@ export default function Product({ params }: { params: { id: string } }) {
                   size={28}
                   strokeWidth={1}
                   className="group-hover:border-white  transition-all duration-300"
+                  onClick={() => updateQuantity(-1)}
                 />
               </div>
               <span
                 className="w-[50px] h-[50px] text-4xl mr-4 cursor-pointer border-opacity-50 rounded-full flex justify-center items-center  py-6 group"
                 // onClick={() => router.push(`/shop`)}
               >
-                0
+                {quantity}
                 {/* <Heart
                   size={28}
                   strokeWidth={1}
@@ -208,6 +221,7 @@ export default function Product({ params }: { params: { id: string } }) {
                   size={28}
                   strokeWidth={1}
                   className="group-hover:border-white  transition-all duration-300"
+                  onClick={() => updateQuantity(1)}
                 />
               </div>
             </div>
@@ -224,10 +238,15 @@ export default function Product({ params }: { params: { id: string } }) {
               </div>
 
               <Button
-                onClick={() => submit()}
+                onClick={() => submit(params?.id)}
                 type="submit"
                 className="w-9/12 h-[50px] rounded-full px-3 py-2  hover:bg-white border border-black hover:border-[#772432] group-hover:border-white hover:text-[#772432]  transition-all duration-300  border-opacity-50 focus:outline-none group-invalid:pointer-events-none group-invalid:opacity-70"
               >
+                {submitting ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  ""
+                )}
                 Add to cart
               </Button>
             </div>

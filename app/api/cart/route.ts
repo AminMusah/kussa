@@ -11,16 +11,26 @@ import { auth, clerkClient } from "@clerk/nextjs/server";
 export const GET = async (req: Request, res: Response) => {
   try {
     await connect();
+
     const cookieStore = cookies();
-    const hasCookie = cookieStore.has("sessionId");
+    const sessionId = cookieStore.get("sessionId")?.value;
 
-    console.log(hasCookie);
+    if (!sessionId) {
+      return NextResponse.json("Cart not found", {
+        status: 400,
+      });
+    }
 
-    const cookie = cookieStore.get("sessionId");
+    // Find the cart associated with the sessionId
+    const cart = await Cart.findOne({ sessionId }).populate("items.productId");
 
-    console.log(cookie);
+    if (!cart) {
+      return NextResponse.json("Cart not found", {
+        status: 400,
+      });
+    }
 
-    return NextResponse.json(hasCookie, {
+    return NextResponse.json(cart, {
       status: 200,
     });
   } catch (err) {
@@ -29,20 +39,18 @@ export const GET = async (req: Request, res: Response) => {
 };
 
 export const POST = async (req: Request, res: Response) => {
-  // Change Request to NextApiRequest
   await connect();
-
-  let randomid = uuidv4();
-  create(randomid);
-  const cookieStore = cookies();
-  const hasCookie = cookieStore.has("sessionId");
   let sessionId;
   let user;
-  if (!hasCookie) {
-    const cookie = cookieStore.get("sessionId");
-    sessionId = cookie;
-  } else {
+  const cookieStore = cookies();
+  const hasCookie = cookieStore.has("sessionId");
+
+  // Generate a new session ID only if it doesn't exist
+  if (hasCookie) {
     sessionId = cookieStore.get("sessionId")?.value;
+  } else {
+    sessionId = uuidv4(); // Generate new session ID
+    const cookie = create(sessionId); // Create cookie with new session ID
   }
 
   const { userId } = auth();
@@ -52,31 +60,40 @@ export const POST = async (req: Request, res: Response) => {
     user = response.publicMetadata.userId;
   }
 
-  console.log(typeof randomid, "id");
+  const { productId, quantity } = await req.json();
 
-  const { items } = await req.json();
+  const product = await Product.findById(productId);
+  if (!product) {
+    return new NextResponse("Product not found!!", { status: 400 });
+  }
 
-  //   for (const item of items) {
-  //     if (!item.productId) {
-  //       return new NextResponse("Please product id is required", { status: 400 });
-  //     }
+  console.log(product);
 
-  //     if (!item.quantity) {
-  //       return new NextResponse("Please quantity is required", {
-  //         status: 400,
-  //       });
-  //     }
+  let cart = await Cart.findOne({ sessionId });
 
-  //     if (!item.price) {
-  //       return new NextResponse("Please price is required", { status: 400 });
-  //     }
-  //   }
+  if (!cart) {
+    cart = new Cart({
+      sessionId,
+      items: [],
+    });
+  }
 
-  const cart = new Cart({
-    userId: user,
-    sessionId: sessionId,
-    items,
-  });
+  const existingItemIndex = cart.items.findIndex(
+    (item: any) => item.productId.toString() === productId
+  );
+
+  if (existingItemIndex > -1) {
+    cart.items[existingItemIndex].quantity += quantity;
+  } else {
+    cart.items.push({
+      productId: product._id,
+      name: product.name,
+      quantity,
+      price: product.price,
+    });
+  }
+
+  await cart.save();
 
   try {
     return NextResponse.json(cart, {

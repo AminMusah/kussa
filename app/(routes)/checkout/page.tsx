@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -20,6 +20,26 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
+import useGetCart from "@/hooks/use-cart-items";
+
+// Define the type for cart items
+interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  _id: string; // {{ edit_1 }} Add _id property
+  productId: {
+    name: string;
+    category: string;
+    images: { url: string }[]; // {{ edit_1 }} Add images property
+  };
+  quantity: number; // {{ edit_2 }} Add quantity property
+  // Add other properties as needed
+}
+
+interface Cart {
+  items: CartItem[];
+}
 
 export default function CheckOut() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -35,6 +55,16 @@ export default function CheckOut() {
   const [zip, setZip] = useState("");
   const [country, setCountry] = useState("");
   const [deliveryInstructions, setDeliveryInstructions] = useState("");
+
+  const { getCart, cart }: any = useGetCart();
+
+  // get a product
+
+  useEffect(() => {
+    getCart();
+  }, []);
+
+  const price = cart?.items?.map((item: any) => item.price);
 
   const validation = {
     name,
@@ -117,55 +147,59 @@ export default function CheckOut() {
             <CardHeader>
               <CardTitle>Order Summary</CardTitle>
             </CardHeader>
+
             <CardContent className="space-y-4">
-              <div className="flex items-center space-x-4">
-                <Image
-                  src="/placeholder.svg?height=80&width=80"
-                  alt="Basic Tee"
-                  width={80}
-                  height={80}
-                  className="rounded-md"
-                />
-                <div className="flex-1">
-                  <h3 className="font-semibold">Basic Tee</h3>
-                  <p className="text-sm text-gray-600">Charcoal</p>
-                  <p className="text-sm text-gray-600">L</p>
-                </div>
-                <p className="font-semibold">GHC 36.00</p>
-              </div>
-              <div className="flex items-center space-x-4">
-                <Image
-                  src="/placeholder.svg?height=80&width=80"
-                  alt="Artwork Tee"
-                  width={80}
-                  height={80}
-                  className="rounded-md"
-                />
-                <div className="flex-1">
-                  <h3 className="font-semibold">Artwork Tee — Iso Dots</h3>
-                  <p className="text-sm text-gray-600">Peach</p>
-                  <p className="text-sm text-gray-600">S</p>
-                </div>
-                <p className="font-semibold">GHC 36.00</p>
-              </div>
+              {cart?.items?.map(
+                (
+                  item: CartItem // Use the defined CartItem type
+                ) => (
+                  <div className="flex items-center space-x-4" key={item?._id}>
+                    <Image
+                      src={item?.productId?.images[0]?.url}
+                      alt={item?.productId?.name}
+                      width={80}
+                      height={80}
+                      className="rounded-md"
+                    />
+                    <div className="flex-1">
+                      <h3 className="font-semibold">{item.productId.name}</h3>
+                      <p className="text-sm text-gray-600">
+                        {item.productId.category}
+                      </p>
+                      {/* <p className="text-sm text-gray-600">L</p> */}
+                    </div>
+                    <p className="font-semibold">GHC {item.price.toFixed(2)}</p>
+                  </div>
+                )
+              )}
               <div className="border-t pt-4">
                 <div className="flex justify-between">
                   <p>Subtotal</p>
-                  <p className="font-semibold">GHC 72.00</p>
+                  <p className="font-semibold">
+                    GHC{" "}
+                    {price
+                      ?.reduce((acc: any, curr: any) => acc + curr, 0)
+                      .toFixed(2)}
+                  </p>
                 </div>
                 <div className="flex justify-between">
                   <p>Shipping</p>
-                  <p className="font-semibold">GHC 8.00</p>
+                  <p className="font-semibold">GHC 0.00</p>
                 </div>
                 <div className="flex justify-between">
                   <p>Taxes</p>
-                  <p className="font-semibold">GHC 6.40</p>
+                  <p className="font-semibold">GHC 0.00</p>
                 </div>
               </div>
               <div className="border-t pt-4">
                 <div className="flex justify-between">
                   <p className="font-semibold">Total</p>
-                  <p className="font-semibold">GHC 86.40</p>
+                  <p className="font-semibold">
+                    GHC{" "}
+                    {price
+                      ?.reduce((acc: any, curr: any) => acc + curr, 0)
+                      .toFixed(2)}
+                  </p>
                 </div>
               </div>
             </CardContent>

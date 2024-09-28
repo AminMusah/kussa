@@ -1,19 +1,46 @@
 import { useModal } from "@/hooks/use-modal-store";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { Trash2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
+import useGetCart from "@/hooks/use-cart-items";
+
+// Define the type for cart items
+interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  _id: string; // {{ edit_1 }} Add _id property
+  productId: {
+    name: string;
+    category: string;
+    images: { url: string }[]; // {{ edit_1 }} Add images property
+  };
+  quantity: number; // {{ edit_2 }} Add quantity property
+  // Add other properties as needed
+}
+
+interface Cart {
+  items: CartItem[];
+}
 
 export default function CartModal() {
   const router = useRouter();
   const { isOpen, onOpen, onClose, type, data, onRender } = useModal();
-
+  const { getCart, cart }: any = useGetCart();
   const isModalOpen = isOpen && type === "toggleCart";
 
   const handleClose = () => {
     onClose();
   };
+
+  useEffect(() => {
+    getCart();
+  }, []);
+
+  const price = cart?.items?.map((item: any) => item.price);
 
   return (
     <AnimatePresence>
@@ -69,96 +96,78 @@ export default function CartModal() {
                           </button>
                         </div>
                       </div>
-
-                      <div className="mt-8">
-                        <div className="flow-root">
-                          <ul
-                            role="list"
-                            className="-my-6 divide-y divide-gray-200"
-                          >
-                            <li className="flex py-6">
-                              <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                <img
-                                  src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg"
-                                  alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
-                                  className="h-full w-full object-cover object-center"
-                                />
-                              </div>
-
-                              <div className="ml-4 flex flex-1 flex-col">
-                                <div>
-                                  <div className="flex justify-between text-base font-medium text-gray-900">
-                                    <h3>
-                                      <a href="#">Throwback Hip Bag</a>
-                                    </h3>
-                                    <p className="ml-4">GHC 90.00</p>
+                      {cart.items.map(
+                        (
+                          item: CartItem // Use the defined CartItem type
+                        ) => (
+                          <div className="mt-8" key={item._id}>
+                            <div className="flow-root">
+                              <ul
+                                role="list"
+                                className="-my-6 divide-y divide-gray-200"
+                              >
+                                <li className="flex py-6">
+                                  <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                    <img
+                                      src={item?.productId?.images[0]?.url}
+                                      alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
+                                      className="h-full w-full object-cover object-center"
+                                    />
                                   </div>
-                                  <p className="mt-1 text-sm text-gray-500">
-                                    Salmon
-                                  </p>
-                                </div>
-                                <div className="flex flex-1 items-end justify-between text-sm">
-                                  <p className="text-gray-500">Qty 1</p>
 
-                                  <div className="flex">
-                                    <button
-                                      type="button"
-                                      className="font-medium text-indigo-600 hover:text-indigo-500"
-                                    >
-                                      <Trash2 color="#000" />
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                            </li>
-                            <li className="flex py-6">
-                              <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                <img
-                                  src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg"
-                                  alt="Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch."
-                                  className="h-full w-full object-cover object-center"
-                                />
-                              </div>
+                                  <div className="ml-4 flex flex-1 flex-col">
+                                    <div>
+                                      <div className="flex justify-between text-base font-medium text-gray-900">
+                                        <h3>
+                                          <a href="#">
+                                            {" "}
+                                            {item?.productId?.name}
+                                          </a>
+                                        </h3>
+                                        <p className="ml-4">
+                                          GHC {item?.price}
+                                        </p>
+                                      </div>
+                                      <p className="mt-1 text-sm text-gray-500">
+                                        {item?.productId?.category}
+                                      </p>
+                                    </div>
+                                    <div className="flex flex-1 items-end justify-between text-sm">
+                                      <p className="text-gray-500">
+                                        Qty {item.quantity}
+                                      </p>
 
-                              <div className="ml-4 flex flex-1 flex-col">
-                                <div>
-                                  <div className="flex justify-between text-base font-medium text-gray-900">
-                                    <h3>
-                                      <a href="#">Medium Stuff Satchel</a>
-                                    </h3>
-                                    <p className="ml-4">GHC 32.00</p>
+                                      <div className="flex">
+                                        <button
+                                          type="button"
+                                          className="font-medium text-indigo-600 hover:text-indigo-500"
+                                        >
+                                          <Trash2 color="#000" />
+                                        </button>
+                                      </div>
+                                    </div>
                                   </div>
-                                  <p className="mt-1 text-sm text-gray-500">
-                                    Blue
-                                  </p>
-                                </div>
-                                <div className="flex flex-1 items-end justify-between text-sm">
-                                  <p className="text-gray-500">Qty 1</p>
-
-                                  <div className="flex">
-                                    <button
-                                      type="button"
-                                      className="font-medium text-indigo-600 hover:text-indigo-500"
-                                    >
-                                      <Trash2 color="#000" />
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        )
+                      )}
                     </div>
 
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>GHC 262.00</p>
+                        <p>
+                          GHC{" "}
+                          {price
+                            .reduce((acc: any, curr: any) => acc + curr, 0)
+                            .toFixed(2)}
+                        </p>
                       </div>
                       {/* <p className="mt-0.5 text-sm text-gray-500">
-                        Shipping and taxes calculated at checkout.
-                      </p> */}
+    Shipping and taxes calculated at checkout.
+  </p> */}
                       <div className="mt-6 ">
                         <Button
                           onClick={() => {
