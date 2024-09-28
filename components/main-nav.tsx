@@ -123,12 +123,14 @@ export function MainNav({
               isScrolled || pathname !== `/` ? "text-black" : "text-white"
             } `}
           />
-          <div className="relative group cursor-pointer">
+          <div
+            className="relative group cursor-pointer"
+            onClick={() => onOpen("toggleCart")}
+          >
             <span className="text-white absolute -top-1 -right-1 bg-[#772432]  group-hover:scale-110 duration-300 rounded-full px-1 text-xs">
               {cart?.items?.length}
             </span>
             <ShoppingCart
-              onClick={() => onOpen("toggleCart")}
               className={`cursor-pointer transition-transform  ${
                 isScrolled || pathname !== `/` ? "text-black" : "text-white"
               } `}

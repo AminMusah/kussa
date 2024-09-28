@@ -66,13 +66,13 @@ export default function InventoryTable() {
 
   const FORMAT = "dddd, MMMM D, YYYY h:mm A";
 
-  console.log(inventory);
+  // console.log(inventory);
 
   return (
     <Card>
       <CardHeader className="flex w-full justify-between flex-row">
         <div>
-          <CardTitle>Inventory</CardTitle>
+          <CardTitle>Inevntory</CardTitle>
           <CardDescription>Manage Inventory.</CardDescription>
         </div>
         {/* <div>

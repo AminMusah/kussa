@@ -35,24 +35,27 @@ import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
 import OverlayLoader from "./overlay-loader";
 
-export default function OrdersTable() {
+export default function TransactionTable() {
   const router = useRouter();
   const [rendring, setRendering] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [orders, setOrders] = useState([]);
+  const [transaction, setTransaction] = useState([]);
   const { toast } = useToast();
 
   // get all products
-  const getOrders = async () => {
+  const getTransactions = async () => {
     try {
       setIsLoading(true);
 
-      const response = await axios.get("/api/order/all/", {
+      const response = await axios.get("https://api.paystack.co/transaction", {
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
         },
       });
-      setOrders(response.data);
+      console.log(response);
+
+      setTransaction(response?.data?.data);
     } catch (error: any) {
       console.error(error.response.data);
     } finally {
@@ -61,19 +64,19 @@ export default function OrdersTable() {
   };
 
   useEffect(() => {
-    getOrders();
+    getTransactions();
   }, []);
 
   const FORMAT = "dddd, MMMM D, YYYY h:mm A";
 
-  // console.log(orders);
+  console.log(transaction);
 
   return (
     <Card>
       <CardHeader className="flex w-full justify-between flex-row">
         <div>
-          <CardTitle>Orders</CardTitle>
-          <CardDescription>Manage and track all orders.</CardDescription>
+          <CardTitle>Transactions</CardTitle>
+          <CardDescription>Manage Transactions.</CardDescription>
         </div>
         {/* <div>
           <Button
@@ -85,16 +88,16 @@ export default function OrdersTable() {
           </Button>
         </div> */}
       </CardHeader>
-      <OverlayLoader isLoading={isLoading} text="Getting orders..." />
+      <OverlayLoader isLoading={isLoading} text="Getting transactions..." />
 
       <CardContent>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Name</TableHead>
               <TableHead>Email</TableHead>
-              <TableHead>Phone</TableHead>
               <TableHead>Amount</TableHead>
+              <TableHead>Channel</TableHead>
+              <TableHead>Status</TableHead>
               <TableHead className="hidden md:table-cell">Created at</TableHead>
               <TableHead>
                 <span className="sr-only">Actions</span>
@@ -103,28 +106,27 @@ export default function OrdersTable() {
           </TableHeader>
 
           <TableBody className="relative">
-            {orders.map((orders: any) => (
-              <TableRow key={orders?._id}>
+            {transaction?.map((transaction: any) => (
+              <TableRow key={transaction?._id}>
                 <TableCell className="font-medium">
-                  {orders.userOrderingInfo?.name}
+                  {transaction?.customer?.email}
                 </TableCell>
                 <TableCell className="font-medium">
-                  {orders.userOrderingInfo?.email}
+                  {transaction?.currency} {transaction?.amount / 100}
+                </TableCell>
+                <TableCell className="font-medium">
+                  {transaction?.channel}
                 </TableCell>
 
-                <TableCell className="hidden md:table-cell">
-                  {orders?.userOrderingInfo?.phone}
+                <TableCell>
+                  <Badge variant="outline">{transaction?.status}</Badge>
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
-                  GHC {orders?.totalAmount}
+                  {dayjs(transaction?.paidAt || transaction?.paid_at).format(
+                    FORMAT
+                  )}
                 </TableCell>
                 {/* <TableCell>
-                  <Badge variant="outline">Draft</Badge>
-                </TableCell> */}
-                <TableCell className="hidden md:table-cell">
-                  {dayjs(orders?.createdAt).format(FORMAT)}
-                </TableCell>
-                <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button aria-haspopup="true" size="icon" variant="ghost">
@@ -135,14 +137,16 @@ export default function OrdersTable() {
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem
                         onClick={() => {
-                          router.push(`/auth/dashboard/orders/${orders?._id}`);
+                          router.push(
+                            `/auth/dashboard/orders/${inventory?._id}`
+                          );
                         }}
                       >
                         view more details
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
-                </TableCell>
+                </TableCell> */}
               </TableRow>
             ))}
           </TableBody>

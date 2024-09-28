@@ -5,6 +5,7 @@ import {
   Bell,
   CircleUser,
   Home,
+  Landmark,
   LineChart,
   Menu,
   Package,
@@ -134,17 +135,17 @@ export default function Dashboard({
                 <LineChart className="h-4 w-4" />
                 Inventory
               </Link>
-              {/* <Link
-                href="#"
+              <Link
+                href="/auth/dashboard/transactions"
                 className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${
-                  pathname === "/auth/dashboard/inventory"
+                  pathname === "/auth/dashboard/transactions"
                     ? "bg-muted text-primary"
                     : "text-muted-foreground"
                 }`}
               >
-                <LineChart className="h-4 w-4" />
-                Analytics
-              </Link> */}
+                <Landmark className="h-4 w-4" />
+                Transactions
+              </Link>
             </nav>
           </div>
         </div>

@@ -104,7 +104,7 @@ export default function CheckOut() {
       }
 
       const data = await response.json();
-      console.log("Payment initiated:", data);
+      // console.log("Payment initiated:", data);
       // Handle successful payment initiation here
       toast({
         title: "Success",
@@ -167,7 +167,7 @@ export default function CheckOut() {
       });
       initiatePayment();
     } catch (error: any) {
-      console.error(error.response);
+      // console.error(error.response);
       toast({
         title: "Error",
         description: error.response.data,

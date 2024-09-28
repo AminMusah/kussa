@@ -48,7 +48,7 @@ export default function ProductsTable() {
 
   const FORMAT = "dddd, MMMM D, YYYY h:mm A";
 
-  console.log(products);
+  // console.log(products);
 
   const deleteProduct = async (id: string) => {
     try {
@@ -108,7 +108,7 @@ export default function ProductsTable() {
               <TableHead>Name</TableHead>
               {/* <TableHead>Status</TableHead> */}
               <TableHead>Price</TableHead>
-              <TableHead className="hidden md:table-cell">Quantity</TableHead>
+              {/* <TableHead className="hidden md:table-cell">Description</TableHead> */}
               <TableHead className="hidden md:table-cell">Created at</TableHead>
               <TableHead>
                 <span className="sr-only">Actions</span>
@@ -148,9 +148,9 @@ export default function ProductsTable() {
                     <Badge variant="outline">Draft</Badge>
                   </TableCell> */}
                   <TableCell>GHC {product?.price}</TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {product.stockQuantity} pcs
-                  </TableCell>
+                  {/* <TableCell className="hidden md:table-cell">
+                    {product.description}
+                  </TableCell> */}
                   <TableCell className="hidden md:table-cell">
                     {dayjs(product.createdAt).format(FORMAT)}
                   </TableCell>
