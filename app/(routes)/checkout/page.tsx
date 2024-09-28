@@ -160,8 +160,6 @@ export default function CheckOut() {
         }
       );
 
-      console.log(response);
-
       toast({
         title: "Success",
         description: "Order placed successfully!, kindly make payment :)",

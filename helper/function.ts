@@ -1,3 +1,7 @@
+import dayjs from "dayjs";
+
+const FORMAT = "dddd, MMMM D, YYYY h:mm A";
+
 const calculateTotal = (items: any) => {
   return items.reduce((acc: any, curr: any) => acc + curr.price, 0);
 };
@@ -10,4 +14,8 @@ const twoDecimalPlaces = (value: number) => {
   });
 };
 
-export { twoDecimalPlaces, calculateTotal };
+const dateConverter = (date: any) => {
+  return dayjs(date).format(FORMAT);
+};
+
+export { twoDecimalPlaces, calculateTotal, dateConverter };

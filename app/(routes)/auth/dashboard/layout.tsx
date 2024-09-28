@@ -37,6 +37,8 @@ import { ModeToggle } from "@/components/mode-toggle";
 
 import { useClerk } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Dashboard({
   children, // will be a page or nested layout
@@ -44,8 +46,30 @@ export default function Dashboard({
   children: React.ReactNode;
 }) {
   const { signOut } = useClerk();
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [orders, setOrders] = useState([]);
   const pathname = usePathname();
+
+  const getOrders = async () => {
+    try {
+      setIsLoading(true);
+
+      const response = await axios.get("/api/order/all/", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      setOrders(response.data);
+    } catch (error: any) {
+      console.error(error.response.data);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getOrders();
+  }, []);
 
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
@@ -64,7 +88,7 @@ export default function Dashboard({
           <div className="flex-1">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
               <Link
-                href="#"
+                href="/auth/dashboard/orders"
                 className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${
                   pathname === "/auth/dashboard"
                     ? "bg-muted text-primary"
@@ -75,7 +99,7 @@ export default function Dashboard({
                 Dashboard
               </Link>
               <Link
-                href="#"
+                href="/auth/dashboard/orders"
                 className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${
                   pathname === "/auth/dashboard/orders"
                     ? "bg-muted text-primary"
@@ -85,7 +109,7 @@ export default function Dashboard({
                 <ShoppingCart className="h-4 w-4" />
                 Orders
                 <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                  6
+                  {orders?.length}
                 </Badge>
               </Link>
               <Link

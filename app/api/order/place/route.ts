@@ -4,20 +4,6 @@ import connect from "@/utils/db";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-export const GET = async (req: Request, res: Response) => {
-  try {
-    await connect();
-
-    const orders = await Order.find({});
-
-    return NextResponse.json(orders, {
-      status: 200,
-    });
-  } catch (err) {
-    return new NextResponse("Server Error", { status: 500 });
-  }
-};
-
 export const POST = async (req: Request, res: Response) => {
   await connect();
   const cookieStore = cookies();
@@ -53,12 +39,19 @@ export const POST = async (req: Request, res: Response) => {
     });
   }
 
+  const generateOrderNumber = () => {
+    const timestamp = Date.now(); // Get current timestamp
+    const randomNum = Math.floor(Math.random() * 10000); // Generate a random number
+    return `ORD-${timestamp}-${randomNum}`; // Format the order number
+  };
+
   // Create the order
   const order = new Order({
     sessionId,
     items: cart.items,
     userOrderingInfo,
     totalAmount,
+    orderNumber: generateOrderNumber(),
     status: "pending",
   });
 
