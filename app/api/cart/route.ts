@@ -67,8 +67,6 @@ export const POST = async (req: Request, res: Response) => {
     return new NextResponse("Product not found!!", { status: 400 });
   }
 
-  console.log(product);
-
   let cart = await Cart.findOne({ sessionId });
 
   if (!cart) {
