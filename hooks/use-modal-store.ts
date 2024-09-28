@@ -10,6 +10,7 @@ interface ModalStore {
   onClose: () => void;
   onRender: () => void;
   render: boolean;
+  setRender: () => void;
 }
 
 export const useModal = create<ModalStore>((set) => ({
@@ -20,4 +21,5 @@ export const useModal = create<ModalStore>((set) => ({
   onOpen: (type, data = {}) => set({ isOpen: true, type, data }),
   onClose: () => set({ type: null, isOpen: false }),
   onRender: () => set({ type: null, render: true }),
+  setRender: () => set({ render: false }),
 }));

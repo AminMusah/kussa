@@ -21,6 +21,7 @@ import { Label } from "@/components/ui/label";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import useGetCart from "@/hooks/use-cart-items";
+import { useModal } from "@/hooks/use-modal-store";
 
 // Define the type for cart items
 interface CartItem {
@@ -55,14 +56,14 @@ export default function CheckOut() {
   const [zip, setZip] = useState("");
   const [country, setCountry] = useState("");
   const [deliveryInstructions, setDeliveryInstructions] = useState("");
-
+  const { render } = useModal();
   const { getCart, cart }: any = useGetCart();
 
   // get a product
 
   useEffect(() => {
     getCart();
-  }, []);
+  }, [render]);
 
   const price = cart?.items?.map((item: any) => item.price);
 

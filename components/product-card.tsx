@@ -2,9 +2,12 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { Button } from "./ui/button";
 import { Heart, ShoppingBasket } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { useModal } from "@/hooks/use-modal-store";
+import axios from "axios";
 
 type ProductProps = {
   name: any;
@@ -24,6 +27,56 @@ const ProductCard = ({
   price,
 }: ProductProps) => {
   const router = useRouter();
+
+  const { toast } = useToast();
+  const [submitting, setSubmitting] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [product, setProduct] = useState<any>({});
+  const [quantity, setQuantity] = useState<number>(0); // Change from Number to number
+  const { render, onRender, setRender } = useModal();
+  const updateQuantity = (change: number) => {
+    setQuantity((prevQuantity) =>
+      prevQuantity + change > 0 ? prevQuantity + change : 0
+    );
+  };
+
+  const submit = async (id: string) => {
+    try {
+      setSubmitting(true);
+
+      const payload = {
+        productId: id,
+        quantity: +quantity + 1,
+      };
+
+      const response = await axios.post("/api/cart/", payload, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (render) {
+        setRender();
+      } else {
+        onRender();
+      }
+
+      toast({
+        title: "Success",
+        description: "Added to cart!!",
+        variant: "success",
+      });
+    } catch (error: any) {
+      console.error(error.response.data);
+      toast({
+        title: "Error",
+        description: error.response.data,
+        variant: "destructive",
+      });
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div className="m-2">
@@ -59,7 +112,24 @@ const ProductCard = ({
                 // onClick={() => router.push(`${link}`)}
                 className="underline flex items-center "
               >
-                <span className="mr-2 font-light">Add to cart</span>
+                <span
+                  className="mr-2 font-light"
+                  onClick={() => {
+                    submit(_id);
+                  }}
+                >
+                  {submitting ? (
+                    <div>
+                      <span className="inline-flex items-center gap-px">
+                        <span className="animate-blink mx-px h-1.5 w-1.5 rounded-full bg-[#772432]"></span>
+                        <span className="animate-blink animation-delay-200 mx-px h-1.5 w-1.5 rounded-full bg-[#772432]"></span>
+                        <span className="animate-blink animation-delay-[400ms] mx-px h-1.5 w-1.5 rounded-full bg-[#772432]"></span>
+                      </span>
+                    </div>
+                  ) : (
+                    `Add to cart`
+                  )}
+                </span>
                 {/* <ShoppingBasket size={16} /> */}
               </span>
             </div>

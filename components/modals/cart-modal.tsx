@@ -2,10 +2,13 @@ import { useModal } from "@/hooks/use-modal-store";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import { Trash2 } from "lucide-react";
+import { Loader2, Minus, Plus, Trash2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import useGetCart from "@/hooks/use-cart-items";
+import { useToast } from "@/hooks/use-toast";
+import OverlayLoader from "../overlay-loader";
+import { calculateTotal, twoDecimalPlaces } from "@/helper/function";
 
 // Define the type for cart items
 interface CartItem {
@@ -14,6 +17,7 @@ interface CartItem {
   price: number;
   _id: string; // {{ edit_1 }} Add _id property
   productId: {
+    _id: string; // {{ edit_1 }} Add _id property here
     name: string;
     category: string;
     images: { url: string }[]; // {{ edit_1 }} Add images property
@@ -28,9 +32,20 @@ interface Cart {
 
 export default function CartModal() {
   const router = useRouter();
-  const { isOpen, onOpen, onClose, type, data, onRender } = useModal();
+  const { isOpen, onOpen, onClose, type, data, onRender, render, setRender } =
+    useModal();
   const { getCart, cart }: any = useGetCart();
+  const [loading, setLoading] = useState<{ [key: string]: boolean }>({});
+  const [action, setAction] = useState(0);
+  const [submitting, setSubmitting] = useState<{ [key: string]: boolean }>({}); // {{ edit_1 }} Define type for submitting state
+  const [quantity, setQuantity] = useState<number>(0); // Change from Number to number
+  const updateQuantity = (change: number, id: string) => {
+    setAction(change);
+    submit(id, change);
+  };
+
   const isModalOpen = isOpen && type === "toggleCart";
+  const { toast } = useToast();
 
   const handleClose = () => {
     onClose();
@@ -38,9 +53,96 @@ export default function CartModal() {
 
   useEffect(() => {
     getCart();
-  }, []);
+  }, [render]);
 
-  const price = cart?.items?.map((item: any) => item.price);
+  const subtotal =
+    cart?.items?.reduce((acc: number, item: CartItem) => {
+      // {{ edit_1 }} Calculate subtotal
+      return acc + item.price * item.quantity; // Multiply price by quantity
+    }, 0) || 0;
+
+  const removeItem = async (productId: string) => {
+    setAction(3);
+    try {
+      setLoading((prevLoadingStates) => ({
+        ...prevLoadingStates,
+        [productId]: true,
+      }));
+
+      const response = await axios.delete(`/api/cart/${cart?._id}`, {
+        data: { productId },
+      });
+
+      toast({
+        variant: "success",
+        title: "Success",
+        description: "item removed!!",
+      });
+      // Update cart items after removal
+      // setCartItems(response.data.cart.items);
+      if (render) {
+        setRender();
+      } else {
+        onRender();
+      }
+      onOpen("toggleCart");
+    } catch (err: any) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: err.response.data.message,
+      });
+    } finally {
+      setLoading((prevLoadingStates) => ({
+        ...prevLoadingStates,
+        [productId]: false,
+      }));
+    }
+  };
+
+  const submit = async (id: string, quantity: number) => {
+    try {
+      setSubmitting((prevLoadingStates) => ({
+        ...prevLoadingStates,
+        [id]: true,
+      }));
+
+      const payload = {
+        productId: id,
+        quantity: quantity, // {{ edit_4 }} Use the passed quantity
+      };
+
+      const response = await axios.post("/api/cart/", payload, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (render) {
+        setRender();
+      } else {
+        onRender();
+      }
+      onOpen("toggleCart");
+      // toast({
+      //   title: "Success",
+      //   description: "Added to cart!!",
+      //   variant: "success",
+      // });
+    } catch (error: any) {
+      console.error(error.response.data);
+      toast({
+        title: "Error",
+        description: error.response.data,
+        variant: "destructive",
+      });
+    } finally {
+      setSubmitting((prevLoadingStates) => ({
+        ...prevLoadingStates,
+        [id]: false,
+      })); // {{ edit_3 }} Remove submitting for this item
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -50,7 +152,7 @@ export default function CartModal() {
           animate={{ x: 0 }}
           exit={{ x: "100%" }}
           transition={{ type: "spring", damping: 20, stiffness: 100 }}
-          className="fixed inset-y-0 right-0 w-full   z-50 "
+          className="fixed inset-y-0 right-0 w-full md:w-[500px]  z-50 "
           aria-labelledby="slide-over-title"
           role="dialog"
           aria-modal="true"
@@ -96,11 +198,11 @@ export default function CartModal() {
                           </button>
                         </div>
                       </div>
-                      {cart.items.map(
+                      {cart?.items?.map(
                         (
                           item: CartItem // Use the defined CartItem type
                         ) => (
-                          <div className="mt-8" key={item._id}>
+                          <div className="mt-8" key={item?._id}>
                             <div className="flow-root">
                               <ul
                                 role="list"
@@ -115,34 +217,84 @@ export default function CartModal() {
                                     />
                                   </div>
 
-                                  <div className="ml-4 flex flex-1 flex-col">
+                                  <div className="ml-4 flex justify-between flex-1 flex-col">
                                     <div>
-                                      <div className="flex justify-between text-base font-medium text-gray-900">
-                                        <h3>
+                                      <div className="flex justify-between text-sm font-medium text-gray-900">
+                                        <h3 className="w-36">
                                           <a href="#">
                                             {" "}
                                             {item?.productId?.name}
                                           </a>
                                         </h3>
-                                        <p className="ml-4">
-                                          GHC {item?.price}
+                                        <p className="">
+                                          GHC{" "}
+                                          {twoDecimalPlaces(
+                                            item?.price * item?.quantity
+                                          )}
                                         </p>
                                       </div>
                                       <p className="mt-1 text-sm text-gray-500">
                                         {item?.productId?.category}
                                       </p>
                                     </div>
-                                    <div className="flex flex-1 items-end justify-between text-sm">
-                                      <p className="text-gray-500">
-                                        Qty {item.quantity}
-                                      </p>
 
+                                    <div className="flex w-full justify-between text-sm">
+                                      <div className="flex items-center space-x-2">
+                                        <Button
+                                          disabled={item?.quantity <= 1}
+                                          variant="outline"
+                                          size="icon"
+                                          onClick={() => {
+                                            updateQuantity(
+                                              -1,
+                                              item?.productId?._id
+                                            );
+                                          }}
+                                        >
+                                          {submitting[item?.productId?._id] &&
+                                          action === -1 ? (
+                                            // {{ edit_4 }} Check if this item is submitting
+                                            <Loader2 className="h-4 w-4 animate-spin" />
+                                          ) : (
+                                            <Minus className="h-4 w-4" />
+                                          )}
+                                        </Button>
+                                        <p className=" text-base">
+                                          {item?.quantity}
+                                        </p>
+                                        <Button
+                                          variant="outline"
+                                          size="icon"
+                                          onClick={() => {
+                                            updateQuantity(
+                                              1,
+                                              item?.productId._id
+                                            );
+                                          }}
+                                        >
+                                          {submitting[item?.productId?._id] &&
+                                          action === 1 ? (
+                                            // {{ edit_5 }} Check if this item is submitting
+                                            <Loader2 className=" h-4 w-4 animate-spin" />
+                                          ) : (
+                                            <Plus className="h-4 w-4" />
+                                          )}
+                                        </Button>
+                                      </div>
                                       <div className="flex">
                                         <button
+                                          onClick={() => {
+                                            removeItem(item?.productId?._id);
+                                          }}
                                           type="button"
                                           className="font-medium text-indigo-600 hover:text-indigo-500"
                                         >
-                                          <Trash2 color="#000" />
+                                          {loading[item?.productId?._id] &&
+                                          action === 3 ? (
+                                            <Loader2 className="h-4 w-4 animate-spin" />
+                                          ) : (
+                                            <Trash2 color="#000" />
+                                          )}
                                         </button>
                                       </div>
                                     </div>
@@ -158,12 +310,7 @@ export default function CartModal() {
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>
-                          GHC{" "}
-                          {price
-                            .reduce((acc: any, curr: any) => acc + curr, 0)
-                            .toFixed(2)}
-                        </p>
+                        <p>GHC {twoDecimalPlaces(subtotal)}</p>
                       </div>
                       {/* <p className="mt-0.5 text-sm text-gray-500">
     Shipping and taxes calculated at checkout.
@@ -185,7 +332,10 @@ export default function CartModal() {
                           <button
                             type="button"
                             className="font-medium text-black hover:text-gray-400 "
-                            onClick={handleClose}
+                            onClick={() => {
+                              handleClose();
+                              router.push("/shop");
+                            }}
                           >
                             Continue Shopping
                             <span aria-hidden="true"> &rarr;</span>

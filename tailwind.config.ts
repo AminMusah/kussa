@@ -88,6 +88,7 @@ const config: Config = {
     },
     animation: {
       reveal: "reveal 0.8s forwards",
+      blink: "blink 1.4s infinite both",
     },
 
     keyframes: {
@@ -104,6 +105,17 @@ const config: Config = {
       shimmer: {
         "100%": {
           transform: "translateX(100%)",
+        },
+      },
+      blink: {
+        "0%": {
+          opacity: "0.2",
+        },
+        "20%": {
+          opacity: "1",
+        },
+        "100%": {
+          opacity: " 0.2",
         },
       },
     },

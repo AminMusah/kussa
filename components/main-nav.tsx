@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { CarTaxiFront, Heart, Search, ShoppingCart } from "lucide-react";
 import { useModal } from "@/hooks/use-modal-store";
+import useGetCart from "@/hooks/use-cart-items";
 
 export function MainNav({
   className,
@@ -17,7 +18,8 @@ export function MainNav({
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  const { onOpen, isOpen } = useModal();
+  const { onOpen, isOpen, render } = useModal();
+  const { getCart, cart }: any = useGetCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,6 +55,10 @@ export function MainNav({
       active: pathname === `/contact`,
     },
   ];
+
+  useEffect(() => {
+    getCart();
+  }, [render]);
 
   return (
     <div
@@ -110,18 +116,24 @@ export function MainNav({
             </Link>
           ))}
         </nav>
+
         <div className="flex items-center space-x-4 px-2">
           <Heart
             className={`cursor-pointer transition-transform duration-300 hover:scale-110   ${
               isScrolled || pathname !== `/` ? "text-black" : "text-white"
             } `}
           />
-          <ShoppingCart
-            onClick={() => onOpen("toggleCart")}
-            className={`cursor-pointer transition-transform   ${
-              isScrolled || pathname !== `/` ? "text-black" : "text-white"
-            }  duration-300 hover:scale-110`}
-          />
+          <div className="relative group cursor-pointer">
+            <span className="text-white absolute -top-1 -right-1 bg-[#772432]  group-hover:scale-110 duration-300 rounded-full px-1 text-xs">
+              {cart?.items?.length}
+            </span>
+            <ShoppingCart
+              onClick={() => onOpen("toggleCart")}
+              className={`cursor-pointer transition-transform  ${
+                isScrolled || pathname !== `/` ? "text-black" : "text-white"
+              } `}
+            />
+          </div>
         </div>
       </div>
     </div>

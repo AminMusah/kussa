@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useModal } from "@/hooks/use-modal-store";
 import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
 import {
@@ -25,7 +26,7 @@ export default function Product({ params }: { params: { id: string } }) {
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState<any>({});
   const [quantity, setQuantity] = useState<number>(0); // Change from Number to number
-
+  const { render, onRender, setRender } = useModal();
   const updateQuantity = (change: number) => {
     setQuantity((prevQuantity) =>
       prevQuantity + change > 0 ? prevQuantity + change : 0
@@ -62,15 +63,17 @@ export default function Product({ params }: { params: { id: string } }) {
         quantity: +quantity,
       };
 
-      console.log(payload);
-
       const response = await axios.post("/api/cart/", payload, {
         headers: {
           "Content-Type": "application/json",
         },
       });
 
-      console.log(response, "res");
+      if (render) {
+        setRender();
+      } else {
+        onRender();
+      }
 
       toast({
         title: "Success",
