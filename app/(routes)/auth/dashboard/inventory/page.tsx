@@ -1,3 +1,9 @@
+import InventoryTable from "@/components/inventory-table";
+
 export default function Inventory() {
-  return <div>hi</div>;
+  return (
+    <div>
+      <InventoryTable />
+    </div>
+  );
 }

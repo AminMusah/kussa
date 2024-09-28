@@ -131,7 +131,7 @@ export default function Dashboard({
                     : "text-muted-foreground"
                 }`}
               >
-                <Users className="h-4 w-4" />
+                <LineChart className="h-4 w-4" />
                 Inventory
               </Link>
               {/* <Link

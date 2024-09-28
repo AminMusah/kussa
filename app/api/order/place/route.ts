@@ -1,5 +1,6 @@
 import Cart from "@/models/Cart";
 import Order from "@/models/Order";
+import Product from "@/models/Product";
 import connect from "@/utils/db";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
@@ -26,6 +27,29 @@ export const POST = async (req: Request, res: Response) => {
 
   if (cart?.items?.length === 0) {
     return new NextResponse("Cart is empty", { status: 400 });
+  }
+
+  // Deduct stock for each item
+  for (const item of cart.items) {
+    const product = await Product.findById(item.productId);
+
+    if (!product) {
+      return new NextResponse(`Product not found: ${item.name}`, {
+        status: 400,
+      });
+    }
+
+    if (product.stockQuantity < item.quantity) {
+      return new NextResponse(`Not enough stock for product: ${product.name}`, {
+        status: 400,
+      });
+    }
+
+    // Deduct the quantity from stock
+    product.stockQuantity -= item.quantity;
+
+    // Save the updated product
+    await product.save();
   }
 
   // Calculate the total amount
