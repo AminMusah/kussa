@@ -22,6 +22,8 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import useGetCart from "@/hooks/use-cart-items";
 import { useModal } from "@/hooks/use-modal-store";
+import { twoDecimalPlaces } from "@/helper/function";
+import axios from "axios";
 
 // Define the type for cart items
 interface CartItem {
@@ -44,6 +46,7 @@ interface Cart {
 
 export default function CheckOut() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isOrdering, setIsOrdering] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
 
@@ -65,7 +68,11 @@ export default function CheckOut() {
     getCart();
   }, [render]);
 
-  const price = cart?.items?.map((item: any) => item.price);
+  const subtotal =
+    cart?.items?.reduce((acc: number, item: CartItem) => {
+      // {{ edit_1 }} Calculate subtotal
+      return acc + item.price * item.quantity; // Multiply price by quantity
+    }, 0) || 0;
 
   const validation = {
     name,
@@ -79,16 +86,6 @@ export default function CheckOut() {
   } as any;
 
   const initiatePayment = async () => {
-    for (let field in validation) {
-      if (!validation[field]) {
-        toast({
-          title: "Error",
-          description: `Please ${field} field is required`,
-          variant: "destructive",
-        });
-        return;
-      }
-    }
     try {
       setIsSubmitting(true);
       const response = await fetch("/api/payment/initiate", {
@@ -97,7 +94,7 @@ export default function CheckOut() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          amount: 1000,
+          amount: subtotal,
           email,
         }),
       });
@@ -124,6 +121,62 @@ export default function CheckOut() {
       //   });
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const placeOrder = async () => {
+    try {
+      for (let field in validation) {
+        if (!validation[field]) {
+          toast({
+            title: "Error",
+            description: `Please ${field} field is required`,
+            variant: "destructive",
+          });
+          return;
+        }
+      }
+
+      setIsOrdering(true);
+
+      const userOrderingInfo = {
+        name,
+        email,
+        phone,
+        address,
+        city,
+        state,
+        zip,
+        country,
+      };
+
+      const response = await axios.post(
+        "/api/order/place",
+        { userOrderingInfo },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log(response);
+
+      toast({
+        title: "Success",
+        description: "Order placed successfully!, kindly make payment :)",
+        variant: "success",
+      });
+      initiatePayment();
+    } catch (error: any) {
+      console.error(error.response);
+      toast({
+        title: "Error",
+        description: error.response.data,
+        variant: "destructive",
+      });
+    } finally {
+      setIsOrdering(false);
     }
   };
 
@@ -154,7 +207,7 @@ export default function CheckOut() {
                 (
                   item: CartItem // Use the defined CartItem type
                 ) => (
-                  <div className="flex items-center space-x-4" key={item?._id}>
+                  <div className="flex space-x-4 " key={item?._id}>
                     <Image
                       src={item?.productId?.images[0]?.url}
                       alt={item?.productId?.name}
@@ -162,14 +215,18 @@ export default function CheckOut() {
                       height={80}
                       className="rounded-md"
                     />
-                    <div className="flex-1">
-                      <h3 className="font-semibold">{item.productId.name}</h3>
+                    <div className="flex-1 justify-start items-start">
+                      <h3 className="font-semibold text-sm">
+                        {item.productId.name}
+                      </h3>
                       <p className="text-sm text-gray-600">
                         {item.productId.category}
                       </p>
                       {/* <p className="text-sm text-gray-600">L</p> */}
                     </div>
-                    <p className="font-semibold">GHC {item.price.toFixed(2)}</p>
+                    <p className="font-semibold">
+                      GHC {twoDecimalPlaces(item.price * item.quantity)}
+                    </p>
                   </div>
                 )
               )}
@@ -177,10 +234,7 @@ export default function CheckOut() {
                 <div className="flex justify-between">
                   <p>Subtotal</p>
                   <p className="font-semibold">
-                    GHC{" "}
-                    {price
-                      ?.reduce((acc: any, curr: any) => acc + curr, 0)
-                      .toFixed(2)}
+                    GHC {twoDecimalPlaces(subtotal)}
                   </p>
                 </div>
                 <div className="flex justify-between">
@@ -196,10 +250,7 @@ export default function CheckOut() {
                 <div className="flex justify-between">
                   <p className="font-semibold">Total</p>
                   <p className="font-semibold">
-                    GHC{" "}
-                    {price
-                      ?.reduce((acc: any, curr: any) => acc + curr, 0)
-                      .toFixed(2)}
+                    GHC {twoDecimalPlaces(subtotal)}
                   </p>
                 </div>
               </div>
@@ -343,10 +394,10 @@ export default function CheckOut() {
             type="submit"
             className="w-full rounded-full"
             onClick={() => {
-              initiatePayment();
+              placeOrder();
             }}
           >
-            {isSubmitting ? (
+            {isOrdering ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
             ) : (
               ""

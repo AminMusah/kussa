@@ -7,16 +7,20 @@ const orderSchema = new mongoose.Schema(
       ref: "User",
       required: false,
     },
+    sessionId: {
+      type: String,
+      required: true,
+    },
     status: {
       type: String,
       enum: ["pending", "shipped", "delivered", "cancelled"],
       default: "pending",
     },
-    totalPrice: { type: Number, required: true },
+    totalAmount: { type: Number, required: true },
     paymentStatus: {
       type: String,
-      enum: ["paid", "unpaid"],
-      default: "unpaid",
+      enum: ["pending", "paid", "shipped", "delivered", "cancelled"],
+      default: "pending",
     },
     items: [
       {
@@ -26,7 +30,7 @@ const orderSchema = new mongoose.Schema(
         price: { type: Number, required: true },
       },
     ],
-    shippingAddress: { type: String, required: true },
+    userOrderingInfo: { type: Object, required: true },
   },
   { timestamps: true }
 );
