@@ -107,7 +107,8 @@ export default function InventoryTable() {
               <TableRow key={inventory?._id}>
                 <TableCell className="font-medium">{inventory?.name}</TableCell>
                 <TableCell className="font-medium">
-                  {inventory.stockQuantity} pcs
+                  {inventory.stockQuantity}{" "}
+                  {inventory?.stockQuantity === 1 ? "pc" : "pcs"}
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
                   {inventory?.price}

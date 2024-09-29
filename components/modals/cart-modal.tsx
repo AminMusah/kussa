@@ -193,7 +193,7 @@ export default function CartModal() {
                           </button>
                         </div>
                       </div>
-                      <p>No items in cart</p>
+                      {cart?.items?.length === 0 && <p>No items in cart</p>}
                       {cart?.items?.map(
                         (
                           item: CartItem // Use the defined CartItem type
