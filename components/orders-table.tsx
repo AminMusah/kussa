@@ -66,8 +66,6 @@ export default function OrdersTable() {
 
   const FORMAT = "dddd, MMMM D, YYYY h:mm A";
 
-  // console.log(orders);
-
   return (
     <Card>
       <CardHeader className="flex w-full justify-between flex-row">
