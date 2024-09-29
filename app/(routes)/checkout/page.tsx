@@ -215,15 +215,15 @@ export default function CheckOut() {
                     />
                     <div className="flex-1 justify-start items-start">
                       <h3 className="font-semibold text-sm">
-                        {item.productId.name}
+                        {item?.productId?.name}
                       </h3>
                       <p className="text-sm text-gray-600">
-                        {item.productId.category}
+                        {item?.productId?.category}
                       </p>
                       {/* <p className="text-sm text-gray-600">L</p> */}
                     </div>
                     <p className="font-semibold">
-                      GHC {twoDecimalPlaces(item.price * item.quantity)}
+                      GHC {twoDecimalPlaces(item?.price * item?.quantity)}
                     </p>
                   </div>
                 )
