@@ -50,10 +50,9 @@ export default function TransactionTable() {
       const response = await axios.get("https://api.paystack.co/transaction", {
         headers: {
           "Content-Type": "application/json",
-          authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+          authorization: `Bearer pk_test_26b8ff5d42befde7b35e08f9f379b26ef3e2c1c2`,
         },
       });
-      console.log(response);
 
       setTransaction(response?.data?.data);
     } catch (error: any) {
@@ -107,7 +106,7 @@ export default function TransactionTable() {
 
           <TableBody className="relative">
             {transaction?.map((transaction: any) => (
-              <TableRow key={transaction?._id}>
+              <TableRow key={transaction?.id}>
                 <TableCell className="font-medium">
                   {transaction?.customer?.email}
                 </TableCell>
