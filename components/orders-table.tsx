@@ -150,7 +150,7 @@ export default function OrdersTable() {
     };
   });
 
-  console.log(updatedOrders, "orders");
+  // console.log(updatedOrders, "orders");
 
   // Update the orders state
   useEffect(() => {
