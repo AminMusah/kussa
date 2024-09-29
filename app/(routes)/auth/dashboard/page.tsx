@@ -28,11 +28,36 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { twoDecimalPlaces } from "@/helper/function";
 
+type Transaction = {
+  customer: {
+    email: string;
+  };
+  status: string; // Add status property
+  gateway_response?: string; // Add gateway_response property
+  paidAt?: string;
+  amount: number;
+  // Add other properties as needed
+};
+
+// Define a type for the order
+type Order = {
+  _id: string;
+  userOrderingInfo: {
+    name: string;
+    email: string;
+    phone: string;
+  };
+  totalAmount: number;
+  createdAt: string;
+
+  // Add other properties as needed
+};
+
 export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState([]);
-  const [orders, setOrders] = useState([]);
-  const [transaction, setTransaction] = useState([]);
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [transaction, setTransaction] = useState<Transaction[]>([]);
 
   const getOrders = async () => {
     try {
@@ -101,8 +126,44 @@ export default function Dashboard() {
     getProducts();
   }, []);
 
+  const orderEmails = new Set(
+    orders.map((order) => order.userOrderingInfo.email)
+  ); // Create a Set of order emails
+
+  // Get matching transactions
+  const matchingTransactions = transaction.filter(
+    (trans) => orderEmails.has(trans.customer.email) // Filter transactions based on matching emails
+  ); // Filter transactions based on matching emails
+
+  // Get unmatched transactions
+  const unmatchedTransactions = transaction.filter(
+    (trans) => !orderEmails.has(trans.customer.email) // Filter transactions that do not match
+  );
+
+  // console.log(matchingTransactions); // Log the matching transactions
+  // console.log(unmatchedTransactions); // Log the unmatched transactions
+
+  const FORMAT = "dddd, MMMM D, YYYY h:mm A";
+
+  // After fetching orders and transactions
+  const updatedOrders = orders.map((order) => {
+    const matchedTransaction = matchingTransactions.find(
+      (trans) => trans.customer.email === order.userOrderingInfo.email
+    );
+
+    return {
+      ...order,
+      success: !!matchedTransaction, // Attach success status
+      status: matchedTransaction?.status, // Attach status
+      gateway_response: matchedTransaction?.gateway_response, // Attach gateway_response
+      paidAt: matchedTransaction?.paidAt, // Attach paidAt
+      paidAmount: matchedTransaction?.amount, // Attach paidAmount
+      // paymentStatus: matchedTransaction?.status,
+    };
+  });
+
   const subtotal =
-    transaction?.reduce((acc: number, item: any) => {
+    matchingTransactions?.reduce((acc: number, item: any) => {
       // {{ edit_1 }} Calculate subtotal
       return acc + item.amount; // Multiply price by quantity
     }, 0) || 0;
