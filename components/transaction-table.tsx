@@ -50,7 +50,7 @@ export default function TransactionTable() {
       const response = await axios.get("https://api.paystack.co/transaction", {
         headers: {
           "Content-Type": "application/json",
-          authorization: `Bearer pk_test_26b8ff5d42befde7b35e08f9f379b26ef3e2c1c2`,
+          authorization: `Bearer sk_test_3dad8c2379e59ee618e545c99d08819c4e208f3e`,
         },
       });
 
@@ -65,6 +65,8 @@ export default function TransactionTable() {
   useEffect(() => {
     getTransactions();
   }, []);
+
+  // console.log(transaction);
 
   const FORMAT = "dddd, MMMM D, YYYY h:mm A";
 
@@ -94,8 +96,9 @@ export default function TransactionTable() {
               <TableHead>Email</TableHead>
               <TableHead>Amount</TableHead>
               <TableHead>Channel</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="hidden md:table-cell">Paid at</TableHead>
+              <TableHead className="hidden md:table-cell">Status</TableHead>
+              <TableHead>Response</TableHead>
+              <TableHead>Paid at</TableHead>
               <TableHead>
                 <span className="sr-only">Actions</span>
               </TableHead>
@@ -116,7 +119,21 @@ export default function TransactionTable() {
                 </TableCell>
 
                 <TableCell>
-                  <Badge variant="outline">{transaction?.status}</Badge>
+                  <Badge
+                    className={
+                      transaction?.status === "success" ? "bg-green-500" : ""
+                    }
+                    variant={
+                      transaction?.status === "success"
+                        ? "outline"
+                        : "destructive"
+                    }
+                  >
+                    {transaction?.status}
+                  </Badge>
+                </TableCell>
+                <TableCell className="font-medium">
+                  {transaction?.gateway_response}
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
                   {dayjs(

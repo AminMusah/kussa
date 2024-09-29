@@ -80,8 +80,11 @@ export default function Dashboard() {
         },
       });
       // console.log(response.data.data);
+      const revenue = response?.data?.data.filter(
+        (success: { status: string }) => success.status === "success"
+      ); // Specify type for success
 
-      setTransaction(response?.data?.data);
+      setTransaction(revenue);
     } catch (error: any) {
       console.error(error.response.data);
     } finally {
@@ -98,12 +101,10 @@ export default function Dashboard() {
     getProducts();
   }, []);
 
-  const allOrders = orders.flatMap((order: any) => order?.items);
-
   const subtotal =
-    allOrders?.reduce((acc: number, item: any) => {
+    transaction?.reduce((acc: number, item: any) => {
       // {{ edit_1 }} Calculate subtotal
-      return acc + item.price * item.quantity; // Multiply price by quantity
+      return acc + item.amount; // Multiply price by quantity
     }, 0) || 0;
 
   return (
@@ -116,7 +117,7 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              GHC {twoDecimalPlaces(subtotal)}
+              GHC {twoDecimalPlaces(subtotal / 100)}
             </div>
             {/* <p className="text-xs text-muted-foreground">
               +20.1% from last month
