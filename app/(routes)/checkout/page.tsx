@@ -295,6 +295,7 @@ export default function CheckOut() {
                     id="name"
                     placeholder=""
                     required
+                    value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
@@ -305,6 +306,7 @@ export default function CheckOut() {
                     type="email"
                     placeholder="email@example.com"
                     required
+                    value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
@@ -315,6 +317,7 @@ export default function CheckOut() {
                     type="tel"
                     placeholder="(123) 456-7890"
                     required
+                    value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                   />
                 </div>
@@ -332,6 +335,7 @@ export default function CheckOut() {
                     id="address"
                     placeholder="123 Main St"
                     required
+                    value={address}
                     onChange={(e) => setAddress(e.target.value)}
                   />
                 </div>
@@ -341,6 +345,7 @@ export default function CheckOut() {
                     id="city"
                     placeholder="Anytown"
                     required
+                    value={city}
                     onChange={(e) => setCity(e.target.value)}
                   />
                 </div>
@@ -350,6 +355,7 @@ export default function CheckOut() {
                     id="state"
                     placeholder="State"
                     required
+                    value={state}
                     onChange={(e) => setState(e.target.value)}
                   />
                 </div>
@@ -359,6 +365,7 @@ export default function CheckOut() {
                     id="zip"
                     placeholder="12345"
                     required
+                    value={zip}
                     onChange={(e) => setZip(e.target.value)}
                   />
                 </div>
@@ -368,6 +375,7 @@ export default function CheckOut() {
                     id="country"
                     placeholder="Country"
                     required
+                    value={country}
                     onChange={(e) => setCountry(e.target.value)}
                   />
                 </div>
@@ -382,6 +390,7 @@ export default function CheckOut() {
                 id="specialInstructions"
                 placeholder="E.g., Leave at the door, Ring doorbell, etc."
                 rows={4}
+                value={deliveryInstructions}
                 onChange={(e) => setDeliveryInstructions(e.target.value)}
               />
             </div>

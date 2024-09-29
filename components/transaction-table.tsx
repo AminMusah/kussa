@@ -68,8 +68,6 @@ export default function TransactionTable() {
 
   const FORMAT = "dddd, MMMM D, YYYY h:mm A";
 
-  console.log(transaction);
-
   return (
     <Card>
       <CardHeader className="flex w-full justify-between flex-row">
@@ -97,7 +95,7 @@ export default function TransactionTable() {
               <TableHead>Amount</TableHead>
               <TableHead>Channel</TableHead>
               <TableHead>Status</TableHead>
-              <TableHead className="hidden md:table-cell">Created at</TableHead>
+              <TableHead className="hidden md:table-cell">Paid at</TableHead>
               <TableHead>
                 <span className="sr-only">Actions</span>
               </TableHead>
@@ -121,9 +119,11 @@ export default function TransactionTable() {
                   <Badge variant="outline">{transaction?.status}</Badge>
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
-                  {dayjs(transaction?.paidAt || transaction?.paid_at).format(
-                    FORMAT
-                  )}
+                  {dayjs(
+                    transaction?.paidAt
+                      ? transaction?.paidAt
+                      : transaction?.paid_at
+                  ).format(FORMAT)}
                 </TableCell>
                 {/* <TableCell>
                   <DropdownMenu>
