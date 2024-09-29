@@ -188,20 +188,16 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="group/wrap explore">
+      <div className="group/wrap explore " id="about">
         <div className="relative scroll-smooth">
-          <div className="flex h-[300px] md:h-screen w-full items-center justify-center">
+          <div className="flex h-[300px]  w-full items-center justify-center">
             <div>
               <div className="overflow-hidden font-clash text-7xl font-medium">
                 <p className="  text-3xl md:text-5xl text-center max-w-xl">
                   Our story
                 </p>
               </div>
-              <div className="overflow-hidden font-clash text-7xl font-medium">
-                {/* <p className="group-hover/wrap:translate-y-full group-hover:animate-reveal group-hover:animation-delay-300 text-xl md:text-5xl text-center max-w-xl">
-                  journey to a healthy skin.
-                </p> */}
-              </div>
+              <div className="overflow-hidden font-clash text-7xl font-medium"></div>
             </div>
           </div>
         </div>
@@ -257,6 +253,21 @@ export default function Home() {
                   Explore
                 </Button>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="group/wrap explore ">
+        <div className="relative scroll-smooth">
+          <div className="flex h-[300px]  w-full items-center justify-center">
+            <div>
+              <div className="overflow-hidden font-clash text-7xl font-medium">
+                <p className="  text-3xl md:text-5xl text-center max-w-xl">
+                  Mission and Vision
+                </p>
+              </div>
+              <div className="overflow-hidden font-clash text-7xl font-medium"></div>
             </div>
           </div>
         </div>
@@ -421,7 +432,7 @@ export default function Home() {
               </AccordionTrigger>
               <AccordionContent>
                 For assistance, please don't hesitate to contact us directly by
-                email
+                email. kussasheabliss@gmail.com.
               </AccordionContent>
             </AccordionItem>
           </Accordion>

@@ -45,7 +45,7 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
       description:
         "Kussa Shea Bliss (KSB) is a well-established company in the skincare and personal care industry with three years of successful operations.",
       buttonText: "Read more",
-      link: "/shop",
+      link: "#about",
     },
 
     {
@@ -54,7 +54,7 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
       description:
         "For quick and easy assistance, feel free to contact us anytime. Our team is here to help you with any questions or concerns you may have.",
       buttonText: "Contact us",
-      link: "/shop",
+      link: "/contact",
     },
   ];
 

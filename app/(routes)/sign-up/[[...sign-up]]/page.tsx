@@ -14,6 +14,7 @@ export default function Page() {
   const [password, setPassword] = React.useState("");
   const [verifying, setVerifying] = React.useState(false);
   const [isVerifying, setIsVerifying] = React.useState(false);
+  const [show, setShow] = React.useState(true);
   const [code, setCode] = React.useState("");
   const router = useRouter();
   const { toast } = useToast();
@@ -88,6 +89,8 @@ export default function Page() {
       });
     }
   };
+
+  if (show) return;
 
   // Display the verification form to capture the OTP code
   if (verifying) {
