@@ -15,8 +15,8 @@ export default function Shop() {
   }, []);
 
   return (
-    <div>
-      <div className="pt-32 flex justify-center items-center flex-col gap-y-6">
+    <div className="explore">
+      <div className="pt-32 flex justify-center items-center flex-col gap-y-6 ">
         <div className="relative ">
           <p className="font-thin md:text-5xl text-center max-w-xl mb-4">
             Our products

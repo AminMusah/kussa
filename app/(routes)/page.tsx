@@ -25,17 +25,17 @@ export default function Home() {
   return (
     <div>
       <Billboard data={[]} />
-      <div className="group/wrap relative">
-        <div className="relative scroll-smooth">
-          <div className="group flex h-[300px] md:h-[500px] w-full items-center justify-center">
+      <div className="group/wrap relative explore">
+        <div className="relative ">
+          <div className=" flex h-[300px] md:h-[500px] w-full items-center justify-center">
             <div>
               <div className="overflow-hidden font-clash text-7xl font-medium">
-                <h2 className="group-hover/wrap:translate-y-full group-hover:animate-reveal text-xs md:text-xl font-thin text-center">
+                <h2 className="text-xs md:text-xl font-thin text-center">
                   Welcome to Kussa shea bliss
                 </h2>
               </div>
               <div className="overflow-hidden font-clash text-7xl font-medium">
-                <p className="group-hover/wrap:translate-y-full group-hover:animate-reveal group-hover:animation-delay-300 text-xl md:text-5xl text-center max-w-xl">
+                <p className=" text-xl md:text-5xl text-center max-w-xl">
                   Effortless journey to a healthy skin.
                 </p>
               </div>
@@ -75,17 +75,17 @@ export default function Home() {
           )
         )}
       </div>
-      <div className="group/wrap relative">
-        <div className="relative scroll-smooth">
-          <div className="group flex h-[300px] md:h-[600px] w-full items-center justify-center">
+      <div className="group/wrap relative explore">
+        <div className="relative ">
+          <div className=" flex h-[300px] md:h-[600px] w-full items-center justify-center">
             <div>
               <div className="overflow-hidden font-clash text-7xl font-medium">
-                <p className="group-hover/wrap:translate-y-full group-hover:animate-reveal  text-xl md:text-5xl text-center max-w-2xl">
+                <p className=" text-xl md:text-5xl text-center max-w-2xl">
                   Explore our products,
                 </p>
               </div>
               <div className="overflow-hidden font-clash text-7xl font-medium">
-                <p className="group-hover/wrap:translate-y-full group-hover:animate-reveal group-hover:animation-delay-300 text-xl md:text-5xl text-center max-w-2xl">
+                <p className=" text-xl md:text-5xl text-center max-w-2xl">
                   featuring various types with unique uses and benefits
                 </p>
               </div>
@@ -188,12 +188,12 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="group/wrap relative">
+      <div className="group/wrap explore">
         <div className="relative scroll-smooth">
-          <div className="group flex h-[300px] md:h-screen w-full items-center justify-center">
+          <div className="flex h-[300px] md:h-screen w-full items-center justify-center">
             <div>
               <div className="overflow-hidden font-clash text-7xl font-medium">
-                <p className="group-hover/wrap:translate-y-full group-hover:animate-reveal  text-3xl md:text-5xl text-center max-w-xl">
+                <p className="  text-3xl md:text-5xl text-center max-w-xl">
                   Our story
                 </p>
               </div>
@@ -262,13 +262,20 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="overflow-hidden font-clash text-7xl font-medium px-2 pt-32">
-        <p className="  text-3xl md:text-5xl  ">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum neque
-          ipsum veritatis quas id consequatur nobis sed, repellat fuga sit
-          necessitatibus saepe deserunt iusto quod culpa earum cum fugit eius?
-        </p>
-      </div>
+      {/* <div className="relative overflow-hidden pt-[1.5rem] sm:pt-[3rem] w-full">
+        <div className="relative px-2 mb-6 w-full">
+          <div className="opacity-100 w-full flex max-w-full flex-col rounded-[32px] group hover:shadow-[0px_4px_19px_rgba(142,151,158,0.15)] bg-white">
+            <div className="overflow-hidden rounded-[32px] hover:shadow-[0px_4px_19px_rgba(142,151,158,0.15)] w-full">
+              <video controls className="w-full">
+                <source
+                  src="https://videos.pexels.com/video-files/4031989/4031989-hd_1280_720_25fps.mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </div>
+          </div>
+        </div>
+      </div> */}
 
       <div className="grid grid-cols-1 sm:grid-cols-3 md:gap-2 p-2 h-[700px]">
         <div

@@ -293,7 +293,7 @@ export default function CheckOut() {
                   <Label htmlFor="name">Full Name</Label>
                   <Input
                     id="name"
-                    placeholder="John Doe"
+                    placeholder=""
                     required
                     onChange={(e) => setName(e.target.value)}
                   />
@@ -303,7 +303,7 @@ export default function CheckOut() {
                   <Input
                     id="email"
                     type="email"
-                    placeholder="john@example.com"
+                    placeholder="email@example.com"
                     required
                     onChange={(e) => setEmail(e.target.value)}
                   />

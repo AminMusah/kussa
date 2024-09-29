@@ -1,6 +1,6 @@
 export default function Explore() {
   return (
-    <div>
+    <div className="explore">
       <div className="pt-32 flex justify-center items-center flex-col gap-y-6">
         <div className="relative ">
           <p className="font-thin md:text-5xl text-center mb-4">
@@ -60,7 +60,7 @@ export default function Explore() {
           <img
             alt="Our lemon infused shea butter product is solely natural shea butter
             infused with lemon essential oil."
-            src="/images/IMG_9330.jpg"
+            src="/images/IMG-20240818-WA0054.jpg"
             className="rounded-lg bg-gray-100"
           />
         </div>
@@ -69,7 +69,7 @@ export default function Explore() {
         <div className="grid grid-cols-2  gap-4 sm:gap-6 lg:gap-8">
           <img
             alt="COCONUT INFUSED SHEA BUTTER"
-            src="/images/IMG_9330.jpg"
+            src="/images/IMG_9365.jpg"
             className="rounded-lg bg-gray-100"
           />
         </div>
@@ -154,7 +154,7 @@ export default function Explore() {
         <div className="grid grid-cols-2  gap-4 sm:gap-6 lg:gap-8">
           <img
             alt="CITRONELLA INFUSED SHEA BUTTER"
-            src="/images/IMG_9330.jpg"
+            src="/images/IMG-20240818-WA0045.jpg"
             className="rounded-lg bg-gray-100"
           />
         </div>
@@ -163,7 +163,7 @@ export default function Explore() {
         <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           <img
             alt="PERFUME INFUSED SHEA BUTTER"
-            src="/images/IMG_9330.jpg"
+            src="/images/IMG_9390.jpg"
             className="rounded-lg bg-gray-100"
           />
         </div>{" "}
@@ -239,7 +239,7 @@ export default function Explore() {
         <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           <img
             alt="LAVENDER INFUSED SHEA BUTTER"
-            src="/images/IMG_9330.jpg"
+            src="/images/IMG-20240818-WA0082.jpg"
             className="rounded-lg bg-gray-100"
           />
         </div>{" "}
@@ -248,7 +248,7 @@ export default function Explore() {
         <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           <img
             alt="NATURAL SHEA BUTTER"
-            src="/images/IMG_9330.jpg"
+            src="/images/IMG_9334.jpg"
             className="rounded-lg bg-gray-100"
           />
         </div>{" "}
@@ -334,7 +334,7 @@ export default function Explore() {
         <div className="grid grid-cols-2  gap-4 sm:gap-6 lg:gap-8">
           <img
             alt="VIRGIN COCONUT OIL"
-            src="/images/IMG_9330.jpg"
+            src="/images/IMG_9361.jpg"
             className="rounded-lg bg-gray-100"
           />
         </div>{" "}
@@ -343,7 +343,7 @@ export default function Explore() {
         <div className="grid grid-cols-2  gap-4 sm:gap-6 lg:gap-8">
           <img
             alt="AFRICAN BLACK SOAP"
-            src="/images/IMG_9330.jpg"
+            src="/images/IMG_9349.jpg"
             className="rounded-lg bg-gray-100"
           />
         </div>{" "}

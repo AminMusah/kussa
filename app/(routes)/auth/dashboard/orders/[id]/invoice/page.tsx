@@ -69,7 +69,7 @@ export default function Invoice({ params }: { params: { id: string } }) {
     dueDate: "July 23, 2023",
     company: {
       name: "Kussa shea bliss",
-      address: "123 Business St, Suite 100, City, State 12345",
+      address: "6th link, Accra",
       phone: "0244650892/0598608660",
       email: "kussasheabliss@gmail.com",
     },
@@ -108,7 +108,7 @@ export default function Invoice({ params }: { params: { id: string } }) {
         </div>
         <div className="text-right">
           <h2 className="text-xl font-semibold">{invoice.company.name}</h2>
-          {/* <p className="text-sm">{invoice.company.address}</p> */}
+          <p className="text-sm">{invoice.company.address}</p>
           <p className="text-sm">{invoice.company.phone}</p>
           <p className="text-sm">{invoice.company.email}</p>
         </div>

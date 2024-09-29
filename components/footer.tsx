@@ -1,9 +1,10 @@
+import Link from "next/link";
 import { Button } from "./ui/button";
 
 export default function Footer() {
   return (
     <div className="bg-black flex flex-col justify-between items-center text-white p-5 ">
-      <div className="flex justify-between w-full py-60 flex-col md:flex-row">
+      <div className="flex justify-between w-full py-60 flex-col md:flex-row explore">
         <div className="grid grid-cols-3 gap-24 md:w-4/5 ">
           <div className="flex flex-col gap-4">
             <h2 className="text-[#423f3f] font-bold">Shop</h2>
@@ -25,13 +26,17 @@ export default function Footer() {
                 Vision and mission
               </li>
               <li className="cursor-pointer hover:text-slate-200">Our story</li>
-              <li className="cursor-pointer hover:text-slate-200">Founder</li>
+              <li className="cursor-pointer hover:text-slate-200">
+                <Link href={"/founder"}>Founder</Link>{" "}
+              </li>
             </ul>
           </div>
           <div className="flex flex-col gap-4">
             <h2 className="text-[#423f3f]">Support area</h2>
             <ul className="flex flex-col gap-2">
-              <li className="cursor-pointer hover:text-slate-200">Contact</li>
+              <li className="cursor-pointer hover:text-slate-200">
+                <Link href={"/contact"}>Contact</Link>{" "}
+              </li>
             </ul>
           </div>
           <div className="flex flex-col gap-4 ">

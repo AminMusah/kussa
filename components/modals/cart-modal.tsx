@@ -124,11 +124,6 @@ export default function CartModal() {
         onRender();
       }
       onOpen("toggleCart");
-      // toast({
-      //   title: "Success",
-      //   description: "Added to cart!!",
-      //   variant: "success",
-      // });
     } catch (error: any) {
       console.error(error.response.data);
       toast({
@@ -198,6 +193,7 @@ export default function CartModal() {
                           </button>
                         </div>
                       </div>
+                      <p>No items in cart</p>
                       {cart?.items?.map(
                         (
                           item: CartItem // Use the defined CartItem type
@@ -306,6 +302,18 @@ export default function CartModal() {
                         )
                       )}
                     </div>
+
+                    {/* <div className="m-6 ">
+                      <Button
+                        onClick={() => {
+                          router.push("/checkout");
+                          handleClose();
+                        }}
+                        className="w-full h-[50px] rounded-full px-3 py-2  hover:bg-white border border-black hover:border-[#772432] group-hover:border-white hover:text-[#772432]  transition-all duration-300  border-opacity-50 focus:outline-none group-invalid:pointer-events-none group-invalid:opacity-70"
+                      >
+                        Clear cart
+                      </Button>
+                    </div> */}
 
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
