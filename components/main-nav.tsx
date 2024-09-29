@@ -118,11 +118,11 @@ export function MainNav({
         </nav>
 
         <div className="flex items-center space-x-4 px-2">
-          <Heart
+          {/* <Heart
             className={`cursor-pointer transition-transform duration-300 hover:scale-110   ${
               isScrolled || pathname !== `/` ? "text-black" : "text-white"
             } `}
-          />
+          /> */}
           <div
             className="relative group cursor-pointer"
             onClick={() => onOpen("toggleCart")}
