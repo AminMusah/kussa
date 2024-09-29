@@ -5,14 +5,22 @@ import { SkeletonCard } from "@/components/product-skeleton-card";
 import { Button } from "@/components/ui/button";
 import useAllProducts from "@/hooks/use-all-products";
 import { Search, SlidersHorizontal } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Shop() {
-  const { products, loading, getProducts } = useAllProducts();
+  const { products, loading, getProducts, filterName, accummilatedFilters } =
+    useAllProducts();
+  const [name, setName] = useState("");
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [accummilatedFilters]);
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      filterName(name);
+    }
+  };
 
   return (
     <div className="explore">
@@ -36,6 +44,8 @@ export default function Shop() {
             type="text"
             placeholder="Search products"
             className="rounded-full mr-4 p-2 px-4 md:min-w-[600px] outline-none border mt-4"
+            onChange={(e) => setName(e.target.value)}
+            onKeyDown={handleKeyPress} // Changed to onKeyDown
           />
           <div className="flex mt-4">
             {/* <div
@@ -55,6 +65,7 @@ export default function Shop() {
                 size={28}
                 strokeWidth={1}
                 className="group-hover:border-white group-hover:text-[#772432]  transition-all duration-300"
+                onClick={() => filterName(name)}
               />
             </div>
           </div>

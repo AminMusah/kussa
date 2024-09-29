@@ -2,11 +2,32 @@ import Product from "@/models/Product";
 import connect from "@/utils/db";
 import { NextResponse } from "next/server";
 
-export const GET = async (req: Request, res: Response) => {
+export const GET = async (req: Request) => {
   try {
     await connect();
 
-    const products = await Product.find({});
+    const url = new URL(req.url); // Create a URL object from req.url
+    const searchParams = url.searchParams; // Use the URL object to get searchParams
+    const name = searchParams.get("name");
+    const category = searchParams.get("category");
+    // console.log(query);
+
+    // const { name, category } = await req.json(); // Change to await req.json() to access body
+    const filters: {
+      name?: { $regex: string; $options: string };
+      category?: string;
+    } = {}; // Define the type for filters
+
+    // // Add filtering by name (case insensitive)
+    if (name) {
+      filters.name = { $regex: name, $options: "i" }; // "i" makes it case-insensitive
+    }
+
+    if (category) {
+      filters.category = category; // Directly assign the category string
+    }
+
+    const products = await Product.find(filters);
 
     return NextResponse.json(products, {
       status: 200,
