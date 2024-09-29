@@ -57,7 +57,7 @@ type Order = {
   };
   totalAmount: number;
   createdAt: string;
-
+  orderNumber: string;
   // Add other properties as needed
 };
 
@@ -89,11 +89,28 @@ export default function TransactionTable() {
     }
   };
 
+  // get all products
+  const getOrders = async () => {
+    try {
+      setIsLoading(true);
+
+      const response = await axios.get("/api/order/all/", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      setOrders(response.data);
+    } catch (error: any) {
+      console.error(error.response.data);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     getTransactions();
+    getOrders();
   }, []);
-
-  // console.log(transaction);
 
   const orderEmails = new Set(
     orders.map((order) => order.userOrderingInfo.email)
@@ -103,6 +120,8 @@ export default function TransactionTable() {
   const matchingTransactions = transaction.filter(
     (trans) => orderEmails.has(trans.customer.email) // Filter transactions based on matching emails
   ); // Filter transactions based on matching emails
+
+  // console.log(orders);
 
   // Get unmatched transactions
   const unmatchedTransactions = transaction.filter(
@@ -128,6 +147,19 @@ export default function TransactionTable() {
       paidAt: matchedTransaction?.paidAt, // Attach paidAt
       paidAmount: matchedTransaction?.amount, // Attach paidAmount
       // paymentStatus: matchedTransaction?.status,
+    };
+  });
+
+  // After fetching orders and transactions
+  const updatedTransactions = matchingTransactions.map((trans) => {
+    const matchedOrders = orders.find(
+      (order) => order.userOrderingInfo.email === trans.customer.email
+    );
+
+    return {
+      ...trans,
+
+      orderNumber: matchedOrders?.orderNumber,
     };
   });
 
@@ -163,6 +195,7 @@ export default function TransactionTable() {
               <TableHead>Email</TableHead>
               <TableHead>Amount</TableHead>
               <TableHead>Channel</TableHead>
+              <TableHead>Order no</TableHead>
               <TableHead className="hidden md:table-cell">Status</TableHead>
               <TableHead>Response</TableHead>
               <TableHead>Paid at</TableHead>
@@ -173,7 +206,7 @@ export default function TransactionTable() {
           </TableHeader>
 
           <TableBody className="relative">
-            {matchingTransactions?.map((transaction: any) => (
+            {updatedTransactions?.map((transaction: any) => (
               <TableRow key={transaction?.id}>
                 <TableCell className="font-medium">
                   {transaction?.customer?.email}
@@ -183,6 +216,9 @@ export default function TransactionTable() {
                 </TableCell>
                 <TableCell className="font-medium">
                   {transaction?.channel}
+                </TableCell>
+                <TableCell className="font-medium">
+                  {transaction?.orderNumber}
                 </TableCell>
 
                 <TableCell>
