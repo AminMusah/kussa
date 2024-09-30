@@ -74,12 +74,16 @@ export default function OrdersTable() {
     try {
       setIsLoading(true);
 
-      const response = await axios.get("/api/order/all/", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      setOrders(response.data);
+      let data = await fetch("/api/order/all/", { cache: "no-store" });
+
+      const response = await data.json();
+      console.log(response, "data");
+      // const response = await axios.get("/api/order/all/", {
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      // });
+      setOrders(response);
     } catch (error: any) {
       console.error(error.response.data);
     } finally {
