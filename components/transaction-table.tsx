@@ -94,7 +94,7 @@ export default function TransactionTable() {
     try {
       setIsLoading(true);
 
-      const response = await axios.get("/api/order/all/", {
+      const response = await axios.get("/api/order/", {
         headers: {
           "Content-Type": "application/json",
         },

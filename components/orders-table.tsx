@@ -74,7 +74,7 @@ export default function OrdersTable() {
     try {
       setIsLoading(true);
 
-      let data = await fetch("/api/order/all/", { cache: "no-store" });
+      let data = await fetch("/api/order/", { cache: "no-store" });
 
       const response = await data.json();
       console.log(response, "data");
