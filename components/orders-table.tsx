@@ -189,8 +189,8 @@ export default function OrdersTable() {
               <TableHead className="hidden md:table-cell">
                 Order value
               </TableHead>
-              {/* <TableHead>Amount paid</TableHead> */}
-              {/* <TableHead className="hidden md:table-cell">Paid at</TableHead> */}
+              <TableHead>Amount paid</TableHead>
+              <TableHead className="hidden md:table-cell">Paid at</TableHead>
               <TableHead className="hidden md:table-cell">Ordered at</TableHead>
               <TableHead>
                 <span className="sr-only">Actions</span>
@@ -199,7 +199,7 @@ export default function OrdersTable() {
           </TableHeader>
 
           <TableBody className="relative">
-            {orders.map((orders: any) => (
+            {updatedOrders.map((orders: any) => (
               <TableRow key={orders?._id}>
                 <TableCell className="hidden md:table-cell">
                   {orders.orderNumber}
@@ -215,16 +215,16 @@ export default function OrdersTable() {
                   {orders?.userOrderingInfo?.phone}
                 </TableCell>
 
-                {/* <TableCell className="hidden md:table-cell">
+                <TableCell className="hidden md:table-cell">
                   GHC {orders?.totalAmount}
-                </TableCell> */}
+                </TableCell>
                 <TableCell className="hidden md:table-cell">
                   GHC {orders?.paidAmount ? orders?.paidAmount / 100 : 0}
                 </TableCell>
 
-                {/* <TableCell className="hidden md:table-cell">
+                <TableCell className="hidden md:table-cell">
                   {dayjs(orders?.paidAt).format(FORMAT)}
-                </TableCell> */}
+                </TableCell>
                 <TableCell className="hidden md:table-cell">
                   {dayjs(orders?.createdAt).format(FORMAT)}
                 </TableCell>
