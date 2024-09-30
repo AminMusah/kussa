@@ -6,9 +6,7 @@ export const GET = async (req: Request, res: Response) => {
   try {
     await connect();
 
-    const orders = await Order.find({})
-      .populate("items.productId")
-      .sort({ createdAt: -1 });
+    const orders = await Order.find({}).populate("items.productId");
 
     return NextResponse.json(orders, {
       status: 200,
