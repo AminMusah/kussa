@@ -40,6 +40,7 @@ import { useClerk, UserButton } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import axios from "axios";
 import { useEffect, useState } from "react";
+export const revalidate = 60;
 
 export default function Dashboard({
   children, // will be a page or nested layout
