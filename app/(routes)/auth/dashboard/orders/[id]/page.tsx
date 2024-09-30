@@ -19,12 +19,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Separator } from "@/components/ui/separator";
-import { Package, Truck } from "lucide-react";
+import { Truck } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { dateConverter, twoDecimalPlaces } from "@/helper/function";
-import dayjs from "dayjs";
-import { useReactToPrint } from "react-to-print";
 import React from "react"; // Import React for forwardRef
 import { useRouter } from "next/navigation";
 
