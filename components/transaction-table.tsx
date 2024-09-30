@@ -195,7 +195,7 @@ export default function TransactionTable() {
               <TableHead>Email</TableHead>
               <TableHead>Amount</TableHead>
               <TableHead className="hidden md:table-cell">Channel</TableHead>
-              <TableHead className="hidden md:table-cell">Order no</TableHead>
+              {/* <TableHead className="hidden md:table-cell">Order no</TableHead> */}
               <TableHead className="hidden md:table-cell">Status</TableHead>
               <TableHead className="hidden md:table-cell">Response</TableHead>
               <TableHead className="hidden md:table-cell">Paid at</TableHead>
@@ -206,7 +206,7 @@ export default function TransactionTable() {
           </TableHeader>
 
           <TableBody className="relative">
-            {updatedTransactions?.map((transaction: any) => (
+            {transaction?.map((transaction: any) => (
               <TableRow key={transaction?.id}>
                 <TableCell className="font-medium">
                   {transaction?.customer?.email}
@@ -217,9 +217,9 @@ export default function TransactionTable() {
                 <TableCell className="hidden md:table-cell">
                   {transaction?.channel}
                 </TableCell>
-                <TableCell className="hidden md:table-cell">
+                {/* <TableCell className="hidden md:table-cell">
                   {transaction?.orderNumber}
-                </TableCell>
+                </TableCell> */}
 
                 <TableCell className="hidden md:table-cell">
                   <Badge
