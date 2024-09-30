@@ -34,6 +34,7 @@ import useAllProducts from "@/hooks/use-all-products";
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
 import OverlayLoader from "./overlay-loader";
+export const revalidate = 60;
 
 // Define a type for the transaction
 type Transaction = {
