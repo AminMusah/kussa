@@ -326,6 +326,14 @@ export default function CartModal() {
                       <div className="mt-6 ">
                         <Button
                           onClick={() => {
+                            if (cart?.items?.length <= 0) {
+                              toast({
+                                variant: "default",
+                                title: "Empty!",
+                                description: "Cart is empty!!",
+                              });
+                              return;
+                            }
                             router.push("/checkout");
                             handleClose();
                           }}

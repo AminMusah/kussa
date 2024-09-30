@@ -194,11 +194,11 @@ export default function TransactionTable() {
             <TableRow>
               <TableHead>Email</TableHead>
               <TableHead>Amount</TableHead>
-              <TableHead>Channel</TableHead>
-              <TableHead>Order no</TableHead>
+              <TableHead className="hidden md:table-cell">Channel</TableHead>
+              <TableHead className="hidden md:table-cell">Order no</TableHead>
               <TableHead className="hidden md:table-cell">Status</TableHead>
-              <TableHead>Response</TableHead>
-              <TableHead>Paid at</TableHead>
+              <TableHead className="hidden md:table-cell">Response</TableHead>
+              <TableHead className="hidden md:table-cell">Paid at</TableHead>
               <TableHead>
                 <span className="sr-only">Actions</span>
               </TableHead>
@@ -214,14 +214,14 @@ export default function TransactionTable() {
                 <TableCell className="font-medium">
                   {transaction?.currency} {transaction?.amount / 100}
                 </TableCell>
-                <TableCell className="font-medium">
+                <TableCell className="hidden md:table-cell">
                   {transaction?.channel}
                 </TableCell>
-                <TableCell className="font-medium">
+                <TableCell className="hidden md:table-cell">
                   {transaction?.orderNumber}
                 </TableCell>
 
-                <TableCell>
+                <TableCell className="hidden md:table-cell">
                   <Badge
                     className={
                       transaction?.status === "success" ? "bg-green-500" : ""
@@ -235,7 +235,7 @@ export default function TransactionTable() {
                     {transaction?.status}
                   </Badge>
                 </TableCell>
-                <TableCell className="font-medium">
+                <TableCell className="hidden md:table-cell">
                   {transaction?.gateway_response}
                 </TableCell>
                 <TableCell className="hidden md:table-cell">

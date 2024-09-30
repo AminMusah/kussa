@@ -50,6 +50,7 @@ export default function Dashboard({
   const [isLoading, setIsLoading] = useState(false);
   const [orders, setOrders] = useState([]);
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
 
   const getOrders = async () => {
     try {
@@ -152,7 +153,7 @@ export default function Dashboard({
       </div>
       <div className="flex flex-col">
         <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
-          <Sheet>
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button
                 variant="outline"
@@ -164,7 +165,10 @@ export default function Dashboard({
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="flex flex-col">
-              <nav className="grid gap-2 text-lg font-medium">
+              <nav
+                className="grid gap-2 text-lg font-medium"
+                onClick={() => setIsOpen(!open)}
+              >
                 <Link
                   href="#"
                   className="flex items-center gap-2 text-lg font-semibold"
@@ -173,45 +177,66 @@ export default function Dashboard({
                   <span className="sr-only">Acme Inc</span>
                 </Link>
                 <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                  href="/auth/dashboard"
+                  className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground ${
+                    pathname === "/auth/dashboard"
+                      ? "bg-muted text-primary"
+                      : "text-muted-foreground"
+                  }`}
                 >
                   <Home className="h-5 w-5" />
                   Dashboard
                 </Link>
                 <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
+                  href="/auth/dashboard/orders"
+                  className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground ${
+                    pathname === "/auth/dashboard/orders"
+                      ? "bg-muted text-primary"
+                      : "text-muted-foreground"
+                  }`}
                 >
                   <ShoppingCart className="h-5 w-5" />
                   Orders
                   <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                    6
+                    {orders?.length}
                   </Badge>
                 </Link>
                 <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                  href="/auth/dashboard/products"
+                  className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground ${
+                    pathname === "/auth/dashboard/products"
+                      ? "bg-muted text-primary"
+                      : "text-muted-foreground"
+                  }`}
                 >
                   <Package className="h-5 w-5" />
                   Products
                 </Link>
+
                 <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                >
-                  <Users className="h-5 w-5" />
-                  Customers
-                </Link>
-                <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                  href="/auth/dashboard/inventory"
+                  className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground ${
+                    pathname === "/auth/dashboard/inventory"
+                      ? "bg-muted text-primary"
+                      : "text-muted-foreground"
+                  }`}
                 >
                   <LineChart className="h-5 w-5" />
-                  Analytics
+                  Inventory
+                </Link>
+                <Link
+                  href="/auth/dashboard/transactions"
+                  className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground ${
+                    pathname === "/auth/dashboard/transactions"
+                      ? "bg-muted text-primary"
+                      : "text-muted-foreground"
+                  }`}
+                >
+                  <Landmark className="h-5 w-5" />
+                  Transactions
                 </Link>
               </nav>
-              <div className="mt-auto">
+              {/* <div className="mt-auto">
                 <Card>
                   <CardHeader>
                     <CardTitle>Upgrade to Pro</CardTitle>
@@ -226,7 +251,7 @@ export default function Dashboard({
                     </Button>
                   </CardContent>
                 </Card>
-              </div>
+              </div> */}
             </SheetContent>
           </Sheet>
           <div className="w-full flex-1">

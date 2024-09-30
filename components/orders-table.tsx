@@ -180,11 +180,15 @@ export default function OrdersTable() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Order number</TableHead>
+              <TableHead className="hidden md:table-cell">
+                Order number
+              </TableHead>
               <TableHead>Name</TableHead>
               <TableHead>Email</TableHead>
-              <TableHead>Phone</TableHead>
-              <TableHead>Order value</TableHead>
+              <TableHead className="hidden md:table-cell">Phone</TableHead>
+              <TableHead className="hidden md:table-cell">
+                Order value
+              </TableHead>
               <TableHead>Amount paid</TableHead>
               <TableHead className="hidden md:table-cell">Paid at</TableHead>
               <TableHead className="hidden md:table-cell">Ordered at</TableHead>
@@ -197,7 +201,7 @@ export default function OrdersTable() {
           <TableBody className="relative">
             {updatedOrders.map((orders: any) => (
               <TableRow key={orders?._id}>
-                <TableCell className="font-medium">
+                <TableCell className="hidden md:table-cell">
                   {orders.orderNumber}
                 </TableCell>
                 <TableCell className="font-medium">
