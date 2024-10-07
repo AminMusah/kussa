@@ -16,7 +16,7 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
   const router = useRouter();
   const slides = [
     {
-      url: "/images/1000007081.jpg",
+      url: "/images/IMG_9416.jpg",
 
       title: "KUSSA SHEA BLISS",
       description: "Effortless journey to a healthy skin.",
@@ -24,7 +24,7 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
       link: "/shop",
     },
     {
-      url: "/images/IMG_9416.jpg",
+      url: "/images/IMG_9334.jpg",
       title: "Skin care",
       description:
         "KUSSA SHEA BLISS specializes in producing high-quality skincare and personal care products infused with shea butter, a natural ingredient known for its nourishing and moisturizing properties.",
