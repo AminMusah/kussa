@@ -44,7 +44,7 @@ export default function Product({ params }: { params: { id: string } }) {
       });
       setProduct(response.data);
     } catch (error: any) {
-      console.error(error.response.data);
+      console.error(error?.response?.data);
     } finally {
       setLoading(false);
     }
@@ -81,10 +81,10 @@ export default function Product({ params }: { params: { id: string } }) {
         variant: "success",
       });
     } catch (error: any) {
-      console.error(error.response.data);
+      console.error(error?.response?.data);
       toast({
         title: "Error",
-        description: error.response.data,
+        description: error?.response?.data,
         variant: "destructive",
       });
     } finally {

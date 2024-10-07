@@ -82,7 +82,7 @@ export default function OrdersTable() {
       });
       setOrders(response.data);
     } catch (error: any) {
-      console.error(error.response.data);
+      console.error(error?.response?.data);
     } finally {
       setIsLoading(false);
     }
@@ -105,7 +105,7 @@ export default function OrdersTable() {
 
       setTransaction(response.data.data);
     } catch (error: any) {
-      console.error(error.response.data);
+      console.error(error?.response?.data);
     } finally {
       setIsLoading(false);
     }

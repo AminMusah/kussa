@@ -54,7 +54,7 @@ export default function InventoryTable() {
       });
       setInventory(response.data);
     } catch (error: any) {
-      console.error(error.response.data);
+      console.error(error?.response?.data);
     } finally {
       setIsLoading(false);
     }

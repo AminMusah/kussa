@@ -146,9 +146,8 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
             >
               <Dot
                 size={66}
-                className={`text-white ${
-                  currentIndex === slideIndex ? "opacity-100" : "opacity-50"
-                }`}
+                className={`text-white ${currentIndex === slideIndex ? "opacity-100" : "opacity-50"
+                  }`}
               />
             </div>
           ))}

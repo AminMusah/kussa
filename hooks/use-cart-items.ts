@@ -15,7 +15,7 @@ const useGetCart = () => {
       });
       setCart(response.data);
     } catch (error: any) {
-      console.error(error.response.data);
+      console.error(error?.response?.data);
     } finally {
       setLoading(false);
     }

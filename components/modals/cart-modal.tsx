@@ -125,10 +125,10 @@ export default function CartModal() {
       }
       onOpen("toggleCart");
     } catch (error: any) {
-      console.error(error.response.data);
+      console.error(error?.response?.data);
       toast({
         title: "Error",
-        description: error.response.data,
+        description: error?.response?.data,
         variant: "destructive",
       });
     } finally {

@@ -70,7 +70,7 @@ export default function Dashboard() {
       });
       setOrders(response.data);
     } catch (error: any) {
-      console.error(error.response.data);
+      console.error(error?.response?.data);
     } finally {
       setIsLoading(false);
     }
@@ -87,7 +87,7 @@ export default function Dashboard() {
       });
       setProducts(response.data);
     } catch (error: any) {
-      console.error(error.response.data);
+      console.error(error?.response?.data);
     } finally {
       setIsLoading(false);
     }
@@ -111,7 +111,7 @@ export default function Dashboard() {
 
       setTransaction(revenue);
     } catch (error: any) {
-      console.error(error.response.data);
+      console.error(error?.response?.data);
     } finally {
       setIsLoading(false);
     }

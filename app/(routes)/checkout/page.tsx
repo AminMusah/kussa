@@ -167,10 +167,10 @@ export default function CheckOut() {
       });
       initiatePayment();
     } catch (error: any) {
-      // console.error(error.response);
+      // console.error(error?.response);
       toast({
         title: "Error",
-        description: error.response.data,
+        description: error?.response?.data,
         variant: "destructive",
       });
     } finally {

@@ -43,7 +43,7 @@ export default function Invoice({ params }: { params: { id: string } }) {
       });
       setOrder(response.data);
     } catch (error: any) {
-      console.error(error.response.data);
+      console.error(error?.response?.data);
     } finally {
       // setLoading(false);
     }

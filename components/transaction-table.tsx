@@ -84,7 +84,7 @@ export default function TransactionTable() {
 
       setTransaction(response?.data?.data);
     } catch (error: any) {
-      console.error(error.response.data);
+      console.error(error?.response?.data);
     } finally {
       setIsLoading(false);
     }
@@ -102,7 +102,7 @@ export default function TransactionTable() {
       });
       setOrders(response.data);
     } catch (error: any) {
-      console.error(error.response.data);
+      console.error(error?.response?.data);
     } finally {
       setIsLoading(false);
     }

@@ -57,7 +57,7 @@ export default function CreateProduct({ params }: { params: { id: string } }) {
       setImages(response.data.images);
       setPrice(response.data.price);
     } catch (error: any) {
-      console.error(error.response.data);
+      console.error(error?.response?.data);
     } finally {
       // setLoading(false);
     }
@@ -99,10 +99,10 @@ export default function CreateProduct({ params }: { params: { id: string } }) {
       });
       setRender(!render);
     } catch (error: any) {
-      console.error(error.response.data);
+      console.error(error?.response?.data);
       toast({
         title: "Error",
-        description: error.response.data,
+        description: error?.response?.data,
         variant: "destructive",
       });
     } finally {
