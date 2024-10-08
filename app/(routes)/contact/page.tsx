@@ -81,7 +81,7 @@ export default function Contact() {
               </div>
               <div className="flex items-center space-x-2 text-white">
                 <Mail className="h-5 w-5" />
-                <span>kussasheabliss@gmail.com</span>
+                <span>info@kussasheabliss.com</span>
               </div>
             </div>
           </div>

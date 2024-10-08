@@ -71,7 +71,7 @@ export default function Invoice({ params }: { params: { id: string } }) {
       name: "Kussa shea bliss",
       address: "6th link, Accra",
       phone: "0244650892/0598608660",
-      email: "kussasheabliss@gmail.com",
+      email: "info@kussasheabliss.com",
     },
     customer: {
       name: "John Doe",

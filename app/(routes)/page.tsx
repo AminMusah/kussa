@@ -432,7 +432,7 @@ export default function Home() {
               </AccordionTrigger>
               <AccordionContent>
                 For assistance, please don't hesitate to contact us directly by
-                email. kussasheabliss@gmail.com.
+                email. info@kussasheabliss.com.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
