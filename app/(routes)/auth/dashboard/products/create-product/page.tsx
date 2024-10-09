@@ -156,6 +156,7 @@ export default function CreateProduct() {
                     <SelectItem value="body oil">Body oil</SelectItem>
                     <SelectItem value="hampers">Hampers</SelectItem>
                     <SelectItem value="diffusers">Diffusers</SelectItem>
+                    <SelectItem value="hair products">Hair products</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
