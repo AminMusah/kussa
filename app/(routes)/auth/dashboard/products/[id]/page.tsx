@@ -173,7 +173,7 @@ export default function CreateProduct({ params }: { params: { id: string } }) {
                     <SelectItem value="soaps">Soaps</SelectItem>
                     <SelectItem value="beard oil">Beard oil</SelectItem>
                     <SelectItem value="body oil">Body oil</SelectItem>
-                    <SelectItem value="hampers">Hapmers</SelectItem>
+                    <SelectItem value="hampers">Hampers</SelectItem>
                     <SelectItem value="diffusers">Diffusers</SelectItem>
                   </SelectContent>
                 </Select>
