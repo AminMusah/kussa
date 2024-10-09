@@ -32,10 +32,24 @@ export default function Shop() {
           <span className="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2  w-1/2 h-[2px] bg-black transition-all duration-300 ease-in-out"></span>
         </div>
         <p className="text-xs md:text-xl font-thin text-center max-w-xl">
-          Discover our exquisite range of Kussa Shea Bliss products and find
-          your perfect skincare solution. Browse our collection of natural, shea
-          butter-infused items, select your favorites, and embark on your
-          journey to healthier, more radiant skin.
+          Kussa Shea Bliss (KSB) is a well-established company in the skincare
+          and personal care industry with over three years of successful
+          operations.
+        </p>
+        <p className="text-xs md:text-xl font-thin text-center max-w-xl">
+          KSB specializes in producing high-quality skincare and personal care
+          products infused with shea butter, a natural ingredient known for its
+          nourishing and moisturizing properties.
+        </p>
+        <p className="text-xs md:text-xl font-thin text-center max-w-xl">
+          The company has gained a solid reputation for its commitment to using
+          ethically sourced and sustainable ingredients, as well as its
+          dedication to providing exceptional customer experience.
+        </p>
+        <p className="text-xs md:text-xl font-thin text-center max-w-xl">
+          Browse through our range of products including Natural and Infused
+          Shea Butter creams, Shower Gels made with African Black Soap, Hair
+          Products, Oils & more.
         </p>
       </div>
       <div className="flex justify-center items-center flex-col w-full">
