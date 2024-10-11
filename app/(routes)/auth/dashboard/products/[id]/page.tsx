@@ -12,16 +12,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import MultipleImageUpload from "@/components/multiple-image-uplaod";
+import useAllCategories from "@/hooks/use-all-categories";
 
 export default function CreateProduct({ params }: { params: { id: string } }) {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const { categories, getCategories } = useAllCategories();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
@@ -110,6 +112,10 @@ export default function CreateProduct({ params }: { params: { id: string } }) {
     }
   };
 
+  useEffect(() => {
+    getCategories();
+  }, []);
+
   return (
     <div className="container mx-auto p-6">
       <Card>
@@ -163,6 +169,15 @@ export default function CreateProduct({ params }: { params: { id: string } }) {
                     <SelectValue placeholder="Select a category" />
                   </SelectTrigger>
                   <SelectContent>
+                    {categories?.map((category: any) => (
+                      <React.Fragment key={category._id}>
+                        <SelectItem value={category._id}>
+                          {category?.label}
+                        </SelectItem>
+                      </React.Fragment>
+                    ))}
+                  </SelectContent>
+                  {/* <SelectContent>
                     <SelectItem value="lemon">Lemon</SelectItem>
                     <SelectItem value="coconut">Coconut</SelectItem>
                     <SelectItem value="citronella">Citronella</SelectItem>
@@ -177,7 +192,7 @@ export default function CreateProduct({ params }: { params: { id: string } }) {
                     <SelectItem value="diffusers">Diffusers</SelectItem>
                     <SelectItem value="hair products">Hair products</SelectItem>
                     <SelectItem value="gift sets">Gift sets</SelectItem>
-                  </SelectContent>
+                  </SelectContent> */}
                 </Select>
               </div>
 
