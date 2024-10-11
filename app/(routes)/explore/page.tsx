@@ -304,9 +304,6 @@ export default function Explore() {
               <div className="mt-4">
                 <ul>
                   <li className="text-xs md:text-base">
-                    • Healthy for cooking.{" "}
-                  </li>
-                  <li className="text-xs md:text-base">
                     • Promotes hair growth and prevents hair damage.
                   </li>
                   <li className="text-xs md:text-base">
