@@ -3,6 +3,7 @@
 import Link from "next/link";
 import {
   Bell,
+  ChartColumnStacked,
   CircleUser,
   Home,
   Landmark,
@@ -124,6 +125,17 @@ export default function Dashboard({
               >
                 <Package className="h-4 w-4" />
                 Products{" "}
+              </Link>
+              <Link
+                href="/auth/dashboard/category"
+                className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${
+                  pathname === "/auth/dashboard/category"
+                    ? "bg-muted text-primary"
+                    : "text-muted-foreground"
+                }`}
+              >
+                <ChartColumnStacked className="h-4 w-4" />
+                Category{" "}
               </Link>
               <Link
                 href="/auth/dashboard/inventory"

@@ -1,30 +1,34 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-const isPublicRoute = createRouteMatcher([
-  "/sign-in(.*)",
-  "/sign-up(.*)",
-  "/",
-  "/shop",
-  "/explore",
-  "/api/auth/login",
-  "/founder",
-  "/checkout",
-  "/contact",
-  "/shop/:path*",
-  "/api/webhooks/clerk",
-  "/api/payment/initiate",
-  "/api/product",
-  "/api/product/:path*",
-  "/api/cart/",
-  "/api/order/place",
-  "/api/cart/:path*",
-]);
+// const isPublicRoute = createRouteMatcher([
+//   "/sign-in(.*)",
+//   "/sign-up(.*)",
+//   "/",
+//   "/shop",
+//   "/explore",
+//   "/api/auth/login",
+//   "/founder",
+//   "/checkout",
+//   "/contact",
+//   "/shop/:path*",
+//   "/api/webhooks/clerk",
+//   "/api/payment/initiate",
+//   "/api/product",
+//   "/api/product/:path*",
+//   "/api/cart/",
+//   "/api/order/place",
+//   "/api/cart/:path*",
+// ]);
 
-export default clerkMiddleware((auth, request) => {
-  if (!isPublicRoute(request)) {
-    auth().protect();
-  }
-});
+// export default clerkMiddleware((auth, request) => {
+//   if (!isPublicRoute(request)) {
+//     auth().protect();
+//   }
+// });
+
+export function middleware() {
+  return;
+}
 
 export const config = {
   matcher: [
