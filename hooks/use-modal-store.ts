@@ -4,7 +4,8 @@ export type ModalType =
   | "toggleCart"
   | "createCategory"
   | "editCategory"
-  | "deleteCategory";
+  | "deleteCategory"
+  | "deleteProduct";
 
 interface ModalStore {
   type: ModalType | null;

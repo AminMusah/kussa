@@ -38,50 +38,14 @@ import useAllCategories from "@/hooks/use-all-categories";
 export const revalidate = 60;
 
 export default function CategoriesTable() {
-  const router = useRouter();
   const { categories, loading, getCategories } = useAllCategories();
-  const [rendring, setRendering] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
-  const { onOpen, isOpen, data, render } = useModal();
+  const { onOpen, render } = useModal();
 
   useEffect(() => {
     getCategories();
-  }, [rendring, render]);
+  }, [render]);
 
   const FORMAT = "dddd, MMMM D, YYYY h:mm A";
-
-  // console.log(products);
-
-  const deleteCategory = async (id: string) => {
-    try {
-      setIsLoading(true);
-
-      const response = await axios.delete(`/api/product/${id}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      toast({
-        title: "Success",
-        description: "Product deleted successfully!!",
-        variant: "success",
-      });
-      setRendering(!rendring);
-    } catch (error: any) {
-      console.error(error?.response?.data);
-      toast({
-        title: "Error",
-        description: error?.response?.data,
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  console.log(categories);
 
   return (
     <Card>
@@ -110,10 +74,10 @@ export default function CategoriesTable() {
             </TableRow>
           </TableHeader>
 
-          <OverlayLoader
-            isLoading={isLoading}
+          {/* <OverlayLoader
+            isLoading={loading}
             text="Processing your request..."
-          />
+          /> */}
 
           <TableBody>
             {categories.map((category: any) => (

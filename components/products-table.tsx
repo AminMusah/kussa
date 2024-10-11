@@ -34,49 +34,18 @@ import useAllProducts from "@/hooks/use-all-products";
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
 import OverlayLoader from "./overlay-loader";
+import { useModal } from "@/hooks/use-modal-store";
 
 export default function ProductsTable() {
   const router = useRouter();
   const { products, loading, getProducts } = useAllProducts();
-  const [rendring, setRendering] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
+  const { onOpen, render } = useModal();
 
   useEffect(() => {
     getProducts();
-  }, [rendring]);
+  }, [render]);
 
   const FORMAT = "dddd, MMMM D, YYYY h:mm A";
-
-  // console.log(products);
-
-  const deleteProduct = async (id: string) => {
-    try {
-      setIsLoading(true);
-
-      const response = await axios.delete(`/api/product/${id}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      toast({
-        title: "Success",
-        description: "Product deleted successfully!!",
-        variant: "success",
-      });
-      setRendering(!rendring);
-    } catch (error: any) {
-      console.error(error?.response?.data);
-      toast({
-        title: "Error",
-        description: error?.response?.data,
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   return (
     <Card>
@@ -117,7 +86,7 @@ export default function ProductsTable() {
           </TableHeader>
 
           <OverlayLoader
-            isLoading={isLoading}
+            isLoading={loading}
             text="Processing your request..."
           />
 
@@ -179,7 +148,7 @@ export default function ProductsTable() {
                         </DropdownMenuItem>
                         <DropdownMenuItem
                           onClick={() => {
-                            deleteProduct(product?._id);
+                            onOpen("deleteProduct", { product });
                           }}
                         >
                           Delete

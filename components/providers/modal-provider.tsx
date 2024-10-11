@@ -5,6 +5,7 @@ import CartModal from "../modals/cart-modal";
 import { CreateCategoryModal } from "../modals/create-category-modal";
 import { EditCategoryModal } from "../modals/edit-category-modal";
 import { DeleteCategoryModal } from "../modals/delete-category-modal";
+import { DeleteProductModal } from "../modals/delete-product-modal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -23,6 +24,7 @@ export const ModalProvider = () => {
       <CreateCategoryModal />
       <EditCategoryModal />
       <DeleteCategoryModal />
+      <DeleteProductModal />
     </>
   );
 };
