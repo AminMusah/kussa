@@ -131,16 +131,10 @@ export default function Explore() {
                 <div className="mt-4">
                   <ul>
                     <li className="text-xs md:text-base">
-                      • Prevents the growth or spread of harmful airborne
-                      bacteria.
-                    </li>
-                    <li className="text-xs md:text-base">
                       • Serves as a repellent for flying insects such as
                       mosquitoes, etc.
                     </li>
-                    <li className="text-xs md:text-base">
-                      • Uplifts negative moods and relaxes the body and mind.
-                    </li>
+
                     <li className="text-xs md:text-base">
                       • It is reputed to reduce muscles spasms, ease headaches,
                       and boost energy.
@@ -189,13 +183,6 @@ export default function Explore() {
                     <li className="text-xs md:text-base">
                       • Increases self-appeal and self-confidence.{" "}
                     </li>
-                    <li className="text-xs md:text-base">
-                      • Enhances health and well-being by improving one’s mood,
-                      reducing anxiety and stress.{" "}
-                    </li>
-                    <li className="text-xs md:text-base">
-                      • Increasing cognitive function and improving sleep.{" "}
-                    </li>
                   </ul>
                 </div>
               </dd>
@@ -219,10 +206,6 @@ export default function Explore() {
               {/* <dt className="font-medium text-gray-900">{feature.name}</dt> */}
               <div className="mt-4">
                 <ul>
-                  <li className="text-xs md:text-base">
-                    • Reduces anxiety and emotions
-                  </li>
-                  <li className="text-xs md:text-base">• Improves Sleep. </li>
                   <li className="text-xs md:text-base">
                     • Helps heal burns and wounds.{" "}
                   </li>
