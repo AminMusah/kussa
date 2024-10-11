@@ -25,15 +25,13 @@ import React, { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-export const CreateCategoryModal = () => {
+export const EditCategoryModal = () => {
   const { isOpen, onClose, type, data, onRender } = useModal();
-  const [file, setFile] = useState("");
   const [loading, setLoading] = useState(false);
   const [nameInput, setNameInput] = useState("");
   const [DescInput, setDescInput] = useState("");
-  const [linkInput, setLinkInput] = useState("");
-  const [categoryInput, setCategoryInput] = useState("");
   const { toast } = useToast();
+
   const handleNameInputChange = (e: any) => {
     setNameInput(e.target.value);
   };
@@ -46,12 +44,36 @@ export const CreateCategoryModal = () => {
 
   const router = useRouter();
 
+  // get a category
+  const getCategory = async (id: any) => {
+    try {
+      // setLoading(true);
+      const response = await axios.get(`/api/categories/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.error(response?.data?.label);
+
+      setNameInput(response.data.label);
+      setDescInput(response.data.desc);
+    } catch (error: any) {
+      console.error(error?.response?.data);
+    } finally {
+      // setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getCategory(data.category?._id);
+  }, [data.category?._id]);
+
   // edit category
   const submit = async (id: any) => {
     try {
       setLoading(true);
 
-      const response = await axios.post(
+      const response = await axios.patch(
         `/api/categories/${id}`,
         {
           label: nameInput,
@@ -65,7 +87,7 @@ export const CreateCategoryModal = () => {
       );
       toast({
         title: "Success",
-        description: "Category created successfully!!",
+        description: "Category updated successfully!!",
         variant: "success",
       });
 
@@ -101,20 +123,22 @@ export const CreateCategoryModal = () => {
               className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0 mb-3"
               placeholder="Category Name"
               onChange={handleNameInputChange}
+              value={nameInput}
             />
             <Input
               className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0 mb-3"
               placeholder="Short Description"
               onChange={handleDescInputChange}
+              value={DescInput}
             />
           </form>
 
           <DialogFooter className="bg-gray-100 px-6 py-4">
-            <Button onClick={submit}>
+            <Button onClick={() => submit(data?.category?._id)}>
               {loading ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               ) : null}
-              Create
+              Update
             </Button>
           </DialogFooter>
         </DialogContent>

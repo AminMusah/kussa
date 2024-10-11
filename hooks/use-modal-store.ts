@@ -1,6 +1,10 @@
 import { create } from "zustand";
 
-export type ModalType = "toggleCart" | "createCategory" | "editCategory";
+export type ModalType =
+  | "toggleCart"
+  | "createCategory"
+  | "editCategory"
+  | "deleteCategory";
 
 interface ModalStore {
   type: ModalType | null;

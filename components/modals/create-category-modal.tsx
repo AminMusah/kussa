@@ -26,7 +26,8 @@ import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export const CreateCategoryModal = () => {
-  const { isOpen, onClose, type, data, onRender } = useModal();
+  const { isOpen, onClose, type, data, onRender, render, setRender } =
+    useModal();
   const [file, setFile] = useState("");
   const [loading, setLoading] = useState(false);
   const [nameInput, setNameInput] = useState("");
@@ -71,7 +72,11 @@ export const CreateCategoryModal = () => {
       setDescInput("");
       setNameInput("");
       handleClose();
-      onRender();
+      if (render) {
+        setRender();
+      } else {
+        onRender();
+      }
     } catch (error: any) {
       console.error(error.response.data);
       toast({

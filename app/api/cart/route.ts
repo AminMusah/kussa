@@ -2,7 +2,6 @@ import Product from "@/models/Product";
 import connect from "@/utils/db";
 import create from "@/utils/cookie";
 import { NextResponse } from "next/server";
-import { NextApiRequest } from "next"; // Import NextApiRequest
 import Cart from "@/models/Cart";
 const { v4: uuidv4 } = require("uuid");
 import { cookies } from "next/headers";

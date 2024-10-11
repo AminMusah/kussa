@@ -47,13 +47,13 @@ export default function CategoriesTable() {
 
   useEffect(() => {
     getCategories();
-  }, [rendring]);
+  }, [rendring, render]);
 
   const FORMAT = "dddd, MMMM D, YYYY h:mm A";
 
   // console.log(products);
 
-  const deleteProduct = async (id: string) => {
+  const deleteCategory = async (id: string) => {
     try {
       setIsLoading(true);
 
@@ -137,12 +137,14 @@ export default function CategoriesTable() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                      <DropdownMenuItem onClick={() => onOpen("editCategory")}>
+                      <DropdownMenuItem
+                        onClick={() => onOpen("editCategory", { category })}
+                      >
                         Edit
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => {
-                          deleteProduct(category?._id);
+                          onOpen("deleteCategory", { category });
                         }}
                       >
                         Delete
