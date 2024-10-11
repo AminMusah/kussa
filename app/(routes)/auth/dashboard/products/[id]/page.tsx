@@ -176,6 +176,7 @@ export default function CreateProduct({ params }: { params: { id: string } }) {
                     <SelectItem value="hampers">Hampers</SelectItem>
                     <SelectItem value="diffusers">Diffusers</SelectItem>
                     <SelectItem value="hair products">Hair products</SelectItem>
+                    <SelectItem value="gift sets">Gift sets</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
