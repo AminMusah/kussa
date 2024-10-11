@@ -34,16 +34,6 @@ export default function Explore() {
                 <div className="mt-4">
                   <ul>
                     <li className="text-xs md:text-base">
-                      • Reduces anxiety and depression.
-                    </li>
-                    <li className="text-xs md:text-base">
-                      • Eases morning sickness.
-                    </li>
-                    <li className="text-xs md:text-base">
-                      • Improves skin health.
-                    </li>
-                    <li className="text-xs md:text-base">• Relieves pain.</li>
-                    <li className="text-xs md:text-base">
                       • Improves cold symptoms.
                     </li>
                     <li className="text-xs md:text-base">

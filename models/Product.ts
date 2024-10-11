@@ -8,6 +8,7 @@ const productSchema = new mongoose.Schema(
     price: { type: Number, required: true },
     stockQuantity: { type: Number, required: true },
     category: { type: String, required: true },
+    categories: [{ type: mongoose.Schema.Types.ObjectId, ref: "Category" }],
     images: [
       {
         // Change this line to define images as an array of objects
