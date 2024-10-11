@@ -17,6 +17,25 @@ export default function Footer() {
               </li>
               <li className="cursor-pointer hover:text-slate-200">Perfume </li>
               <li className="cursor-pointer hover:text-slate-200">Lavender </li>
+              <li className="cursor-pointer hover:text-slate-200">Natural </li>
+              <li className="cursor-pointer hover:text-slate-200">
+                Coconut oil{" "}
+              </li>
+              <li className="cursor-pointer hover:text-slate-200">Soaps </li>
+              <li className="cursor-pointer hover:text-slate-200">
+                Beard oil{" "}
+              </li>
+              <li className="cursor-pointer hover:text-slate-200">Body oil </li>
+              <li className="cursor-pointer hover:text-slate-200">Hampers </li>
+              <li className="cursor-pointer hover:text-slate-200">
+                Diffusers{" "}
+              </li>
+              <li className="cursor-pointer hover:text-slate-200">
+                Hair products{" "}
+              </li>
+              <li className="cursor-pointer hover:text-slate-200">
+                Gift sets{" "}
+              </li>
             </ul>
           </div>
           <div className="flex flex-col gap-4 ">
