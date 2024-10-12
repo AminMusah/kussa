@@ -165,15 +165,13 @@ export default function OrdersTable() {
           <CardTitle>Orders</CardTitle>
           <CardDescription>Manage and track all orders.</CardDescription>
         </div>
-        {/* <div>
+        <div>
           <Button
-            onClick={() =>
-              router.push("/auth/dashboard/products/create-product")
-            }
+            onClick={() => router.push("/auth/dashboard/orders/place-order")}
           >
-            Add product
+            Place order
           </Button>
-        </div> */}
+        </div>
       </CardHeader>
       <OverlayLoader isLoading={isLoading} text="Getting orders..." />
 
