@@ -13,6 +13,7 @@ import {
 } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/toaster";
 import { ModalProvider } from "@/components/providers/modal-provider";
+import { Analytics } from "@vercel/analytics/react";
 
 const nunito = Nunito({ subsets: ["latin"] });
 export const metadata: Metadata = {
@@ -39,6 +40,7 @@ export default function RootLayout({
             <MainNav className="mx-6" />
 
             {children}
+            <Analytics />
             <Footer />
           </div>
           <Toaster />
