@@ -72,7 +72,7 @@ export default function InventoryTable() {
     <Card>
       <CardHeader className="flex w-full justify-between flex-row">
         <div>
-          <CardTitle>Inevntory</CardTitle>
+          <CardTitle>Inventory</CardTitle>
           <CardDescription>Manage Inventory.</CardDescription>
         </div>
         {/* <div>
