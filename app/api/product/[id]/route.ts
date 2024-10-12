@@ -1,3 +1,4 @@
+import Category from "@/models/Category";
 import Product from "@/models/Product";
 import connect from "@/utils/db";
 import { NextResponse } from "next/server";
@@ -78,7 +79,15 @@ export async function PATCH(
     {
       new: true,
     }
-  );
+  )
+    .populate("category")
+    .populate("categories");
+
+  if (category) {
+    await Category.findByIdAndUpdate(category, {
+      $addToSet: { products: updateProduct._id }, // Use $addToSet to prevent duplicates
+    });
+  }
 
   try {
     return NextResponse.json(updateProduct);

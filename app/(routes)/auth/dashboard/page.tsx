@@ -291,7 +291,7 @@ export default function Dashboard() {
                     {orders?.name}
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    {orders?.category}
+                    {orders?.category?.label}
                   </p>
                 </div>
                 <div className="ml-auto font-medium">

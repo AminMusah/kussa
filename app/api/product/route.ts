@@ -1,3 +1,4 @@
+import Category from "@/models/Category";
 import Product from "@/models/Product";
 import connect from "@/utils/db";
 import { NextResponse } from "next/server";
@@ -27,7 +28,12 @@ export const GET = async (req: Request) => {
       filters.category = category; // Directly assign the category string
     }
 
-    const products = await Product.find(filters);
+    const products = await Product.find(filters).populate({
+      path: "category",
+      model: Category,
+    });
+
+    console.log(products);
 
     return NextResponse.json(products, {
       status: 200,
@@ -74,6 +80,14 @@ export const POST = async (req: Request, res: Response) => {
     stockQuantity: parseInt(stockQuantity),
     images,
     category,
+  });
+
+  // Add category in the product
+  await newProduct.categories.push(category);
+
+  // Add the category ID to the products array
+  await Category.findByIdAndUpdate(category, {
+    $push: { products: newProduct._id },
   });
 
   await newProduct.save();

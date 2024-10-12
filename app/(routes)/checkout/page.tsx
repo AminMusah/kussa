@@ -33,7 +33,7 @@ interface CartItem {
   _id: string; // {{ edit_1 }} Add _id property
   productId: {
     name: string;
-    category: string;
+    category: any;
     images: { url: string }[]; // {{ edit_1 }} Add images property
   };
   quantity: number; // {{ edit_2 }} Add quantity property
@@ -218,7 +218,7 @@ export default function CheckOut() {
                         {item?.productId?.name}
                       </h3>
                       <p className="text-sm text-gray-600">
-                        {item?.productId?.category}
+                        {item?.productId?.category?.label}
                       </p>
                       {/* <p className="text-sm text-gray-600">L</p> */}
                     </div>

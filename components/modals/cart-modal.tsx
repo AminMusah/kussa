@@ -19,7 +19,7 @@ interface CartItem {
   productId: {
     _id: string; // {{ edit_1 }} Add _id property here
     name: string;
-    category: string;
+    category: any;
     images: { url: string }[]; // {{ edit_1 }} Add images property
   };
   quantity: number; // {{ edit_2 }} Add quantity property
@@ -230,7 +230,7 @@ export default function CartModal() {
                                         </p>
                                       </div>
                                       <p className="mt-1 text-sm text-gray-500">
-                                        {item?.productId?.category}
+                                        {item?.productId?.category?.label}
                                       </p>
                                     </div>
 

@@ -21,7 +21,13 @@ export const GET = async (req: Request, res: Response) => {
     }
 
     // Find the cart associated with the sessionId
-    const cart = await Cart.findOne({ sessionId }).populate("items.productId");
+    const cart = await Cart.findOne({ sessionId }).populate({
+      path: "items.productId",
+      populate: {
+        path: "category", // assuming category is a field in Product schema
+        model: "Category", // specify the model name
+      },
+    });
 
     if (!cart) {
       return NextResponse.json("Cart not found", {
