@@ -218,11 +218,16 @@ export default function OrdersTable() {
                   GHC {orders?.totalAmount}
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
-                  GHC {orders?.paidAmount ? orders?.paidAmount / 100 : 0}
+                  GHC{" "}
+                  {orders?.paidAmount && orders?.paidAt
+                    ? orders?.paidAmount / 100
+                    : 0}
                 </TableCell>
 
                 <TableCell className="hidden md:table-cell">
-                  {dayjs(orders?.paidAt).format(FORMAT)}
+                  {orders?.paidAmount > 0
+                    ? dayjs(orders?.paidAt).format(FORMAT)
+                    : ""}
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
                   {dayjs(orders?.createdAt).format(FORMAT)}
