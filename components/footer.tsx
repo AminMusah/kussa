@@ -1,7 +1,17 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "./ui/button";
+import useAllCategories from "@/hooks/use-all-categories";
+import { useEffect } from "react";
 
 export default function Footer() {
+  const { categories, loading, getCategories } = useAllCategories();
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
   return (
     <div className="bg-black flex flex-col justify-between items-center text-white p-5 ">
       <div className="flex justify-between w-full py-60 flex-col md:flex-row explore">
@@ -10,32 +20,14 @@ export default function Footer() {
             <h2 className="text-[#423f3f] font-bold">Shop</h2>
             <ul className="flex flex-col gap-1.5">
               <li className="cursor-pointer hover:text-slate-200">All </li>
-              <li className="cursor-pointer hover:text-slate-200">Lemon </li>
-              <li className="cursor-pointer hover:text-slate-200">Coconut </li>
-              <li className="cursor-pointer hover:text-slate-200">
-                Citronella{" "}
-              </li>
-              <li className="cursor-pointer hover:text-slate-200">Perfume </li>
-              <li className="cursor-pointer hover:text-slate-200">Lavender </li>
-              <li className="cursor-pointer hover:text-slate-200">Natural </li>
-              <li className="cursor-pointer hover:text-slate-200">
-                Coconut oil{" "}
-              </li>
-              <li className="cursor-pointer hover:text-slate-200">Soaps </li>
-              <li className="cursor-pointer hover:text-slate-200">
-                Beard oil{" "}
-              </li>
-              <li className="cursor-pointer hover:text-slate-200">Body oil </li>
-              <li className="cursor-pointer hover:text-slate-200">Hampers </li>
-              <li className="cursor-pointer hover:text-slate-200">
-                Diffusers{" "}
-              </li>
-              <li className="cursor-pointer hover:text-slate-200">
-                Hair products{" "}
-              </li>
-              <li className="cursor-pointer hover:text-slate-200">
-                Gift sets{" "}
-              </li>
+              {categories.map((category: any) => (
+                <li
+                  key={category?._id}
+                  className="cursor-pointer hover:text-slate-200"
+                >
+                  {category?.label}{" "}
+                </li>
+              ))}
             </ul>
           </div>
           <div className="flex flex-col gap-4 ">

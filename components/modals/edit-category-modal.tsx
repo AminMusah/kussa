@@ -53,7 +53,6 @@ export const EditCategoryModal = () => {
           "Content-Type": "application/json",
         },
       });
-      console.error(response?.data?.label);
 
       setNameInput(response.data.label);
       setDescInput(response.data.desc);

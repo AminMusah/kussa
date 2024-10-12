@@ -21,7 +21,6 @@ const useAllProducts = () => {
         },
       });
       setProducts(response.data);
-      console.error(response?.data);
     } catch (error: any) {
       console.error(error?.response?.data);
     } finally {

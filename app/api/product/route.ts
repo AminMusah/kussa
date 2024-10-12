@@ -33,8 +33,6 @@ export const GET = async (req: Request) => {
       model: Category,
     });
 
-    console.log(products);
-
     return NextResponse.json(products, {
       status: 200,
     });

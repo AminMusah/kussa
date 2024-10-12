@@ -49,8 +49,6 @@ export default function CreateProduct() {
         };
       });
 
-      console.log(imgUrls, "urls");
-
       const payload = {
         name,
         description,
@@ -59,8 +57,6 @@ export default function CreateProduct() {
         images: imgUrls,
         category,
       };
-
-      console.log(payload);
 
       const response = await axios.post("/api/product/", payload, {
         headers: {
