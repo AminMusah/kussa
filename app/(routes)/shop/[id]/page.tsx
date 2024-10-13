@@ -128,7 +128,7 @@ export default function Product({ params }: { params: { id: string } }) {
   };
 
   return (
-    <div>
+    <div className="mb-48">
       <div className="grid sm:grid-cols-1  md:grid-cols-3 pt-28 md:pt-44 mb-5 h-full md:h-screen p-10 ">
         <div className="flex justify-between flex-col col-span-3 md:col-span-3 xl:col-span-1">
           <div className="px-0 xl:px-10 mb-5">
