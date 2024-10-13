@@ -120,7 +120,7 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 h-full flex flex-col justify-center items-center text-center gap-y-6">
+        <div className="relative z-10 h-full flex flex-col justify-center items-center text-center gap-y-6  top-[-20%] left-1/2 transform -translate-x-1/2">
           <h2 className="max-w-xl text-white text-3xl md:text-[60px] font-thin  animate-reveal">
             {slides[currentIndex]?.title}
           </h2>
