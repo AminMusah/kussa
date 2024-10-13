@@ -48,11 +48,20 @@ export function MainNav({
       label: "Explore",
       active: pathname === `/explore`,
     },
-
     {
       href: `/contact`,
       label: "Contact Us",
       active: pathname === `/contact`,
+    },
+    {
+      href: `#about`,
+      label: "About Us",
+      active: pathname === `#about`,
+    },
+    {
+      href: `/founder`,
+      label: "Founder",
+      active: pathname === `/founder`,
     },
   ];
 
