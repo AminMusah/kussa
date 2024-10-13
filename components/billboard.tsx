@@ -44,10 +44,9 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
       title: "About us",
       description:
         "Kussa Shea Bliss (KSB) is a well-established company in the skincare and personal care industry with three years of successful operations.",
-      buttonText: "Read more",
+      buttonText: "Read more about us",
       link: "#about",
     },
-
     {
       url: "/images/IMG_9425.jpg",
       title: "Contact us",
@@ -55,6 +54,14 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
         "For quick and easy assistance, feel free to contact us anytime. Our team is here to help you with any questions or concerns you may have.",
       buttonText: "Contact us",
       link: "/contact",
+    },
+    {
+      url: "/images/IMG_9425.jpg",
+      title: "Our founder",
+      description:
+        "Kussa Shea Bliss was founded 5 years ago by Ms Irene Atubiga, a passionate entrepreneur with extensive experience in the skincare industry. ",
+      buttonText: "Read more about our founder",
+      link: "/founder",
     },
   ];
 
@@ -108,7 +115,7 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
                 className={isTransitioning ? "transitioning" : ""}
               />
             ))}
-            <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+            <div className="absolute inset-0 bg-black bg-opacity-50"></div>
           </div>
         </div>
 
@@ -146,8 +153,9 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
             >
               <Dot
                 size={66}
-                className={`text-white ${currentIndex === slideIndex ? "opacity-100" : "opacity-50"
-                  }`}
+                className={`text-white ${
+                  currentIndex === slideIndex ? "opacity-100" : "opacity-50"
+                }`}
               />
             </div>
           ))}
