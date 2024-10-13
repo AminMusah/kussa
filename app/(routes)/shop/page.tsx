@@ -100,6 +100,7 @@ export default function Shop() {
                     images: [];
                     link: string;
                     price: number;
+                    createdAt: any;
                   },
                   index
                 ) => <ProductCard {...product} key={product?._id} />

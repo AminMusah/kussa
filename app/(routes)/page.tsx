@@ -73,6 +73,7 @@ export default function Home() {
                   images: [];
                   link: string;
                   price: number;
+                  createdAt: any;
                 },
                 index
               ) => <ProductCard {...product} key={product._id} />

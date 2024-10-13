@@ -16,6 +16,7 @@ type ProductProps = {
   link: string;
   _id: string;
   price: Number;
+  createdAt: any;
 };
 
 const ProductCard = ({
@@ -25,6 +26,7 @@ const ProductCard = ({
   link,
   _id,
   price,
+  createdAt,
 }: ProductProps) => {
   const router = useRouter();
 
@@ -78,6 +80,14 @@ const ProductCard = ({
     }
   };
 
+  const isNewArrival = (date: any) => {
+    const now: any = new Date();
+    const createdDate: any = new Date(date);
+    const differenceInTime = now - createdDate;
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24); // Convert from milliseconds to days
+    return differenceInDays < 20;
+  };
+
   return (
     <div className="m-2">
       <div className="col-span-1 cursor-pointer group">
@@ -94,11 +104,13 @@ const ProductCard = ({
             <div className="absolute top-3 right-3">
               <Heart fill="#fff" color="#fff" className="" />
             </div>
-            <div className="absolute top-3 left-3">
-              <p className="text-white text-xs font-thin bg-[#772432] px-2 py-1 rounded-full">
-                New arrival
-              </p>
-            </div>
+            {isNewArrival(createdAt) ? (
+              <div className="absolute top-3 left-3">
+                <p className="text-white text-xs font-thin bg-[#772432] px-2 py-1 rounded-full">
+                  New arrival
+                </p>
+              </div>
+            ) : null}
           </div>
           <div className="flex flex-row justify-between">
             <div
