@@ -22,7 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useModal } from "@/hooks/use-modal-store";
 import React, { useEffect, useState } from "react";
-import { Loader2 } from "lucide-react";
+import { ChevronRight, Loader2, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export const EditCategoryModal = () => {
@@ -30,6 +30,8 @@ export const EditCategoryModal = () => {
   const [loading, setLoading] = useState(false);
   const [nameInput, setNameInput] = useState("");
   const [DescInput, setDescInput] = useState("");
+  const [newSubcategoryName, setNewSubcategoryName] = useState("");
+  const [subcategories, setSubcategories] = useState<string[]>([]);
   const { toast } = useToast();
 
   const handleNameInputChange = (e: any) => {
@@ -56,12 +58,15 @@ export const EditCategoryModal = () => {
 
       setNameInput(response.data.label);
       setDescInput(response.data.desc);
+      setSubcategories(response.data.subcategories);
     } catch (error: any) {
       console.error(error?.response?.data);
     } finally {
       // setLoading(false);
     }
   };
+
+  console.log(subcategories);
 
   useEffect(() => {
     getCategory(data.category?._id);
@@ -130,6 +135,24 @@ export const EditCategoryModal = () => {
               onChange={handleDescInputChange}
               value={DescInput}
             />
+            {subcategories?.length > 0 && (
+              <ul className="ml-6 space-y-1">
+                {subcategories.map((subcategory, index) => (
+                  <li key={index} className="flex items-center gap-2">
+                    <ChevronRight className="h-3 w-3" />
+                    <span>{subcategory}</span>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      // onClick={() => deleteSubcategory(index)}
+                      className="ml-auto"
+                    >
+                      <Trash2 className="h-3 w-3" />
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            )}
           </form>
 
           <DialogFooter className="bg-gray-100 px-6 py-4">

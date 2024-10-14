@@ -12,8 +12,6 @@ export const POST = async (req: Request, res: Response) => {
 
   const { userOrderingInfo } = await req.json();
 
-  console.log(userOrderingInfo);
-
   if (!sessionId) {
     return new NextResponse("No sessionId found", { status: 400 });
   }

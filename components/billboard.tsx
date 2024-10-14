@@ -56,7 +56,7 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
       link: "/contact",
     },
     {
-      url: "/images/IMG_9425.jpg",
+      url: "/images/IMG_9330.jpg",
       title: "Our founder",
       description:
         "Kussa Shea Bliss was founded 5 years ago by Ms Irene Atubiga, a passionate entrepreneur with extensive experience in the skincare industry. ",

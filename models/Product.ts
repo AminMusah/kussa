@@ -12,6 +12,10 @@ const productSchema = new mongoose.Schema(
       ref: "Category",
     },
     categories: [{ type: mongoose.Schema.Types.ObjectId, ref: "Category" }],
+    subcategory: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "SubCategory", // Add subcategory reference
+    },
     images: [
       {
         // Change this line to define images as an array of objects

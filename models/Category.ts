@@ -9,6 +9,9 @@ const categorySchema = new mongoose.Schema(
     desc: {
       type: String,
     },
+    subcategories: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "SubCategory" },
+    ],
     products: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
   },
   { timestamps: true }
