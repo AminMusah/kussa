@@ -8,16 +8,11 @@ export const GET = async (req: Request, res: Response) => {
   try {
     await connect();
 
-    const categories = await Category.find({}).populate(
-      {
-        path: "products",
-        model: Product,
-      },
-      {
-        path: "subcategories",
-        model: SubCategory,
-      }
-    );
+    const categories = await Category.find({}).populate({
+      path: "subcategories", // Populates the subcategories field
+      model: "SubCategory", // Refers to the SubCategory model
+      select: "label", // Only return the 'label' field from subcategories
+    });
 
     return NextResponse.json(categories, {
       status: 200,
@@ -49,15 +44,11 @@ export const POST = async (req: Request, res: Response) => {
     );
   }
 
-  console.log(createdSubcategories);
-
   const category = new Category({
     label,
     desc,
     subcategories: createdSubcategories, // Save subcategories to the category
   });
-
-  console.log(category);
 
   await category.save();
 

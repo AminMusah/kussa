@@ -86,10 +86,10 @@ export default function Footer() {
         </div>
       </div>
       <div className="flex flex-wrap items-start justify-start w-full gap-x-80">
-        <p>
+        <p className="text-sm">
           © {new Date().getFullYear()} KUSSA SHEA BLISS. All rights reserved.
         </p>
-        <p>Effortless journey to a healthy skin.</p>
+        <p className="text-sm">Effortless journey to a healthy skin.</p>
       </div>
     </div>
   );

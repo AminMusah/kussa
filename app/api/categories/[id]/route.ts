@@ -1,4 +1,5 @@
 import Category from "@/models/Category";
+import SubCategory from "@/models/SubCategory";
 import connect from "@/utils/db";
 import { NextResponse } from "next/server";
 
@@ -14,7 +15,11 @@ export async function GET(
     return new NextResponse("category id is required", { status: 400 });
   }
 
-  const category = await Category.findById(id);
+  const category = await Category.findById(id).populate({
+    path: "subcategories", // Populates the subcategories field
+    model: "SubCategory", // Refers to the SubCategory model
+    select: "label", // Only return the 'label' field from subcategories
+  });
 
   try {
     return NextResponse.json(category, {
@@ -39,7 +44,7 @@ export async function PATCH(
 
   const body = await req.json();
 
-  const { label, desc } = body;
+  const { label, desc, subcategories } = body;
 
   if (!id) {
     return new NextResponse("id is required", { status: 400 });
@@ -49,11 +54,23 @@ export async function PATCH(
     return new NextResponse("Please enter category name", { status: 400 });
   }
 
+  let createdSubcategories = [];
+  if (subcategories && subcategories.length > 0) {
+    createdSubcategories = await Promise.all(
+      subcategories.map(async (subLabel: string) => {
+        const subcategory = new SubCategory({ label: subLabel });
+        await subcategory.save();
+        return { _id: subcategory._id, label: subcategory.label }; // Return the subcategory's _id and label
+      })
+    );
+  }
+
   const updateCategory = await Category.findByIdAndUpdate(
     { _id: id },
     {
       label,
       desc,
+      subcategories: createdSubcategories,
     },
     {
       new: true,

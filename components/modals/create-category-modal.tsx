@@ -61,8 +61,6 @@ export const CreateCategoryModal = () => {
     }
   };
 
-  console.log(subcategories);
-
   // create category
   const submit = async () => {
     try {
