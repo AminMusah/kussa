@@ -21,11 +21,14 @@ const isPublicRoute = createRouteMatcher([
   "/api/categories",
 ]);
 
-export default clerkMiddleware((auth, request) => {
-  if (!isPublicRoute(request)) {
-    auth().protect();
-  }
-});
+export default clerkMiddleware(
+  (auth, request) => {
+    if (!isPublicRoute(request)) {
+      auth().protect();
+    }
+  },
+  { debug: true }
+);
 
 // export function middleware() {
 //   return;
