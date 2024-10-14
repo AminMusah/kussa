@@ -32,16 +32,16 @@ export default function Footer() {
           </div>
           <div className="flex flex-col gap-4">
             <h2 className="text-[#423f3f] font-bold">Categories</h2>
-            <ul className="gap-2.5">
+            <ul className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
               {categories.map((category: any) => (
                 <li
                   key={category?._id}
-                  className="cursor-pointer hover:text-slate-200"
+                  className="cursor-pointer hover:text-slate-200 mt-2 space-y-1"
                 >
-                  {category?.label}{" "}
+                  <span className="text-[#777575] "> {category?.label}</span>
                   {category?.subcategories &&
                     category.subcategories.length > 0 && (
-                      <ul className="mt-2 space-y-1">
+                      <ul className="">
                         {category.subcategories.map((subcategory: any) => (
                           <li key={subcategory?._id} className="text-gray-200">
                             {subcategory?.label}
