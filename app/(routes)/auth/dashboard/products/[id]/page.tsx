@@ -51,6 +51,7 @@ export default function CreateProduct({ params }: { params: { id: string } }) {
           "Content-Type": "application/json",
         },
       });
+      console.log(response.data);
       setProduct(response.data);
       setName(response.data.name);
       setDescription(response.data.description);

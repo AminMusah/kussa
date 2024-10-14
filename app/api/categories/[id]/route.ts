@@ -15,11 +15,18 @@ export async function GET(
     return new NextResponse("category id is required", { status: 400 });
   }
 
-  const category = await Category.findById(id).populate({
-    path: "subcategories", // Populates the subcategories field
-    model: "SubCategory", // Refers to the SubCategory model
-    select: "label", // Only return the 'label' field from subcategories
-  });
+  const category = await Category.findById(id).populate(
+    {
+      path: "subcategories",
+      model: "SubCategory",
+      select: "label",
+    },
+    {
+      path: "categories",
+      model: "Category",
+      select: "label",
+    }
+  );
 
   try {
     return NextResponse.json(category, {
