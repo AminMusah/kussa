@@ -15,44 +15,51 @@ export default function Footer() {
   return (
     <div className="bg-black flex flex-col justify-between items-center text-white p-5 ">
       <div className="flex justify-between w-full py-60 flex-col md:flex-row explore">
-        <div className="grid grid-cols-3 gap-24 md:w-4/5 ">
-          <div className="flex flex-col gap-4">
-            <h2 className="text-[#423f3f] font-bold">Shop</h2>
-            <ul className="flex flex-col gap-1.5">
-              <li className="cursor-pointer hover:text-slate-200">All </li>
-              {categories.map((category: any) => (
-                <li
-                  key={category?._id}
-                  className="cursor-pointer hover:text-slate-200"
-                >
-                  {category?.label}{" "}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="flex flex-col gap-4">
-            <h2 className="text-[#423f3f] font-bold">Categories</h2>
-            <ul className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
-              {categories.map((category: any) => (
-                <li
-                  key={category?._id}
-                  className="cursor-pointer hover:text-slate-200 mt-2 space-y-1"
-                >
-                  <span className="text-[#777575] "> {category?.label}</span>
-                  {category?.subcategories &&
-                    category.subcategories.length > 0 && (
-                      <ul className="">
-                        {category.subcategories.map((subcategory: any) => (
-                          <li key={subcategory?._id} className="text-gray-200">
-                            {subcategory?.label}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="grid grid-cols-3 gap-16 md:w-4/5 ">
+          {categories.length && (
+            <div className="flex flex-col gap-4">
+              <h2 className="text-[#423f3f] font-bold">Shop</h2>
+              <ul className="flex flex-col gap-1.5">
+                <li className="cursor-pointer hover:text-slate-200">All </li>
+                {categories.map((category: any) => (
+                  <li
+                    key={category?._id}
+                    className="cursor-pointer hover:text-slate-200"
+                  >
+                    {category?.label}{" "}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {categories.length && (
+            <div className="flex flex-col gap-4">
+              <h2 className="text-[#423f3f] font-bold">Categories</h2>
+              <ul className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
+                {categories.map((category: any) => (
+                  <li
+                    key={category?._id}
+                    className="cursor-pointer hover:text-slate-200 mt-2 space-y-1"
+                  >
+                    <span className="text-[#777575] "> {category?.label}</span>
+                    {category?.subcategories &&
+                      category.subcategories.length > 0 && (
+                        <ul className="">
+                          {category.subcategories.map((subcategory: any) => (
+                            <li
+                              key={subcategory?._id}
+                              className="text-gray-200"
+                            >
+                              {subcategory?.label}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           <div className="flex flex-col gap-4 ">
             <h2 className="text-[#423f3f] ">About</h2>
