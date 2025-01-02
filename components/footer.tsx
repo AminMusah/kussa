@@ -33,7 +33,7 @@ export default function Footer() {
             </div>
           )}
           {categories.map((category: any) => (
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4" key={category?._id}>
               {/* <h2 className="text-[#423f3f] font-bold">{category?.label}</h2> */}
               <ul className="flex flex-col gap-1.5">
                 <li className="text-[#423f3f] font-bold capitalize">
