@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { Menu, X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { CarTaxiFront, Heart, Search, ShoppingCart } from "lucide-react";
 import { useModal } from "@/hooks/use-modal-store";
 import useGetCart from "@/hooks/use-cart-items";
+import NavToggle from "./nav-toggle";
 
 export function MainNav({
   className,
@@ -20,6 +22,7 @@ export function MainNav({
   const router = useRouter();
   const { onOpen, isOpen, render } = useModal();
   const { getCart, cart }: any = useGetCart();
+  const [open, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -125,13 +128,30 @@ export function MainNav({
             </Link>
           ))}
         </nav>
-
         <div className="flex items-center space-x-4 px-2">
           {/* <Heart
             className={`cursor-pointer transition-transform duration-300 hover:scale-110   ${
               isScrolled || pathname !== `/` ? "text-black" : "text-white"
             } `}
           /> */}
+
+          {open ? (
+            <X
+              className={`block md:hidden cursor-pointer transition-transform duration-300 hover:scale-110   ${
+                isScrolled || pathname !== `/` ? "text-black" : "text-white"
+              } `}
+              aria-label={open ? "Close menu" : "Open menu"}
+              onClick={() => setIsOpen(!open)}
+            />
+          ) : (
+            <Menu
+              className={`block md:hidden cursor-pointer transition-transform duration-300 hover:scale-110   ${
+                isScrolled || pathname !== `/` ? "text-black" : "text-white"
+              } `}
+              aria-label={open ? "Close menu" : "Open menu"}
+              onClick={() => setIsOpen(!open)}
+            />
+          )}
           <div
             className="relative group cursor-pointer"
             onClick={() => onOpen("toggleCart")}
@@ -147,6 +167,7 @@ export function MainNav({
           </div>
         </div>
       </div>
+      <NavToggle isOpen={open} setIsOpen={setIsOpen} />
     </div>
   );
 }
